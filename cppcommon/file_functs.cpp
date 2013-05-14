@@ -11,7 +11,7 @@ namespace CPPCOMMON
 		  return true;
 		return false;
 	}
-	bool createDir(const char * dir_path, bool p = true)
+	bool createDir(const char * dir_path, bool p)
 	{
 		string dir_str(dir_path);
 		string cmd = "mkdir";
