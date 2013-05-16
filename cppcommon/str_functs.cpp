@@ -22,6 +22,15 @@ namespace CPPCOMMON
 			}
 		}
 	}
+
+	void upperStr(string& str)
+	{
+		transform(str.begin(), str.end(), str.begin(), (int (*)(int))toupper);
+	}
+	void lowerStr(string& str)
+	{
+		transform(str.begin(), str.end(), str.begin(), (int (*)(int))tolower);
+	}
 }
 
 #ifdef TEST_STR_FUNCTS
@@ -36,6 +45,9 @@ int main()
 	{
 		cout<<vec[i]<<endl;
 	}
+	string s = "1111aaafasfa,asdj.sadhashfhaha";
+	upperStr(s);
+	cout<<s<<endl;
 	return 0;
 }
 #endif
