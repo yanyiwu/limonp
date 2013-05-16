@@ -25,7 +25,7 @@ namespace CPPCOMMON
 	}
 	bool checkDirExist(const char * dir_path)
 	{
-		return checkFileExist;
+		return checkFileExist(dir_path);
 	}
 }
 
