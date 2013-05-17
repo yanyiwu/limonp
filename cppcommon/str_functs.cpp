@@ -84,7 +84,6 @@ namespace CPPCOMMON
 		for(int i = 0; i < patterns.size(); i++)
 		{
 			strSrcMutable = replaceStr(strSrcMutable, patterns[i], transStr);
-			cout<<strSrcMutable<<endl;
 		}
 		splitStr(strSrcMutable, outVec, transStr);
 		return true;
