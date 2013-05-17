@@ -10,6 +10,14 @@ namespace CPPCOMMON
 {
 	using namespace std;
 	void splitStr(const string& source, vector<string>& out_vec, const string& pattern = " ");
+	bool splitStrMultiPattern(
+				const string& strSrc, 
+				vector<string>& outVec, 
+				const vector<string>& patterns
+				);
 	void upperStr(string& str);
+	void lowerStr(string& str);
+	string replaceStr(const string& strSrc, const string& oldStr, const string& newStr, int count = -1);
+	string stripStr(const string& str, const string& patternstr = " \n\t");
 }
 #endif
