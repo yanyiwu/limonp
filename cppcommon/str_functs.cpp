@@ -17,26 +17,16 @@ namespace CPPCOMMON
 			pos = s.find(pattern, i);
 			if(pos < length)
 			{
-				out_vec.push_back(s.substr(i, pos - i));
+				string tmp = stripStr(s.substr(i, pos - i));
+				if("" != tmp)
+				{
+					out_vec.push_back(tmp);
+				}
 				i = pos + pattern.size() - 1;
 			}
 		}
 	}
 
-	/*string stripStr(const string& str, const char stripChar)
-	{
-		string::size_type pleft = str.find_first_not_of(stripChar);
-		
-		if(pleft == string::npos)
-		{
-			return "";
-		}
-		string::size_type pright = str.find_last_not_of(stripChar);
-		cout<<pleft<<endl;
-		cout<<pright<<endl;
-		return str.substr(pleft, pright - pleft + 1);
-	}*/
-	
 	string stripStr(const string& str, const string& patternstr)
 	{
 		size_t leftpos = 0;
@@ -64,7 +54,7 @@ namespace CPPCOMMON
 		return str.substr(leftpos, rightpos - leftpos + 1);
 	}
 	
-	bool splitStrMultiPattern(
+	bool splitStrMultiPatterns(
 				const string& strSrc, 
 				vector<string>& outVec, 
 				const vector<string>& patterns
