@@ -6,14 +6,16 @@
 #include <queue>
 #include <string>
 
-#define PRINT_VECTOR(vec) for(size_t i = 0; i < vec.size(); i++) \
+#define FOR_VECTOR(vec, i) for(size_t i = 0; i < vec.size(); i++)
+
+#define PRINT_VECTOR(vec) FOR_VECTOR(vec, i)\
 {\
 	cout<<vec[i]<<endl;\
 }
 
-#define PRINT_MATRIX(mat) for(size_t i = 0; i < mat.size(); i++) \
+#define PRINT_MATRIX(mat) FOR_VECTOR(mat, i) \
 {\
-	for(size_t j = 0; j < mat[i].size(); j++)\
+	FOR_VECTOR(mat[i], j)\
 	{\
 		cout<<"["<<i<<","<<j<<"]:"<<mat[i][j]<<endl;\
 	}\
