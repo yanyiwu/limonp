@@ -1,4 +1,4 @@
-#include "vec_functs.tcc"
+#include "vec_functs.h"
 
 #ifdef TEST_VEC_FUNCTS
 using namespace CPPCOMMON;
@@ -8,16 +8,18 @@ int main()
 	for(int i=0;i<5;i++)
 	  vec.push_back(i);
 	vector<int> pats;
-	//pats.push_back(1);
+	pats.push_back(0);
 	pats.push_back(3);
 	//pats.push_back(4);
-	vector< vector<int> > res;
+	vector<pair<int, vector<int> > > res;
 	splitVec<int>(vec,res,pats);
 	for(int i =0;i<res.size();i++)
 	{
-		for(int j = 0;j<res[i].size();j++)
+		cout<<"first:"<<res[i].first<<endl;
+		cout<<"seconde:"<<endl;
+		for(int j = 0;j<res[i].second.size();j++)
 		{
-			cout<<res[i][j]<<endl;
+			cout<<res[i].second[j]<<endl;
 		}
 		cout<<endl;
 	}
