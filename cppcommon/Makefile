@@ -12,6 +12,7 @@ CMLIB = cmlib.a
 %.o: %.cpp
 	$(CC) $(CCOPT) $<
 
+
 all: $(CMLIB)
 
 $(CMLIB): file_functs.o io_functs.o str_functs.o vec_functs.o
