@@ -79,13 +79,17 @@ namespace CPPCOMMON
 		return true;
 	}
 
-	void upperStr(string& str)
+	string upperStr(const string& strIn)
 	{
+		string str = strIn;
 		transform(str.begin(), str.end(), str.begin(), (int (*)(int))toupper);
+		return str;
 	}
-	void lowerStr(string& str)
+	string lowerStr(const string& strIn)
 	{
+		string str = strIn;
 		transform(str.begin(), str.end(), str.begin(), (int (*)(int))tolower);
+		return str;
 	}
 	string replaceStr(const string& strSrc, const string& oldStr, const string& newStr, int count)
 	{
