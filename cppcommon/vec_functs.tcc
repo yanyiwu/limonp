@@ -6,9 +6,16 @@
 #include <string>
 #include <vector>
 #include <utility>
+#include <algorithm>
 namespace CPPCOMMON
 {
 	using namespace std;
+	template<typename T>
+		bool isInVec(const vector<T>& vec, const T& item)
+		{
+			typename vector<T>::const_iterator it	= find(vec.begin(), vec.end(), item);
+			return it != vec.end();
+		}
 	template<typename T>
 		void splitVec(const vector<T>& vecSrc, vector< pair<T, vector<T> > >& outVec, const vector<T>& patterns)
 		{

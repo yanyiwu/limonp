@@ -13,6 +13,8 @@ int main()
 	//pats.push_back(4);
 	vector<pair<int, vector<int> > > res;
 	splitVec<int>(vec,res,pats);
+	cout<<isInVec<int>(vec, 0)<<endl;
+	cout<<isInVec<int>(vec, -1)<<endl;
 	for(int i =0;i<res.size();i++)
 	{
 		cout<<"first:"<<res[i].first<<endl;
