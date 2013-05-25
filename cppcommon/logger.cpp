@@ -1,9 +1,13 @@
 #include "logger.h"
 namespace CPPCOMMON
 {
-	const char * Logger::_logFormat =  "%s:%d [%s]:%s";
+	const char * Logger::_logFormat =  "%s [File:%s] [Line:%d] [%s] Msg:%s";
+	const char * Logger::_timeFormat = "%Y-%m-%d %H:%M:%S";
+	const char * Logger::_logDir = "./log/";
+	const char * Logger::_logName = "run.log";
 	Logger::Logger()
 	{
+
 		_isCoutOpen = true;
 		_logLevel[LL_DEBUG] = "DEBUG";
 		_logLevel[LL_INFO] = "INFO";
@@ -19,17 +23,15 @@ namespace CPPCOMMON
 			_logFile.close();
 		}
 	}
-	//Logger::AddHandler
 	void Logger::InitDefault()
 	{
-		string logDir = "./log/";
-		string logName = "run.log";
-		if(!checkDirExist(logDir.c_str()))
+		_logCoutLevel = LL_INFO;
+		_logFileLevel = LL_DEBUG;
+		if(!checkDirExist(_logDir))
 		{
-			createDir(logDir.c_str());
+			createDir(_logDir);
 		}
-		
-		_logFile.open((logDir + logName).c_str(), ios::app);
+		_logFile.open((string(_logDir) + string(_logName)).c_str(), ios::app);
 		
 	}
 	bool Logger::Logging(unsigned int level, const string& msg, const string& fileName, const int& lineNo)
@@ -39,12 +41,15 @@ namespace CPPCOMMON
 			cerr<<"level's value is out of range"<<endl;
 			return false;
 		}
-		sprintf(_cStrBuf, _logFormat, fileName.c_str(), lineNo, _logLevel[level], msg.c_str());
-		if(_isCoutOpen)
+		time(&_timeNow);
+		strftime(_cStrBuf, sizeof(_cStrBuf), _timeFormat, localtime(&_timeNow));
+		string timeStr = _cStrBuf;
+		sprintf(_cStrBuf, _logFormat, timeStr.c_str(), fileName.c_str(), lineNo, _logLevel[level], msg.c_str());
+		if(_isCoutOpen && level >= _logCoutLevel)
 		{
 		  cout<<_cStrBuf<<endl;
 		}
-		if(_logFile)
+		if(_logFile && level >= _logFileLevel)
 		{
 			_logFile<<_cStrBuf<<endl;
 		}
@@ -61,15 +66,10 @@ namespace CPPCOMMON
 using namespace CPPCOMMON;
 int main()
 {
-	/*
-	ofstream fout;
-	fout.open("tmp.log", ios::app);
-	fout<<"11111"<<endl;
-	fout.close();
-	f2<<"222"<<endl;
-	*/
-	//loggerSingleTon.Logging(LL_INFO, "test", __FILE__, __LINE__);
+	LogDebug("debug log!");
 	LogInfo("test info log");
+	LogWarn("warning log");
+	LogError("error log");
 	LogFatal("fatal !!!!");
 	return 0;
 }

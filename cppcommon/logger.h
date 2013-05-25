@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <stdio.h>
 #include "file_functs.h"
 
 #define LL_DEBUG 1
@@ -41,6 +42,12 @@ namespace CPPCOMMON
 			const char * _logLevel[LEVEL_ARRAY_SIZE];
 			ofstream _logFile;
 			static const char * _logFormat;
+			static const char * _timeFormat;
+			static const char * _logDir;
+			static const char * _logName;
+			unsigned int _logCoutLevel;
+			unsigned int _logFileLevel;
+			time_t _timeNow;
 	};
 }
 

@@ -15,7 +15,7 @@ CMLIB = cmlib.a
 
 all: $(CMLIB)
 
-$(CMLIB): file_functs.o io_functs.o str_functs.o vec_functs.o
+$(CMLIB): file_functs.o io_functs.o str_functs.o vec_functs.o logger.o
 	$(DOPACK) 
 	
 file_functs.test: file_functs.cpp file_functs.h
