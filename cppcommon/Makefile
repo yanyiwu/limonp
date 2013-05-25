@@ -27,8 +27,8 @@ str_functs.test: str_functs.cpp str_functs.h
 vec_functs.test: vec_functs.cpp vec_functs.h vec_functs.tcc
 	g++ -o $@ $< -DTEST_VEC_FUNCTS
 
-logger.ut: logger.cpp logger.h
-	g++ -o $@ $< -DUNIT_TEST
+logger.ut: logger.cpp logger.h file_functs.cpp file_functs.h
+	g++ -o $@ $< file_functs.cpp -DUNIT_TEST
 
 clean:
 	rm -f *.test *.o $(CMLIB)
