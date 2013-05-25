@@ -70,6 +70,7 @@ int main()
 	*/
 	//loggerSingleTon.Logging(LL_INFO, "test", __FILE__, __LINE__);
 	LogInfo("test info log");
+	LogFatal("fatal !!!!");
 	return 0;
 }
 #endif

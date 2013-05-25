@@ -26,7 +26,7 @@
 
 namespace CPPCOMMON
 {
-	using namespace std
+	using namespace std;
 	class Logger
 	{
 		public:
