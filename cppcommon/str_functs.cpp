@@ -112,13 +112,27 @@ namespace CPPCOMMON
 
 	unsigned int countStrDistance(const string& A, const string& B)
 	{
-		size_t lenA = A.size();
-		size_t lenB = B.size();
-		size_t len = (lenA < lenB ? lenA : lenB);
+		unsigned int lenA = A.size();
+		unsigned int lenB = B.size();
+		unsigned int len = (lenA < lenB ? lenA : lenB);
 		unsigned int res = lenA + lenB - 2 * len;
 		for(size_t i = 0; i < len; i++)
 		{
 			if(A[i] != B[i])
+			  res++;
+		}
+		return res;
+	}
+
+	unsigned int countStrSimilarity(const string& A, const string& B)
+	{
+		unsigned int lenA = A.size();
+		unsigned int lenB = B.size();
+		unsigned int len = (lenA < lenB ? lenA : lenB);
+		unsigned int res = 0;
+		for(size_t i = 0; i < len; i++)
+		{
+			if(A[i] == B[i])
 			  res++;
 		}
 		return res;
