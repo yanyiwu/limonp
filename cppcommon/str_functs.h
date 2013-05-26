@@ -20,5 +20,6 @@ namespace CPPCOMMON
 	string replaceStr(const string& strSrc, const string& oldStr, const string& newStr, int count = -1);
 	string stripStr(const string& str, const string& patternstr = " \n\t");
 	unsigned int countStrDistance(const string& A, const string& B);
+	unsigned int countStrSimilarity(const string& A, const string& B);
 }
 #endif
