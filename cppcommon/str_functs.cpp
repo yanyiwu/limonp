@@ -85,12 +85,14 @@ namespace CPPCOMMON
 		transform(str.begin(), str.end(), str.begin(), (int (*)(int))toupper);
 		return str;
 	}
+
 	string lowerStr(const string& strIn)
 	{
 		string str = strIn;
 		transform(str.begin(), str.end(), str.begin(), (int (*)(int))tolower);
 		return str;
 	}
+
 	string replaceStr(const string& strSrc, const string& oldStr, const string& newStr, int count)
 	{
 		string strRet = strSrc;
@@ -107,6 +109,20 @@ namespace CPPCOMMON
 		}
 		return strRet;
 	}
+
+	unsigned int countStrDistance(const string& A, const string& B)
+	{
+		size_t lenA = A.size();
+		size_t lenB = B.size();
+		size_t len = (lenA < lenB ? lenA : lenB);
+		unsigned int res = lenA + lenB - 2 * len;
+		for(size_t i = 0; i < len; i++)
+		{
+			if(A[i] != B[i])
+			  res++;
+		}
+		return res;
+	}
 }
 
 #ifdef TEST_STR_FUNCTS
@@ -117,6 +133,7 @@ int main()
 {
 	string s = " \t\n1 a h \n";
 	cout<<"["<<stripStr(s)<<"]"<<endl;
+	cout<<countStrDistance("Aheheh","heheh1212")<<endl;
 	//vector<string> vec;
 	//splitStr("1 3 4", vec);
 	//char * a[] = {"3","jaj","ads"};
