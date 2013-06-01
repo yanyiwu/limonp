@@ -9,7 +9,9 @@
 namespace CPPCOMMON
 {
 	using namespace std;
-	void splitStr(const string& source, vector<string>& out_vec, const string& pattern = " ");
+	string joinStr(const vector<string>& source, const string& connector);
+	vector<string> splitStr(const string& source, const string& pattern = " \t\n");
+	void splitStr(const string& source, vector<string>& out_vec, const string& pattern = " \t\n");
 	bool splitStrMultiPatterns(
 				const string& strSrc, 
 				vector<string>& outVec, 

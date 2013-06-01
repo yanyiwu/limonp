@@ -2,6 +2,28 @@
 
 namespace CPPCOMMON
 {
+	string joinStr(const vector<string>& src, const string& connectorStr)
+	{
+		string res;
+		string tmpStr;
+		size_t len = src.size();
+		for(size_t i = 0; i < len - 1; i++)
+		{
+			res += stripStr(src[i]);
+			res += connectorStr;
+		}
+		if(0 < len)
+		{
+			res +=  stripStr(src[len-1]);
+		}
+		return res;
+	}
+	vector<string> splitStr(const string& source, const string& pattern)
+	{
+		vector<string> res;
+		splitStr(source, res, pattern);
+		return res;
+	}
 	void splitStr(const string& source, vector<string>& out_vec, const string& pattern)
 	{
 		if(0 == pattern.size())
@@ -148,6 +170,7 @@ int main()
 	string s = " \t\n1 a h \n";
 	cout<<"["<<stripStr(s)<<"]"<<endl;
 	cout<<countStrDistance("Aheheh","heheh1212")<<endl;
+	cout<<joinStr(splitStr(s), ",")<<endl;
 	//vector<string> vec;
 	//splitStr("1 3 4", vec);
 	//char * a[] = {"3","jaj","ads"};
