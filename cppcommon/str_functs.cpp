@@ -49,31 +49,20 @@ namespace CPPCOMMON
 		}
 	}
 
-	string stripStr(const string& str, const string& patternstr)
+	string stripStr(const string& str, const string& patternStr)
 	{
-		size_t leftpos = 0;
-		size_t rightpos = str.size() - 1;
-		while(leftpos < str.size())
+		if(str.empty())
 		{
-			if(patternstr.find(str[leftpos]) == string::npos)
-			{
-				break;
-			}
-			leftpos++;
+			return str;
 		}
-		if(leftpos == str.size())
+		string::size_type posL = str.find_first_not_of(patternStr);
+		if(string::npos == posL)
 		{
-			return "";
+			return str;
 		}
-		while(rightpos > leftpos)
-		{
-			if(patternstr.find(str[rightpos]) == string::npos)
-			{
-				break;
-			}
-			rightpos--;
-		}
-		return str.substr(leftpos, rightpos - leftpos + 1);
+		string::size_type posR = str.find_last_not_of(patternStr);
+		return str.substr(posL, posR - posL + 1);
+
 	}
 	
 	bool splitStrMultiPatterns(
