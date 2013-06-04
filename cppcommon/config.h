@@ -21,7 +21,9 @@ namespace CPPCOMMON
 			~Config();
 			bool init(const string& configFile);
 			void display();
+			string getByKey(const string& key);
 		private:
+			string _stripComment(const string& line);
 			map<string, string> _map;
 
 	};

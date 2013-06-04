@@ -25,6 +25,11 @@ namespace CPPCOMMON
 		vector<string> vecBuf;
 		while(getline(ifile, line))
 		{
+			line = _stripComment(line);
+			if(line.empty())
+			{
+				continue;
+			}
 			vecBuf = splitStr(line, "=");
 			if(2 != vecBuf.size())
 			{
@@ -45,6 +50,7 @@ namespace CPPCOMMON
 		ifile.close();
 		return true;
 	}
+
 	void Config::display()
 	{
 		for(map<string, string>::iterator it = _map.begin(); it != _map.end(); it++)
@@ -52,6 +58,30 @@ namespace CPPCOMMON
 			cout<<"("<<it->first<<","<<it->second<<")"<<endl;
 		}
 	}
+	
+	string Config::getByKey(const string& key)
+	{
+		if(_map.end() != _map.find(key))
+		{
+			return _map[key];
+		}
+		else
+		{
+			return "";
+		}
+	}
+
+	string Config::_stripComment(const string& line)
+	{
+		string res = line;
+		string::size_type pos = res.find('#');
+		if(string::npos != pos)
+		{
+			res = res.substr(0, pos);
+		}
+		return stripStr(res);
+	}
+
 }
 
 
@@ -62,6 +92,8 @@ int main()
 	Config config;
 	config.init("1.conf");
 	config.display();
+	cout<<config.getByKey("a")<<endl;
+	cout<<config.getByKey("cm")<<endl;
 	return 0;
 }
 
