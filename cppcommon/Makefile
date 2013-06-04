@@ -4,6 +4,9 @@ LINK = g++
 LINKOPT = 
 PACK = ar
 PACKOPT = rc
+SOURCES := $(wildcard *.cpp)
+OBJS := $(patsubst %.cpp,%.o,$(SOURCES))
+
 DOPACK = $(PACK) $(PACKOPT) $@ $?
 DOLINK = $(LINK) $(LINKOPT) -o $@ $?
 
@@ -15,8 +18,10 @@ CMLIB = cmlib.a
 
 all: $(CMLIB)
 
-$(CMLIB): file_functs.o io_functs.o str_functs.o vec_functs.o logger.o config.o
+
+$(CMLIB): $(OBJS)
 	$(DOPACK) 
+	
 	
 file_functs.test: file_functs.cpp file_functs.h
 	g++ -o $@ $< -DTEST_FILE_FUNCTS
@@ -34,3 +39,4 @@ config.ut: config.cpp config.h
 
 clean:
 	rm -f *.test *.ut *.o $(CMLIB)
+
