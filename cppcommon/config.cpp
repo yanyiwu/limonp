@@ -5,6 +5,7 @@ namespace CPPCOMMON
 {
 	Config::Config()
 	{
+		_isInit = false;
 	}
 
 	Config::~Config()
@@ -14,11 +15,16 @@ namespace CPPCOMMON
 	bool Config::init(const string& configFile)
 	{
 		char msgBuf[1024];
+		if(_isInit)
+		{
+			LogFatal("already have been initialized. ");
+			return false;
+		}
 		ifstream ifile(configFile.c_str());
 		if(!ifile)
 		{
 			sprintf(msgBuf, "open configFile[%s] failed.", configFile.c_str());
-			LogError(msgBuf);
+			LogFatal(msgBuf);
 			return false;
 		}
 		string line, key, value;
@@ -34,7 +40,7 @@ namespace CPPCOMMON
 			if(2 != vecBuf.size())
 			{
 				sprintf(msgBuf, "line[%s] is illegal.", line.c_str());
-				LogError(msgBuf);
+				LogFatal(msgBuf);
 				return false;
 			}
 			key = vecBuf[0];
@@ -42,12 +48,13 @@ namespace CPPCOMMON
 			if(_map.end() != _map.find(key))
 			{
 				sprintf(msgBuf, "key[%s] already exists.", key.c_str());
-				LogError(msgBuf);
+				LogFatal(msgBuf);
 				return false;
 			}
 			_map[key] = value;
 		}
 		ifile.close();
+		_isInit = true;
 		return true;
 	}
 
@@ -84,16 +91,21 @@ namespace CPPCOMMON
 
 }
 
+namespace CPPCOMMON
+{
+	Config gConfig;
+}
+
 
 #ifdef CONFIG_UT
 using namespace CPPCOMMON;
 int main()
 {
-	Config config;
-	config.init("1.conf");
-	config.display();
-	cout<<config.getByKey("a")<<endl;
-	cout<<config.getByKey("cm")<<endl;
+	gConfig.init("1.conf");
+	gConfig.init("1.conf");
+	gConfig.display();
+	cout<<gConfig.getByKey("a")<<endl;
+	cout<<gConfig.getByKey("cm")<<endl;
 	return 0;
 }
 

@@ -25,8 +25,14 @@ namespace CPPCOMMON
 		private:
 			string _stripComment(const string& line);
 			map<string, string> _map;
+			bool _isInit;
 
 	};
+}
+
+namespace CPPCOMMON
+{
+	extern Config gConfig;
 }
 
 #endif
