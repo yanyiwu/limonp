@@ -249,7 +249,7 @@ int main()
 	//
 	//s = "ab1ba2ab3";
 	//cout<<replaceStr(s,"ab","###")<<endl;
-    ifstream ifile("dict.txt");
+    ifstream ifile("testdata/dict.txt");
     string line;
     while(getline(ifile, line))
     {
