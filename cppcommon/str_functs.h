@@ -6,6 +6,7 @@
 #include <vector>
 #include <algorithm>
 #include <cctype>
+#include <stdint.h>
 namespace CPPCOMMON
 {
 	using namespace std;
@@ -23,5 +24,9 @@ namespace CPPCOMMON
 	string stripStr(const string& str, const string& patternstr = " \n\t");
 	unsigned int countStrDistance(const string& A, const string& B);
 	unsigned int countStrSimilarity(const string& A, const string& B);
+
+    
+    size_t unicodeToUtf8(uint16_t *in, size_t len, char * out);
+    int utf8ToUnicode(const char* inutf8, int len, uint16_t* unicode);
 }
 #endif

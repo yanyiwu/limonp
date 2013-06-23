@@ -148,6 +148,79 @@ namespace CPPCOMMON
 		}
 		return res;
 	}
+
+    //unicode utf8 transform
+    size_t unicodeToUtf8(uint16_t *in, size_t len, char * out)
+    {
+        size_t res = 0;
+        for (int i = 0; i < len; i++)
+        {
+            uint16_t unicode = in[i];
+            if (unicode >= 0x0000 && unicode <= 0x007f)
+            {
+                *out = (uint8_t)unicode;
+                out += 1;
+                res += 1;
+            }
+            else if (unicode >= 0x0080 && unicode <= 0x07ff)
+            {
+                *out = 0xc0 | (unicode >> 6);
+                out += 1;
+                *out = 0x80 | (unicode & (0xff >> 2));
+                out += 1;
+                res += 2;
+            }
+            else if (unicode >= 0x0800 && unicode <= 0xffff)
+            {
+                *out = 0xe0 | (unicode >> 12);
+                out += 1;
+                *out = 0x80 | ((unicode >> 6) & 0x3f);
+                out += 1;
+                *out = 0x80 | (unicode & 0x3f);
+                out += 1;
+                res += 3;
+            }
+
+        }
+        *out = '\0';
+        return res;
+    }
+
+    /*from: http://www.cppblog.com/lf426/archive/2008/03/31/45796.html */
+    int utf8ToUnicode(const char* inutf8, int len, uint16_t* unicode)
+    {
+        int length;
+        const unsigned char* utf8 = (const unsigned char*) inutf8;
+        const unsigned char* t = (const unsigned char*) inutf8;
+
+        length = 0;
+        while (utf8 - t < len)
+        {
+            if ( *(unsigned char *) utf8 <= 0x7f ) 
+            {
+                //expand with 0s.
+                *unicode++ = *utf8++;
+            }
+            //2 byte.
+            else if ( *(unsigned char *) utf8 <= 0xdf ) 
+            {
+                *unicode++ = ((*(unsigned char *) utf8 & 0x1f) << 6) + ((*(unsigned char *) (utf8 + 1)) & 0x3f);
+                utf8 += 2;
+            }
+            //3 byte.Chinese may use 3 byte.
+            else {
+                *unicode++ = ((int) (*(unsigned char *) utf8 & 0x0f) << 12) +
+                    ((*(unsigned char *) (utf8 + 1) & 0x3f) << 6) +
+                    (*(unsigned char *) (utf8 + 2) & 0x3f);
+                utf8 += 3;
+            }
+            length++;
+        }
+
+        *unicode = 0;
+        return length;
+    }
+
 }
 
 #ifdef TEST_STR_FUNCTS
@@ -156,10 +229,10 @@ using namespace CPPCOMMON;
 using namespace std;
 int main()
 {
-	string s = " \t\n1 a h \n";
-	cout<<"["<<stripStr(s)<<"]"<<endl;
-	cout<<countStrDistance("Aheheh","heheh1212")<<endl;
-	cout<<joinStr(splitStr(s), ",")<<endl;
+	//string s = " \t\n1 a h \n";
+	//cout<<"["<<stripStr(s)<<"]"<<endl;
+	//cout<<countStrDistance("Aheheh","heheh1212")<<endl;
+	//cout<<joinStr(splitStr(s), ",")<<endl;
 	//vector<string> vec;
 	//splitStr("1 3 4", vec);
 	//char * a[] = {"3","jaj","ads"};
@@ -173,9 +246,25 @@ int main()
 	//string s = "1111aaafasfa,asdj.sadhashfhaha";
 	//upperStr(s);
 	//cout<<s<<endl;
-	
+	//
 	//s = "ab1ba2ab3";
 	//cout<<replaceStr(s,"ab","###")<<endl;
+    ifstream ifile("dict.txt");
+    string line;
+    while(getline(ifile, line))
+    {
+        uint16_t strbuf[1024];
+
+        size_t unilen = utf8ToUnicode(line.c_str(), line.size(), strbuf);
+        for(int i = 0; i < unilen; i++)
+        {
+            // printf("%x\n", strbuf[i]);
+        }
+        char utf8str[512]={0};
+        unicodeToUtf8(strbuf, unilen, utf8str);
+        //cout<<strlen(utf8str);
+        cout<<utf8str<<endl;
+    }
 	return 0;
 }
 #endif
