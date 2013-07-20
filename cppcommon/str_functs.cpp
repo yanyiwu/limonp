@@ -250,6 +250,7 @@ namespace CPPCOMMON
 	}
 
     /*from: http://www.cppblog.com/lf426/archive/2008/03/31/45796.html */
+	/*if the inutf8 is not utf8 , this function maybe cause core dump!!!*/
     int utf8ToUnicode(const char* inutf8, int len, uint16_t* unicode)
     {
         int length;
@@ -433,31 +434,31 @@ int main()
     //    cout<<utf8str<<endl;
     //}
 	//cout<<string_format("hehe%s11asd%dasf","[here]",2);
-	//ifstream ifile("testdata/dict.utf8");
-	//string line;
-	//while(getline(ifile, line))
-	//{
-	//	cout<<line<<endl;
-	//	string uniStr = utf8ToUnicode(line);
-	//	//cout<<uniStr<<endl;
-	//	string utfStr = unicodeToUtf8(uniStr);
-	//	cout<<utfStr<<endl;
-	//}
+	ifstream ifile("testdata/dict.utf8");
+	string line;
+	while(getline(ifile, line))
+	{
+		cout<<line<<endl;
+		string uniStr = utf8ToUnicode(line);
+		//cout<<utf8ToUnicode(uniStr)<<endl; this will core dump
+		string utfStr = unicodeToUtf8(uniStr);
+		cout<<utfStr<<endl;
+	}
 	//vector<string> tmp;
 	//tmp.push_back("1");
 	////tmp.push_back("2");
 	////tmp.clear();
 	//cout<<joinStr(tmp, ",")<<endl;
-	ifstream ifile("testdata/dict.gbk");
-	string line;
-	while(getline(ifile, line))
-	{
-		cout<<line<<endl;
-		string s = gbkToUtf8(line);
-		cout<<getUtf8WordLen(s)<<endl;
-		s = utf8ToGbk(s);
-		cout<<s<<endl;
-	}
+	//ifstream ifile("testdata/dict.gbk");
+	//string line;
+	//while(getline(ifile, line))
+	//{
+	//	cout<<line<<endl;
+	//	string s = gbkToUtf8(line);
+	//	cout<<getUtf8WordLen(s)<<endl;
+	//	s = utf8ToGbk(s);
+	//	cout<<s<<endl;
+	//}
 	return 0;
 }
 #endif
