@@ -286,6 +286,10 @@ namespace CPPCOMMON
 
 	string utf8ToUnicode(const string& utfStr)
 	{
+		if(utfStr.empty())
+		{
+			return "";
+		}
 		uint16_t* pUni = new uint16_t[utfStr.size()];
 		size_t uniLen = utf8ToUnicode(utfStr.c_str(), utfStr.size(), pUni);
 		string res;
