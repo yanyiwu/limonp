@@ -229,6 +229,7 @@ namespace CPPCOMMON
 		char * utfStr = new char[(len<<1) + 1];
 		if(NULL == utfStr)
 		{
+			delete [] uniArr;
 			return "";
 		}
 		for(int i = 0; i < len; i+=2)
@@ -442,7 +443,7 @@ int main()
     //    cout<<utf8str<<endl;
     //}
 	//cout<<string_format("hehe%s11asd%dasf","[here]",2);
-	ifstream ifile("testdata/dict.utf8");
+	ifstream ifile("testdata/dict.gbk");
 	string line;
 	while(getline(ifile, line))
 	{
