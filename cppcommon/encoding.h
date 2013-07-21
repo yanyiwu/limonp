@@ -7,6 +7,7 @@
 #define CPPCOMMON_ENCODING_H
 
 #include "str_functs.h"
+#include "vec_functs.h"
 
 namespace CPPCOMMON
 {
@@ -26,6 +27,11 @@ namespace CPPCOMMON
 			bool setEncoding(const string& enc);
 			string encode(const string& str);
 			string decode(const string& str);
+		public:
+			bool isUniStrValid(const string& unistr)
+			{
+				return !(unistr.empty() || unistr.size() % 2);
+			}
 			
 	};
 }

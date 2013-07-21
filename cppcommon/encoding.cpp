@@ -27,8 +27,9 @@ namespace CPPCOMMON
 	}
 	string UnicodeEncoding::encode(const string& str)
 	{
-		if(str.empty())
+		if(!isUniStrValid(str))
 		{
+			cout<<__FILE__<<__LINE__<<endl;
 			return "";
 		}
 		if(UTF8ENC == _encoding)
@@ -39,22 +40,35 @@ namespace CPPCOMMON
 		{
 			return utf8ToGbk(unicodeToUtf8(str));
 		}
+		cout<<__FILE__<<__LINE__<<endl;
 		return "";
 	}
 	string UnicodeEncoding::decode(const string& str)
 	{
 		if(str.empty())
 		{
+			cout<<__FILE__<<__LINE__<<endl;
 			return "";
 		}
+		string res;
 		if(UTF8ENC == _encoding)
 		{
-			return utf8ToUnicode(str);
+			
+			res = utf8ToUnicode(str);
+			if(isUniStrValid(res))
+			{
+				return res;
+			}
 		}
 		else if(GBKENC == _encoding)
 		{
-			return utf8ToUnicode(gbkToUtf8(str));
+			res = utf8ToUnicode(gbkToUtf8(str));
+			if(isUniStrValid(res))
+			{
+				return res;
+			}
 		}
+		cout<<__FILE__<<__LINE__<<endl;
 		return "";
 	}
 }
@@ -64,6 +78,32 @@ using namespace CPPCOMMON;
 int main()
 {
 	UnicodeEncoding enc;
+	ifstream ifile("testdata/dict.utf8");
+	string line;
+	//enc.setEncoding(UnicodeEncoding::UTF8ENC);
+	//enc.setEncoding(UnicodeEncoding::GBKENC);
+	//while(getline(ifile, line))
+	//{
+	//	cout<<line<<endl;
+	//	cout<<enc.encode(enc.decode(line))<<endl;
+	//	cout<<enc.decode(enc.encode(line))<<endl;
+	//	cout<<enc.decode(line)<<endl;
+	//	cout<<enc.encode(line)<<endl;
+	//}
+	ifile.close();
+	ifile.open("testdata/dict.gbk");
+	enc.setEncoding(UnicodeEncoding::GBKENC);
+	while(getline(ifile, line))
+	{
+		
+		cout<<line<<endl;
+		cout<<line.size()<<endl;
+		cout<<enc.encode(enc.decode(line))<<endl;
+		cout<<enc.decode(enc.encode(line))<<endl;
+		cout<<enc.decode(line)<<endl;
+		cout<<enc.encode(line)<<endl;
+	}
+	ifile.close();
 	
 	return 0;
 }
