@@ -6,20 +6,27 @@
 
 namespace CPPCOMMON
 {
-	const string& UnicodeEncoding::UTF8ENC = "utf-8";
-	const string& UnicodeEncoding::GBKENC = "gbk";
 	
 	UnicodeEncoding::UnicodeEncoding(const string& enc)
 	{
-		_encVec.push_back(UTF8ENC);
-		_encVec.push_back(GBKENC);
+		cout<<__FILE__<<__LINE__<<endl;
+		
+		//_encVec.push_back(UTF8ENC);
+		//_encVec.push_back(GBKENC);
+		cout<<__FILE__<<__LINE__<<endl;
+		
 		if(!isInVec<string>(_encVec, enc))
 		{
+		cout<<__FILE__<<__LINE__<<endl;
+		
 			//default
 			_encoding = UTF8ENC;
+		cout<<__FILE__<<__LINE__<<endl;
 		}
 		else
 		{
+		cout<<__FILE__<<__LINE__<<endl;
+		
 			_encoding = enc;
 		}
 	}
@@ -100,7 +107,7 @@ int main()
 	//}
 	ifile.close();
 	ifile.open("testdata/dict.gbk");
-	enc.setEncoding(UnicodeEncoding::GBKENC);
+	enc.setEncoding(GBKENC);
 	while(getline(ifile, line))
 	{
 		
