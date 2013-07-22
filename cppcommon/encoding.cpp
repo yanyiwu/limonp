@@ -38,7 +38,7 @@ namespace CPPCOMMON
 		return true;
 	}
 
-	string UnicodeEncoding::encode(const vector<uint16_t>& unicode)
+	string UnicodeEncoding::encode(const Unicode& unicode)
 	{
 		if(unicode.empty())
 		{
@@ -55,7 +55,7 @@ namespace CPPCOMMON
 		return "";
 	}
 
-	bool UnicodeEncoding::decode(const string& str, vector<uint16_t>& unicode)
+	bool UnicodeEncoding::decode(const string& str, Unicode& unicode)
 	{
 		if(str.empty())
 		{
@@ -80,7 +80,7 @@ int main()
 {
 	UnicodeEncoding enc(GBKENC);
 	ifstream ifile("testdata/dict.gbk");
-	vector<uint16_t> unicode;
+	Unicode unicode;
 	string line;
 	while(getline(ifile, line))
 	{

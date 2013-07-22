@@ -8,6 +8,7 @@
 namespace CPPCOMMON
 {
 	typedef unsigned int uint;
+	typedef std::vector<uint16_t> Unicode;
 }
 
 
