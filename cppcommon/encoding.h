@@ -27,6 +27,7 @@ namespace CPPCOMMON
 		public:
 			bool setEncoding(const string& enc);
 			string encode(const Unicode& unicode);
+			string encode(UnicodeConstIterator begin, UnicodeConstIterator end);
 			bool decode(const string& str, Unicode& unicode);
 			
 	};

@@ -38,6 +38,16 @@ namespace CPPCOMMON
 		return true;
 	}
 
+	string UnicodeEncoding::encode(UnicodeConstIterator begin, UnicodeConstIterator end)
+	{
+		if(begin >= end)
+		{
+			return "";
+		}
+		Unicode unicode(begin, end);
+		return encode(unicode);
+	}
+
 	string UnicodeEncoding::encode(const Unicode& unicode)
 	{
 		if(unicode.empty())
