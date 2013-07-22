@@ -9,24 +9,17 @@ namespace CPPCOMMON
 	
 	UnicodeEncoding::UnicodeEncoding(const string& enc)
 	{
-		cout<<__FILE__<<__LINE__<<endl;
 		
-		//_encVec.push_back(UTF8ENC);
-		//_encVec.push_back(GBKENC);
-		cout<<__FILE__<<__LINE__<<endl;
+		_encVec.push_back(UTF8ENC);
+		_encVec.push_back(GBKENC);
 		
 		if(!isInVec<string>(_encVec, enc))
 		{
-		cout<<__FILE__<<__LINE__<<endl;
-		
 			//default
 			_encoding = UTF8ENC;
-		cout<<__FILE__<<__LINE__<<endl;
 		}
 		else
 		{
-		cout<<__FILE__<<__LINE__<<endl;
-		
 			_encoding = enc;
 		}
 	}
