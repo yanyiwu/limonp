@@ -1,7 +1,7 @@
 /************************************
  * file enc : utf8
  * author   : wuyanyi09@gmail.com
-************************************/
+ ************************************/
 #include "str_functs.h"
 
 namespace CPPCOMMON
@@ -22,9 +22,9 @@ namespace CPPCOMMON
 				return str;
 			}
 			if (n > -1)
-				size = n + 1;
+			  size = n + 1;
 			else
-				size *= 2;
+			  size *= 2;
 		}
 		return str;
 	}
@@ -91,7 +91,29 @@ namespace CPPCOMMON
 		return str.substr(posL, posR - posL + 1);
 
 	}
-	
+
+
+	//http://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring
+	// trim from start
+	std::string &ltrim(std::string &s) 
+	{
+		s.erase(s.begin(), std::find_if(s.begin(), s.end(), std::not1(std::ptr_fun<int, int>(std::isspace))));
+		return s;
+	}
+
+	// trim from end
+	std::string &rtrim(std::string &s) 
+	{
+		s.erase(std::find_if(s.rbegin(), s.rend(), std::not1(std::ptr_fun<int, int>(std::isspace))).base(), s.end());
+		return s;
+	}
+
+	// trim from both ends
+	std::string &trim(std::string &s) 
+	{
+		return ltrim(rtrim(s));
+	}
+
 	bool splitStrMultiPatterns(
 				const string& strSrc, 
 				vector<string>& outVec, 
@@ -238,22 +260,22 @@ int main()
 	//
 	//s = "ab1ba2ab3";
 	//cout<<replaceStr(s,"ab","###")<<endl;
-    //ifstream ifile("testdata/dict.txt");
-    //string line;
-    //while(getline(ifile, line))
-    //{
-    //    uint16_t strbuf[1024];
+	//ifstream ifile("testdata/dict.txt");
+	//string line;
+	//while(getline(ifile, line))
+	//{
+	//    uint16_t strbuf[1024];
 
-    //    size_t unilen = utf8ToUnicode(line.c_str(), line.size(), strbuf);
-    //    for(int i = 0; i < unilen; i++)
-    //    {
-    //        // printf("%x\n", strbuf[i]);
-    //    }
-    //    char utf8str[512]={0};
-    //    unicodeToUtf8(strbuf, unilen, utf8str);
-    //    //cout<<strlen(utf8str);
-    //    cout<<utf8str<<endl;
-    //}
+	//    size_t unilen = utf8ToUnicode(line.c_str(), line.size(), strbuf);
+	//    for(int i = 0; i < unilen; i++)
+	//    {
+	//        // printf("%x\n", strbuf[i]);
+	//    }
+	//    char utf8str[512]={0};
+	//    unicodeToUtf8(strbuf, unilen, utf8str);
+	//    //cout<<strlen(utf8str);
+	//    cout<<utf8str<<endl;
+	//}
 	//cout<<string_format("hehe%s11asd%dasf","[here]",2);
 	//ifstream ifile("testdata/dict.gbk");
 	//string line;
@@ -279,12 +301,15 @@ int main()
 	//	s = utf8ToGbk(s);
 	//	cout<<s<<endl;
 	//}
-	cout<<strStartsWith("--help","--")<<endl;
-	cout<<strStartsWith("--help","-")<<endl;
-	cout<<strStartsWith("--help","he")<<endl;
-	cout<<strStartsWith("help","help")<<endl;
-	cout<<strStartsWith("","help")<<endl;
-	cout<<strStartsWith("hel","")<<endl;
+	//cout<<strStartsWith("--help","--")<<endl;
+	//cout<<strStartsWith("--help","-")<<endl;
+	//cout<<strStartsWith("--help","he")<<endl;
+	//cout<<strStartsWith("help","help")<<endl;
+	//cout<<strStartsWith("","help")<<endl;
+	//cout<<strStartsWith("hel","")<<endl;
+	string s("  helloword heh\t");
+	string b;
+	cout<<trim(b)<<"11"<<endl;
 	return 0;
 }
 #endif

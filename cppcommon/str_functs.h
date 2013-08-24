@@ -17,6 +17,8 @@
 #include <iconv.h>
 #include <memory.h>
 #include "typedefs.h"
+#include <functional> 
+#include <locale>
 namespace CPPCOMMON
 {
 	using namespace std;
@@ -33,6 +35,9 @@ namespace CPPCOMMON
 	string lowerStr(const string& str);
 	string replaceStr(const string& strSrc, const string& oldStr, const string& newStr, int count = -1);
 	string stripStr(const string& str, const string& patternstr = " \n\t");
+	std::string &ltrim(std::string &s) ;
+	std::string &rtrim(std::string &s) ;
+	std::string &trim(std::string &s) ;
 	unsigned int countStrDistance(const string& A, const string& B);
 	unsigned int countStrSimilarity(const string& A, const string& B);
 
