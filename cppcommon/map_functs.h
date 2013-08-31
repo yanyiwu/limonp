@@ -8,6 +8,7 @@
 #define CPPCOMMON_MAP_FUNCTS_H
 
 #include <map>
+#include <set>
 #include <iostream>
 #include <sstream>
 
