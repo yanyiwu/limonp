@@ -7,15 +7,15 @@
 namespace CPPCOMMON
 {
     //http://stackoverflow.com/questions/2342162/stdstring-formatting-like-sprintf
-    string string_format(const string fmt, ...) 
+    string string_format(const char* fmt, ...) 
     {
-        int size = 100;
+        int size = 256;
         std::string str;
         va_list ap;
         while (1) {
             str.resize(size);
             va_start(ap, fmt);
-            int n = vsnprintf((char *)str.c_str(), size, fmt.c_str(), ap);
+            int n = vsnprintf((char *)str.c_str(), size, fmt, ap);
             va_end(ap);
             if (n > -1 && n < size) {
                 str.resize(n);
@@ -62,22 +62,22 @@ namespace CPPCOMMON
         res.clear();
 
         size_t start = source.find_first_not_of(pattern);
-		size_t end;
-		if(string::npos == start)
-		{
-			return false;
-		}
-		while(string::npos != start)
-		{
-			end = source.find_first_of(pattern, start);
-			if(string::npos == end)
-			{
-				res.push_back(source.substr(start));
-				return true;
-			}
-			res.push_back(source.substr(start, end - start));
-			start = source.find_first_not_of(pattern,  end);
-		}
+        size_t end;
+        if(string::npos == start)
+        {
+            return false;
+        }
+        while(string::npos != start)
+        {
+            end = source.find_first_of(pattern, start);
+            if(string::npos == end)
+            {
+                res.push_back(source.substr(start));
+                return true;
+            }
+            res.push_back(source.substr(start, end - start));
+            start = source.find_first_not_of(pattern,  end);
+        }
         return true;
     }
 

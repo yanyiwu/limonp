@@ -14,7 +14,6 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdarg.h>
-#include <iconv.h>
 #include <memory.h>
 #include "typedefs.h"
 #include <functional> 
@@ -22,7 +21,7 @@
 namespace CPPCOMMON
 {
     using namespace std;
-    string string_format(const string fmt, ...) ;
+    string string_format(const char*, ...) ;
     string joinStr(const vector<string>& source, const string& connector);
     vector<string> splitStr(const string& source, const string& pattern = " \t\n");
     bool splitStr(const string& source, vector<string>& res, const string& pattern = " \t\n");
