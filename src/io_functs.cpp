@@ -23,7 +23,6 @@ namespace CPPCOMMON
         out.close();
     }
 }
-#define TEST_IO_FUNCTS
 #ifdef TEST_IO_FUNCTS
 #include <iostream>
 using namespace CPPCOMMON;
