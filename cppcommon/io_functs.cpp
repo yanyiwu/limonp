@@ -9,6 +9,10 @@ namespace CPPCOMMON
     string loadFile2Str(const char * const filepath)
     {
         ifstream in(filepath);
+        if(!in)
+        {
+            return "";
+        }
         istreambuf_iterator<char> beg(in), end;
         string str(beg, end);
         in.close();
@@ -31,10 +35,11 @@ int main()
 {
 //    char filename[] = "1/2/3";
 //    cout<<loadFile2Str("1")<<endl;
-    string s = "hello world";
-    loadStr2File("testfile", ofstream::app, "hello world\n");
-    loadStr2File("testfile", ofstream::app, "hello world\n");
-    loadStr2File("testfile", ofstream::app, "hello world\n");
+    //string s = "hello world";
+    //loadStr2File("testfile", ofstream::app, "hello world\n");
+    //loadStr2File("testfile", ofstream::app, "hello world\n");
+    //loadStr2File("testfile", ofstream::app, "hello world\n");
+    cout<<loadFile2Str("testfile")<<endl;
     return 0;
 }
 #endif
