@@ -10,7 +10,7 @@ namespace CPPCOMMON
         "DEBUG","INFO","WARN","ERROR","FATAL"
     };
 
-    const char * Logger::_logFormat = "%s [File:%s] [Line:%d] [%s] Msg:%s\n";
+    const char * Logger::_logFormat = "%s File:%s Line:%d %s %s\n";
     const char * Logger::_timeFormat = "%Y-%m-%d %H:%M:%S";
     time_t Logger::_timeNow;
     Logger::Logger()

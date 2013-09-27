@@ -26,6 +26,27 @@ namespace CPPCOMMON
         copy(str.begin(), str.end(), itr);
         out.close();
     }
+
+    int ReadFromFile(const char * fileName, char* buf, int maxCount, const char* mode)
+    {                                        
+        FILE* fp = fopen(fileName, mode);    
+        if (!fp)                             
+          return 0;                          
+        int ret;                             
+        fgets(buf, maxCount, fp) ? ret = 1 : ret = 0;                                       
+        fclose(fp);                          
+        return ret;                          
+    }                                        
+
+    int WriteStr2File(const char* fileName, const char* buf, const char* mode)
+    {                                          
+        FILE* fp = fopen(fileName, mode);      
+        if (!fp)                               
+          return 0;                            
+        int n = fprintf(fp, "%s", buf);        
+        fclose(fp);                            
+        return n;                              
+    }                                          
 }
 #ifdef TEST_IO_FUNCTS
 #include <iostream>
