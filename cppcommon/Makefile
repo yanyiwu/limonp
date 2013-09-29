@@ -1,26 +1,34 @@
-CC = g++
-CCOPT = -Wall -c
-LINK = g++
-LINKOPT = 
-PACK = ar
-PACKOPT = rc
+CXX    := g++
+LD     := g++
+AR     := ar rc
+
+DEBUG_CXXFLAGS     := -g -Wall -DDEBUG 
+RELEASE_CXXFLAGS   := -Wall -O3
+
+ifeq (YES, ${RELEASE})
+   CXXFLAGS     := ${RELEASE_CXXFLAGS}
+   LDFLAGS      := ${RELEASE_LDFLAGS}
+else
+   CXXFLAGS       := ${DEBUG_CXXFLAGS}
+   LDFLAGS      := ${DEBUG_LDFLAGS}
+endif
+
+DOLINK := $(LD) $(LDFLAGS) -o $@ $^
+DOPACK := $(AR)  
 SOURCES := $(wildcard *.cpp)
 OBJS := $(patsubst %.cpp,%.o,$(SOURCES))
-
-DOPACK = $(PACK) $(PACKOPT) $@ $^
-DOLINK = $(LINK) $(LINKOPT) -o $@ $^
 
 CMLIB = libcm.a
 
 %.o: %.cpp
-	$(CC) $(CCOPT) $<
+	$(CXX) $(CXXFLAGS) -c $<
 
 
 all: $(CMLIB)
 
 
 $(CMLIB): $(OBJS)
-	$(DOPACK) 
+	$(DOPACK) $@ $<
 	
 	
 file_functs.ut: file_functs.cpp file_functs.h
