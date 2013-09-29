@@ -28,8 +28,7 @@ all: $(CMLIB)
 
 
 $(CMLIB): $(OBJS)
-	$(DOPACK) $@ $<
-	
+	$(DOPACK) $@ $(OBJS)
 	
 file_functs.ut: file_functs.cpp file_functs.h
 	g++ -o $@ $< -DTEST_FILE_FUNCTS
