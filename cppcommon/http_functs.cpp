@@ -48,7 +48,7 @@ namespace CPPCOMMON
 using namespace CPPCOMMON;
 int main()
 {
-    string url("http://127.0.0.1/?k1=v1&k2=v2");
+    string url("http://127.0.0.1/?k1=v1&k2=v2 hh");
     HashMap<string, string> mp;
     parseUrl(url, mp);
     cout<<HashMapToString(mp)<<endl;

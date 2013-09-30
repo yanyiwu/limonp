@@ -5,6 +5,7 @@
 #include <string>
 #include "typedefs.h"
 #include "map_functs.h"
+#include "str_functs.h"
 namespace CPPCOMMON
 {
     using namespace std;
