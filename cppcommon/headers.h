@@ -11,5 +11,6 @@
 #include "str_functs.h"
 #include "map_functs.h"
 #include "argv_functs.h"
+#include "http_functs.h"
 
 #endif
