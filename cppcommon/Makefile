@@ -49,7 +49,7 @@ config.ut: config.cpp config.h
 	g++ -o $@ $< -DCONFIG_UT $(CMLIB)
 
 http_functs.ut: http_functs.cpp http_functs.h
-	g++ -o $@ $< -DUT 
+	g++ -o $@ $< -DUT -DDEBUG $(CMLIB)
 
 clean:
 	rm -f *.test *.ut *.o $(CMLIB)

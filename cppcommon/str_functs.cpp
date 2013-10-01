@@ -254,6 +254,9 @@ int main()
     cout<<strStartsWith("hel","")<<endl;
     cout<<strEndsWith("hel","")<<endl;
     cout<<strEndsWith("hel","el")<<endl;
+    //string s(" \t\n ni hao ad \r\n");
+    string s;
+    cout<<":::"<<trim(s)<<":::"<<endl;
     return 0;
 }
 #endif

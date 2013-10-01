@@ -17,6 +17,7 @@ namespace CPPCOMMON
         public:
             static const char* const KEY_METHOD;
             static const char* const KEY_PATH;
+            static const char* const KEY_PROTOCOL;
         public:
             bool load(const string& headerStr);
         private:
@@ -41,6 +42,10 @@ namespace CPPCOMMON
             HashMap<string, string> _methodPostMap;
         private:
             bool _methodMap(const HashMap<string, string>& mp, const string& key, string& res);
+        public:
+#ifdef DEBUG
+            string toString();// function for debug because of heavy time consuming
+#endif
     };
 
     bool parseUrl(const string& url, HashMap<string, string>& mp);
