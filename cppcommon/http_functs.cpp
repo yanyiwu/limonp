@@ -40,6 +40,48 @@ namespace CPPCOMMON
 
         return true;
     }
+
+    const char* const HttpReqInfo::KEY_METHOD = "METHOD";
+    const char* const HttpReqInfo::KEY_PATH = "PATH";
+
+    bool HttpReqInfo::load(const string& headerStr)
+    {
+        size_t len = headerStr.size();
+        size_t lpos = 0, rpos = 0;
+        rpos = headerStr.find(' ', lpos);
+        if(!_parse(headerStr, lpos, rpos, KEY_METHOD))
+        {
+            LogError("parse %s faild.", key);
+            return false;
+        }
+        lpos = rpos + 1;
+        rpos = headerStr.find(' ', lpos);
+        
+        
+        return true;
+    }
+
+    bool HttpReqInfo::_parse(const string& headerStr, size_t lpos, size_t rpos, const char * const key)
+    {
+        if(string::npos == rpos || rpos <= lpos)
+        {
+            return false;
+        }
+        _headerMap[KEY_METHOD] = headerStr.substr(lpos, rpos - lpos);
+        return true;
+    }
+
+    bool HttpReqInfo::_methodMap(const HashMap<string, string>& mp, const string& key, string& res)
+    {
+        HashMap<string, string>::const_iterator it = mp.find(key);
+        if(it == mp.end())
+        {
+            return false;
+        }
+        res = it->second;
+        return true;
+    }
+
 }
 
 
