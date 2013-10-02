@@ -87,12 +87,21 @@ namespace CPPCOMMON
         {
             string s(headerStr, lpos, rpos - lpos);
             size_t p = s.find(':');
-            if(p >= s.size() - 1 || p == 0)
+            if(string::npos == p)
             {
                 LogFatal("headerStr illegal.");
                 return false;
             }
-            _headerMap[s.substr(0, p)] = s.substr(p + 1);
+            string k(s, 0, p);
+            string v(s, p+1);
+            trim(k);
+            trim(v);
+            if(k.empty()||v.empty())
+            {
+                LogFatal("headerStr illegal.");
+                return false;
+            }
+            _headerMap[k] = v;
             lpos = rpos + 2;
         }
         //message header end
