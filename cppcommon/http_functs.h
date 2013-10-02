@@ -23,11 +23,14 @@ namespace CPPCOMMON
         private:
             //bool _parse(const string& headerStr, size_t lpos, size_t rpos, const char * const key);
         public:
+            string& operator[] (const string& key)
+            {
+                return _headerMap[key];
+            }
             bool find(const string& key, string& res)
             {
                 return _find(_headerMap, key, res);
             }
-        public:
             bool GET(const string& argKey, string& res)
             {
                 return _find(_methodGetMap, argKey, res);
