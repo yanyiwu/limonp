@@ -113,7 +113,7 @@ namespace CPPCOMMON
     //    return true;
     //}
 
-    bool HttpReqInfo::_find(const HashMap<string, string>& mp, const string& key, string& res)
+    bool HttpReqInfo::_find(const HashMap<string, string>& mp, const string& key, string& res)const
     {
         HashMap<string, string>::const_iterator it = mp.find(key);
         if(it == mp.end())
@@ -124,8 +124,7 @@ namespace CPPCOMMON
         return true;
     }
 
-#ifdef DEBUG
-    string HttpReqInfo::toString()
+    string HttpReqInfo::toString() const
     {
         string res("{");
         res += HashMapToString(_headerMap);
@@ -136,7 +135,6 @@ namespace CPPCOMMON
         res += "}";
         return res;
     }
-#endif
 
 }
 

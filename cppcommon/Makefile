@@ -21,7 +21,7 @@ OBJS := $(patsubst %.cpp,%.o,$(SOURCES))
 CMLIB = libcm.a
 
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $<
+	$(CXX) -c $(CXXFLAGS) $<
 
 
 all: $(CMLIB)

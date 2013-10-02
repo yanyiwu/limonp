@@ -27,15 +27,15 @@ namespace CPPCOMMON
             {
                 return _headerMap[key];
             }
-            bool find(const string& key, string& res)
+            bool find(const string& key, string& res)const
             {
                 return _find(_headerMap, key, res);
             }
-            bool GET(const string& argKey, string& res)
+            bool GET(const string& argKey, string& res)const
             {
                 return _find(_methodGetMap, argKey, res);
             }
-            bool POST(const string& argKey, string& res)
+            bool POST(const string& argKey, string& res)const
             {
                 return _find(_methodPostMap, argKey, res);
             }
@@ -44,11 +44,9 @@ namespace CPPCOMMON
             HashMap<string, string> _methodGetMap;
             HashMap<string, string> _methodPostMap;
         private:
-            bool _find(const HashMap<string, string>& mp, const string& key, string& res);
+            bool _find(const HashMap<string, string>& mp, const string& key, string& res) const;
         public:
-#ifdef DEBUG
-            string toString();// function for debug because of heavy time consuming
-#endif
+            string toString() const;// function for debug because of heavy time consuming
     };
 
     bool parseUrl(const string& url, HashMap<string, string>& mp);
