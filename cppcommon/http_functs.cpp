@@ -47,33 +47,73 @@ namespace CPPCOMMON
 
     bool HttpReqInfo::load(const string& headerStr)
     {
-        size_t len = headerStr.size();
         size_t lpos = 0, rpos = 0;
         vector<string> buf;
-        rpos = headerStr.find('\n', lpos);
-        if(string::npos == rpos || !splitStr(headerStr.substr(lpos, rpos - lpos), buf, " ") || 3 != buf.size())
+        rpos = headerStr.find("\r\n", lpos);
+        if(string::npos == rpos)
         {
-            LogError("parse header first line failed.");
+            LogFatal("headerStr illegal.");
+            return false;
+        }
+        string firstline(headerStr, lpos, rpos - lpos);
+        if(!splitStr(firstline, buf, " ") || 3 != buf.size())
+        {
+            LogFatal("parse header first line failed.");
             return false;
         }
         _headerMap[KEY_METHOD] = trim(buf[0]); 
         _headerMap[KEY_PATH] = trim(buf[1]); 
         _headerMap[KEY_PROTOCOL] = trim(buf[2]); 
-        return true;
-    }
-
-    bool HttpReqInfo::_parse(const string& headerStr, size_t lpos, size_t rpos, const char * const key)
-    {
-        if(string::npos == rpos || rpos <= lpos)
+        //first request line end
+        //parse path to _methodGetMap
+        if("GET" == _headerMap[KEY_METHOD])
         {
+            if(!parseUrl(firstline, _methodGetMap))
+            {
+                LogFatal("headerStr illegal.");
+                return false;
+            }
+        }
+        
+        
+        lpos = rpos + 2;
+        if(lpos >= headerStr.size())
+        {
+            LogFatal("headerStr illegal");
             return false;
         }
-        string s(headerStr.substr(lpos, rpos - lpos));
-        _headerMap[KEY_METHOD] = trim(s);
+        //message header begin
+        while(lpos <= headerStr.size() && string::npos != (rpos = headerStr.find("\r\n", lpos)) && rpos > lpos)
+        {
+            string s(headerStr, lpos, rpos - lpos);
+            size_t p = s.find(':');
+            if(p >= s.size() - 1 || p == 0)
+            {
+                LogFatal("headerStr illegal.");
+                return false;
+            }
+            _headerMap[s.substr(0, p)] = s.substr(p + 1);
+            lpos = rpos + 2;
+        }
+        //message header end
+
+        //body begin
+        
         return true;
     }
 
-    bool HttpReqInfo::_methodMap(const HashMap<string, string>& mp, const string& key, string& res)
+    //bool HttpReqInfo::_parse(const string& headerStr, size_t lpos, size_t rpos, const char * const key)
+    //{
+    //    if(string::npos == rpos || rpos <= lpos)
+    //    {
+    //        return false;
+    //    }
+    //    string s(headerStr, lpos, rpos - lpos);
+    //    _headerMap[KEY_METHOD] = trim(s);
+    //    return true;
+    //}
+
+    bool HttpReqInfo::_find(const HashMap<string, string>& mp, const string& key, string& res)
     {
         HashMap<string, string>::const_iterator it = mp.find(key);
         if(it == mp.end())
@@ -110,7 +150,7 @@ int main()
     HashMap<string, string> mp;
     parseUrl(url, mp);
     cout<<HashMapToString(mp)<<endl;
-    const char * header = "GET /hehek1=v1&%20k2=v2 HTTP/1.1\nHost: 10.109.245.13:11256\nConnection: keep-alive\nAccept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\nUser-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.66 Safari/537.36\nAccept-Encoding: gzip,deflate,sdch\nAccept-Language: zh-CN,zh;q=0.8\n";
+    const char * header = "GET /hehek1=v1&%20k2=v2 HTTP/1.1\r\nHost: 10.109.245.13:11256\r\nConnection: keep-alive\r\nAccept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\r\nUser-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.66 Safari/537.36\r\nAccept-Encoding: gzip,deflate,sdch\r\nAccept-Language: zh-CN,zh;q=0.8\r\n\r\n";
     HttpReqInfo reqinfo;
     reqinfo.load(header);
     cout<<reqinfo.toString()<<endl;

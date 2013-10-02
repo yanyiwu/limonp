@@ -21,27 +21,27 @@ namespace CPPCOMMON
         public:
             bool load(const string& headerStr);
         private:
-            bool _parse(const string& headerStr, size_t lpos, size_t rpos, const char * const key);
+            //bool _parse(const string& headerStr, size_t lpos, size_t rpos, const char * const key);
         public:
-            string& operator [](const string& key)
+            bool find(const string& key, string& res)
             {
-                return _headerMap[key];
+                return _find(_headerMap, key, res);
             }
         public:
             bool GET(const string& argKey, string& res)
             {
-                return _methodMap(_methodGetMap, argKey, res);
+                return _find(_methodGetMap, argKey, res);
             }
             bool POST(const string& argKey, string& res)
             {
-                return _methodMap(_methodPostMap, argKey, res);
+                return _find(_methodPostMap, argKey, res);
             }
         private:
             HashMap<string, string> _headerMap;
             HashMap<string, string> _methodGetMap;
             HashMap<string, string> _methodPostMap;
         private:
-            bool _methodMap(const HashMap<string, string>& mp, const string& key, string& res);
+            bool _find(const HashMap<string, string>& mp, const string& key, string& res);
         public:
 #ifdef DEBUG
             string toString();// function for debug because of heavy time consuming
