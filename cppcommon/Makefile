@@ -23,7 +23,6 @@ CMLIB = libcm.a
 %.o: %.cpp
 	$(CXX) -c $(CXXFLAGS) $<
 
-
 all: $(CMLIB)
 
 
@@ -49,6 +48,9 @@ config.ut: config.cpp config.h
 	g++ -o $@ $< -DCONFIG_UT $(CMLIB)
 
 http_functs.ut: http_functs.cpp http_functs.h
+	g++ -o $@ $< -DUT -DDEBUG $(CMLIB)
+
+sort_functs.ut: sort_functs.cpp sort_functs.h
 	g++ -o $@ $< -DUT -DDEBUG $(CMLIB)
 
 clean:

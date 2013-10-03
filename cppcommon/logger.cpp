@@ -9,7 +9,7 @@ namespace CPPCOMMON
         "DEBUG","INFO","WARN","ERROR","FATAL"
     };
 
-    const char * Logger::_logFormat = "%s File:%s Line:%d %s %s\n";
+    const char * Logger::_logFormat = "%s %s:%d %s %s\n";
     const char * Logger::_timeFormat = "%Y-%m-%d %H:%M:%S";
 
     bool Logger::LoggingF(uint level, const char* fileName, int lineNo, const string& fmt, ...)
