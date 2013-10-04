@@ -12,7 +12,7 @@ struct NodeTest
 	}
 };
 
-bool cmp(NodeTest lhs, NodeTest rhs)
+bool cmp(const NodeTest& lhs, const NodeTest& rhs)
 {
 	return lhs.sid < rhs.sid;
 }

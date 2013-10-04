@@ -39,7 +39,7 @@ namespace CPPCOMMON
 			public:
 
 				//默认空指针最大
-				CWinnerTree(bool(*CMP_ELEMENT)(NODE L,NODE R))
+				CWinnerTree(bool(*CMP_ELEMENT)(const NODE& L,const NODE& R))
 				{
 					M_CMP_ELEMENT=CMP_ELEMENT;
 				}
@@ -293,12 +293,12 @@ namespace CPPCOMMON
 				int nRun;
 				int nTrack;//跟踪计算结点
 
-				bool (*M_CMP_ELEMENT)(NODE L,NODE R);
+				bool (*M_CMP_ELEMENT)( const NODE& L,const NODE& R);
 		};
 
 	//文件归并排序
 	template <class NODE>
-		int  K_MergeFile(const char *pchFileIn,const char *pchFileOut,bool(*CMP_NODE)(NODE L,NODE R),int nFreeMemSize)
+		int  K_MergeFile(const char *pchFileIn,const char *pchFileOut,bool(*CMP_NODE)(const NODE& L,const NODE& R),int nFreeMemSize)
 		{
 			FILE *fpSrc, *fpDes;
 			if ((fpSrc=fopen(pchFileIn,"rb"))==NULL)
