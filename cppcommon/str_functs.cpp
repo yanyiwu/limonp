@@ -53,30 +53,54 @@ namespace CPPCOMMON
         return res;
     }
 
-    bool splitStr(const string& source, vector<string>& res, const string& pattern)
+    //bool splitStr(const string& source, vector<string>& res, const string& pattern)
+    //{
+    //    if(source.empty())
+    //    {
+    //        return false;
+    //    }
+    //    res.clear();
+
+    //    size_t start = source.find_first_not_of(pattern);
+    //    size_t end;
+    //    if(string::npos == start)
+    //    {
+    //        return false;
+    //    }
+    //    while(string::npos != start)
+    //    {
+    //        end = source.find_first_of(pattern, start);
+    //        if(string::npos == end)
+    //        {
+    //            res.push_back(source.substr(start));
+    //            return true;
+    //        }
+    //        res.push_back(source.substr(start, end - start));
+    //        start = source.find_first_not_of(pattern,  end);
+    //    }
+    //    return true;
+    //}
+
+    bool splitStr(const string& src, vector<string>& res, const string& pattern)
     {
-        if(source.empty())
+        if(src.empty())
         {
             return false;
         }
         res.clear();
 
-        size_t start = source.find_first_not_of(pattern);
-        size_t end;
-        if(string::npos == start)
+        size_t start = 0;
+        size_t end = 0;
+        while(start < src.size())
         {
-            return false;
-        }
-        while(string::npos != start)
-        {
-            end = source.find_first_of(pattern, start);
+            end = src.find_first_of(pattern, start);
             if(string::npos == end)
             {
-                res.push_back(source.substr(start));
+                res.push_back(src.substr(start));
                 return true;
             }
-            res.push_back(source.substr(start, end - start));
-            start = source.find_first_not_of(pattern,  end);
+            res.push_back(src.substr(start, end - start));
+            start = end + 1;
         }
         return true;
     }
@@ -241,7 +265,7 @@ using namespace std;
 int main()
 {
     vector<string> vec;
-    splitStr("1 3 4", vec);
+    splitStr("1\t3\t\t4", vec);
     for(uint i =0;i < vec.size(); i++)
     {
         cout<<vec[i]<<endl;
