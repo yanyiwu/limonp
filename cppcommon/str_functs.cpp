@@ -100,6 +100,11 @@ namespace CPPCOMMON
                 return true;
             }
             res.push_back(src.substr(start, end - start));
+			if(end == src.size() - 1)
+			{
+				res.push_back("");
+				break;
+			}
             start = end + 1;
         }
         return true;
@@ -265,7 +270,8 @@ using namespace std;
 int main()
 {
     vector<string> vec;
-    splitStr("1\t3\t\t4", vec);
+    splitStr("\t1\t3\t4\t", vec);
+	cout<<vec.size()<<endl;
     for(uint i =0;i < vec.size(); i++)
     {
         cout<<vec[i]<<endl;
