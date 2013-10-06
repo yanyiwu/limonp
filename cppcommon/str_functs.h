@@ -1,7 +1,7 @@
 /************************************
  * file enc : ascii
  * author   : wuyanyi09@gmail.com
-************************************/
+ ************************************/
 #ifndef CPPCOMMON_STR_FUNCTS_H
 #define CPPCOMMON_STR_FUNCTS_H
 #include <fstream>
@@ -85,6 +85,42 @@ namespace CPPCOMMON
     {
         return str.find(ch) != string::npos;
     }
-    
+
+    inline void extractWords(const string& sentence, vector<string>& words)
+    {
+        bool flag = false;
+        uint lhs = 0, len = 0;
+        for(uint i = 0; i < sentence.size(); i++)
+        {
+            char x = sentence[i];
+            if((0x0030 <= x && x<= 0x0039) || (0x0041 <= x && x <= 0x005a ) || (0x0061 <= x && x <= 0x007a))
+            {
+                if(flag)
+                {
+                    len ++;
+                }
+                else
+                {
+                    lhs = i;
+                    len = 1;
+                }
+                flag = true;
+            }
+            else
+            {
+                if(flag)
+                {
+                    words.push_back(string(sentence, lhs, len));
+                }
+                flag = false;
+            }
+        }
+        if(flag)
+        {
+            words.push_back(string(sentence, lhs, len));
+        }
+    }
+
+
 }
 #endif
