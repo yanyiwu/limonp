@@ -11,7 +11,7 @@ OBJS := $(patsubst %.cpp,%.o,$(SOURCES))
 LIBDIR = 
 LIBDB =  
 LIBDBOPT = 
-CMDIR = ../src
+CMDIR = ../cppcommon
 CMLIB = cm
 
 # remove the objs after compilation
@@ -32,7 +32,7 @@ $(CMLIB):
 	cd $(CMDIR) && $(MAKE)
 
 clean:
-	rm -f main *.o *.d
+	rm -f main *.o *.d *.d.*
 	cd $(CMDIR) && make clean
 
 sinclude $(SOURCES:.cpp=.d)
