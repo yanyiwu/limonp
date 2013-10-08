@@ -15,22 +15,33 @@
 namespace CPPCOMMON
 {
 	using namespace std;
-	template<typename T>
-		string vecToString(const vector<T>& vec)
-		{
-			if(vec.empty())
-			{
-				return "[]";
-			}
-			stringstream ss;
-			ss<<"["<<vec[0];
-			for(unsigned int i = 1; i < vec.size(); i++)
-			{
-				ss<<","<<vec[i];
-			}
-			ss<<"]";
-			return ss.str();
-		}
+    template <typename T>
+        bool vecToString(const vector<T>& vec, string& res)
+        {
+            if(vec.empty())
+            {
+                res = "[]";
+                return false;
+            }
+            stringstream ss;
+            ss<<'['<<vec[0];
+            for(uint i = 1; i < vec.size(); i++)
+            {
+                ss<<", "<<vec[i];
+            }
+            ss<<']';
+            res = ss.str();
+            return true;
+        }
+
+    template <typename T>
+        string vecToString(const vector<T>& vec)
+        {
+            string res;
+            vecToString(vec, res);
+            return res;
+        }
+
 	template<typename T>
 		bool isInVec(const vector<T>& vec, const T& item)
 		{

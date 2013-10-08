@@ -17,6 +17,7 @@ namespace CPPCOMMON
 {
     using namespace std;
 
+
     template <typename T>
         string setToString(const set<T>& st)
         {
