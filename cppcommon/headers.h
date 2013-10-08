@@ -13,5 +13,6 @@
 #include "argv_functs.h"
 #include "http_functs.h"
 #include "sort_functs.h"
+#include "md5.h"
 
 #endif
