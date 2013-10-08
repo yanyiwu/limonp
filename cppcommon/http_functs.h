@@ -47,9 +47,10 @@ namespace CPPCOMMON
             bool _find(const HashMap<string, string>& mp, const string& key, string& res) const;
         public:
             string toString() const;// function for debug because of heavy time consuming
+        private:
+            bool _parseUrl(const string& url, HashMap<string, string>& mp);
     };
 
-    bool parseUrl(const string& url, HashMap<string, string>& mp);
 }
 
 #endif
