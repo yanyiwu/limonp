@@ -50,7 +50,7 @@ namespace CPPCOMMON
     {
         size_t lpos = 0, rpos = 0;
         vector<string> buf;
-        rpos = headerStr.find("\r\n", lpos);
+        rpos = headerStr.find("\n", lpos);
         if(string::npos == rpos)
         {
             LogFatal("headerStr illegal.");
@@ -77,21 +77,20 @@ namespace CPPCOMMON
         }
         
         
-        lpos = rpos + 2;
+        lpos = rpos + 1;
         if(lpos >= headerStr.size())
         {
             LogFatal("headerStr illegal");
             return false;
         }
         //message header begin
-        while(lpos <= headerStr.size() && string::npos != (rpos = headerStr.find("\r\n", lpos)) && rpos > lpos)
+        while(lpos < headerStr.size() && string::npos != (rpos = headerStr.find('\n', lpos)) && rpos > lpos)
         {
             string s(headerStr, lpos, rpos - lpos);
             size_t p = s.find(':');
             if(string::npos == p)
             {
-                LogFatal("headerStr illegal.");
-                return false;
+                break;//encounter empty line
             }
             string k(s, 0, p);
             string v(s, p+1);
@@ -102,8 +101,8 @@ namespace CPPCOMMON
                 LogFatal("headerStr illegal.");
                 return false;
             }
-            _headerMap[k] = v;
-            lpos = rpos + 2;
+            _headerMap[upperStr(k)] = v;
+            lpos = rpos + 1;
         }
         //message header end
 
