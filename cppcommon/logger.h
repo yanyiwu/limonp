@@ -24,17 +24,11 @@
 #define CSTR_BUFFER_SIZE 1024
 
 
-//#define LogDebug(msg) Logger::Logging(LL_DEBUG, msg, __FILE__, __LINE__)
-//#define LogInfo(msg) Logger::Logging(LL_INFO, msg, __FILE__, __LINE__)
-//#define LogWarn(msg) Logger::Logging(LL_WARN, msg, __FILE__, __LINE__)
-//#define LogError(msg) Logger::Logging(LL_ERROR, msg, __FILE__, __LINE__)
-//#define LogFatal(msg) Logger::Logging(LL_FATAL, msg, __FILE__, __LINE__)
-
-#define LogDebug(fmt, ...) Logger::LoggingF(LL_DEBUG, __FILE__, __LINE__, fmt, ## __VA_ARGS__)
-#define LogInfo(fmt, ...) Logger::LoggingF(LL_INFO, __FILE__, __LINE__, fmt, ## __VA_ARGS__)
-#define LogWarn(fmt, ...) Logger::LoggingF(LL_WARN, __FILE__, __LINE__, fmt, ## __VA_ARGS__)
-#define LogError(fmt, ...) Logger::LoggingF(LL_ERROR, __FILE__, __LINE__, fmt, ## __VA_ARGS__)
-#define LogFatal(fmt, ...) Logger::LoggingF(LL_FATAL, __FILE__, __LINE__, fmt, ## __VA_ARGS__)
+#define LogDebug(fmt, ...) Logger::LoggingF(LL_DEBUG, __FILE__, __LINE__, __FUNCTION__, fmt, ## __VA_ARGS__)
+#define LogInfo(fmt, ...) Logger::LoggingF(LL_INFO, __FILE__, __LINE__, __FUNCTION__, fmt, ## __VA_ARGS__)
+#define LogWarn(fmt, ...) Logger::LoggingF(LL_WARN, __FILE__, __LINE__, __FUNCTION__, fmt, ## __VA_ARGS__)
+#define LogError(fmt, ...) Logger::LoggingF(LL_ERROR, __FILE__, __LINE__, __FUNCTION__, fmt, ## __VA_ARGS__)
+#define LogFatal(fmt, ...) Logger::LoggingF(LL_FATAL, __FILE__, __LINE__, __FUNCTION__, fmt, ## __VA_ARGS__)
 
 
 namespace CPPCOMMON
@@ -43,9 +37,13 @@ namespace CPPCOMMON
     class Logger
     {
         public:
-            static bool Logging(uint level, const string& msg, const char* fileName, int lineNo);
-            static bool Logging(uint level, const char * msg, const char* fileName, int lineNo);
-            static bool LoggingF(uint level, const char* fileName, int lineNo, const string& fmt, ...);
+            static bool Logging(uint level, const string& msg, const char* fileName, int lineNo, const char* functName)
+			{
+
+				return Logging(level, msg.c_str(), fileName, lineNo, functName);
+			}
+            static bool Logging(uint level, const char * msg, const char* fileName, int lineNo, const char* functName);
+            static bool LoggingF(uint level, const char* fileName, int lineNo, const char* functName, const string& fmt, ...);
         private:
             //static char _cStrBuf[CSTR_BUFFER_SIZE];
             static const char * _logLevel[LEVEL_ARRAY_SIZE];
