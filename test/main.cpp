@@ -20,7 +20,7 @@ bool utCastFunct()
     for(short i = -128 ; i <= 127; i++)
     {
         float f = shortBitsToFloat(i);
-        cout<<i<<","<<f<<","<<floatToShortBits(f)<<endl;
+        cout<<i<<" "<<f<<endl;
     }
     return true;
 }
