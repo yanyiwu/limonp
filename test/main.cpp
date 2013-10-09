@@ -15,6 +15,16 @@ bool utStrFunct()
 	return true;
 }
 
+bool utCastFunct()
+{
+    for(short i = -128 ; i <= 127; i++)
+    {
+        float f = shortBitsToFloat(i);
+        cout<<i<<","<<f<<","<<floatToShortBits(f)<<endl;
+    }
+    return true;
+}
+
 bool utArgvContext()
 {
 	return true;
@@ -23,5 +33,6 @@ bool utArgvContext()
 int main()
 {
 	utStrFunct();
+    utCastFunct();
 	return 0;
 }
