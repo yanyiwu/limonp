@@ -57,7 +57,7 @@ namespace CPPCOMMON
             // 当指数符号为1时(正次方)，且左234位为1，返回无穷大量
             return (short) (code | infinite_16);
         }
-        if ((fi & loss_32 ^ loss_32) > 0 && (fi & sign_exponent_32) == 0) {
+        if (((fi & loss_32) ^ loss_32) > 0 && (fi & sign_exponent_32) == 0) {
             // 当指数符号位0时(负次方)，且左234位为0(与111异或>0)，返回无穷小量
             return infinitesmall_16;
         }

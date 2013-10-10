@@ -2,7 +2,7 @@ CXX    := g++
 LD     := g++
 AR     := ar rc
 
-DEBUG_CXXFLAGS     := -g -Wall -DDEBUG 
+DEBUG_CXXFLAGS     := -g -Wall -O3 -DDEBUG 
 RELEASE_CXXFLAGS   := -Wall -O3
 
 ifeq (YES, ${RELEASE})
