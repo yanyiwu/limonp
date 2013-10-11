@@ -15,6 +15,7 @@
 namespace CPPCOMMON
 {
 	using namespace std;
+    
     template <typename T>
         bool vecToString(const vector<T>& vec, string& res)
         {
@@ -24,12 +25,12 @@ namespace CPPCOMMON
                 return false;
             }
             stringstream ss;
-            ss<<'['<<vec[0];
+            ss<<"[\""<<vec[0];
             for(uint i = 1; i < vec.size(); i++)
             {
-                ss<<", "<<vec[i];
+                ss<<"\", \""<<vec[i];
             }
-            ss<<']';
+            ss<<"\"]";
             res = ss.str();
             return true;
         }
