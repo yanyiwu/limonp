@@ -18,6 +18,8 @@ DOPACK := $(AR)
 SOURCES := $(wildcard *.cpp)
 OBJS := $(patsubst %.cpp,%.o,$(SOURCES))
 
+LIBLINK := -L. -lcm -lmysqlclient
+
 CMLIB = libcm.a
 
 %.o: %.cpp
@@ -25,6 +27,8 @@ CMLIB = libcm.a
 
 all: $(CMLIB)
 
+%.ut: %.cpp
+	$(CXX) -o $@ -DUT $(CXXFLAGS) $< $(LIBLINK)
 
 $(CMLIB): $(OBJS)
 	$(DOPACK) $@ $(OBJS)

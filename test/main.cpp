@@ -30,6 +30,11 @@ bool utArgvContext()
 	return true;
 }
 
+bool utMysqlClient()
+{
+    return true;
+}
+
 int main()
 {
 	utStrFunct();
