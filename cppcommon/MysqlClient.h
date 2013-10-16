@@ -3,13 +3,18 @@
 
 #include <mysql/mysql.h>
 #include <iostream>
+#include <vector>
+#include <string>
 #include "logger.h"
+#include "vec_functs.h"
 
 namespace CPPCOMMON
 {
     using namespace std;
     class MysqlClient
     {
+        public:
+            typedef vector< vector<string> > RowsType;
         private:
             const char * const HOST;
             const unsigned int PORT;
@@ -27,6 +32,7 @@ namespace CPPCOMMON
             bool init();
             bool dispose();
             bool executeSql(const char* sql);
+            bool select(const char* sql, RowsType& rows);
 
         private:
             MYSQL * _conn;
