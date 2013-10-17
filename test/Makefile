@@ -12,7 +12,9 @@ LIBDIR =
 LIBDB =  
 LIBDBOPT = 
 CMDIR = ../cppcommon
-CMLIB = cm
+CMLIB = $(CMDIR)/libcm.a
+
+LINK_LIB := -lmysqlclient
 
 # remove the objs after compilation
 .INTERMEDIATE: 
@@ -26,7 +28,7 @@ CMLIB = cm
 all: main
 
 main: main.o $(CMLIB)
-	$(CC) $(CCOPT) -o $@ $< -L$(CMDIR) -l$(CMLIB)
+	$(CC) $(CCOPT) -o $@ $^ $(LINK_LIB)
 
 $(CMLIB):
 	cd $(CMDIR) && $(MAKE)
