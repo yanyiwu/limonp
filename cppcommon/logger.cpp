@@ -9,10 +9,10 @@ namespace CPPCOMMON
         "DEBUG","INFO","WARN","ERROR","FATAL"
     };
 
-    const char * Logger::_logFormat = "%s %s:%d %s %s %s\n";
+    const char * Logger::_logFormat = "%s %s:%d %s %s\n";
     const char * Logger::_timeFormat = "%Y-%m-%d %H:%M:%S";
 
-    bool Logger::LoggingF(uint level, const char* fileName, int lineNo, const char* functName, const string& fmt, ...)
+    bool Logger::LoggingF(uint level, const char* fileName, int lineNo, const string& fmt, ...)
     {
         int size = 256;
         string msg;
@@ -31,10 +31,10 @@ namespace CPPCOMMON
             else
               size *= 2;
         }
-        return Logging(level, msg, fileName, lineNo, functName);
+        return Logging(level, msg, fileName, lineNo);
     }
 
-    bool Logger::Logging(uint level, const char * msg, const char* fileName, int lineNo, const char* functName)
+    bool Logger::Logging(uint level, const char * msg, const char* fileName, int lineNo)
     {
         if(level > LL_FATAL)
         {
@@ -52,11 +52,11 @@ namespace CPPCOMMON
         }
         if(level >= LL_WARN)
         {
-            fprintf(stderr, _logFormat, buf, fileName, lineNo, functName, _logLevel[level], msg);
+            fprintf(stderr, _logFormat, buf, fileName, lineNo,_logLevel[level], msg);
         }
         else
         {
-            fprintf(stdout, _logFormat, buf, fileName, lineNo, functName, _logLevel[level], msg);
+            fprintf(stdout, _logFormat, buf, fileName, lineNo, _logLevel[level], msg);
             fflush(stdout);
         }
         return true;
