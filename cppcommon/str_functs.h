@@ -21,28 +21,109 @@
 namespace CPPCOMMON
 {
     using namespace std;
-    string string_format(const char*, ...) ;
-    string joinStr(const vector<string>& source, const string& connector);
-    vector<string> splitStr(const string& source, const string& pattern = " \t\n");
-    bool splitStr(const string& source, vector<string>& res, const string& pattern = " \t\n");
-    bool splitStrMultiPatterns(
-                const string& strSrc, 
-                vector<string>& outVec, 
-                const vector<string>& patterns
-                );
-    string upperStr(const string& str);
-    string lowerStr(const string& str);
-    string replaceStr(const string& strSrc, const string& oldStr, const string& newStr, int count = -1);
-    string stripStr(const string& str, const string& patternstr = " \n\t");
-    std::string &ltrim(std::string &s) ;
-    std::string &rtrim(std::string &s) ;
-    std::string &trim(std::string &s) ;
-    unsigned int countStrDistance(const string& A, const string& B);
-    unsigned int countStrSimilarity(const string& A, const string& B);
+    inline string string_format(const char* fmt, ...) 
+    {
+        int size = 256;
+        std::string str;
+        va_list ap;
+        while (1) {
+            str.resize(size);
+            va_start(ap, fmt);
+            int n = vsnprintf((char *)str.c_str(), size, fmt, ap);
+            va_end(ap);
+            if (n > -1 && n < size) {
+                str.resize(n);
+                return str;
+            }
+            if (n > -1)
+              size = n + 1;
+            else
+              size *= 2;
+        }
+        return str;
+    }
+    inline bool joinStr(const vector<string>& src, string& dest, const string& connectorStr)
+    {
+        if(src.empty())
+        {
+            return false;
+        }
+        for(uint i = 0; i < src.size() - 1; i++)
+        {
+            dest += src[i];
+            dest += connectorStr;
+        }
+        dest += src[src.size() - 1];
+        return true;
+    }
 
+    inline string joinStr(const vector<string>& source, const string& connector)
+    {
+        string res;
+        joinStr(source, res, connector);
+        return res;
+    }
 
-    bool uniStrToVec(const string& str, Unicode& vec);
-    string uniVecToStr(const Unicode& vec);
+    inline bool splitStr(const string& src, vector<string>& res, const string& pattern)
+    {
+        if(src.empty())
+        {
+            return false;
+        }
+        res.clear();
+
+        size_t start = 0;
+        size_t end = 0;
+        while(start < src.size())
+        {
+            end = src.find_first_of(pattern, start);
+            if(string::npos == end)
+            {
+                res.push_back(src.substr(start));
+                return true;
+            }
+            res.push_back(src.substr(start, end - start));
+			if(end == src.size() - 1)
+			{
+				res.push_back("");
+				break;
+			}
+            start = end + 1;
+        }
+        return true;
+    }
+
+    inline string upperStr(const string& strIn)
+    {
+        string str = strIn;
+        transform(str.begin(), str.end(), str.begin(), (int (*)(int))toupper);
+        return str;
+    }
+
+    inline string lowerStr(const string& strIn)
+    {
+        string str = strIn;
+        transform(str.begin(), str.end(), str.begin(), (int (*)(int))tolower);
+        return str;
+    }
+
+    inline std::string &ltrim(std::string &s) 
+    {
+        s.erase(s.begin(), std::find_if(s.begin(), s.end(), std::not1(std::ptr_fun<int, int>(std::isspace))));
+        return s;
+    }
+
+    inline std::string &rtrim(std::string &s) 
+    {
+        s.erase(std::find_if(s.rbegin(), s.rend(), std::not1(std::ptr_fun<int, int>(std::isspace))).base(), s.end());
+        return s;
+    }
+
+    inline std::string &trim(std::string &s) 
+    {
+        return ltrim(rtrim(s));
+    }
+
 
     inline uint16_t twocharToUint16(char high, char low)
     {
@@ -55,11 +136,6 @@ namespace CPPCOMMON
         res.first = (in>>8) & 0x00ff; //high
         res.second = (in) & 0x00ff; //low
         return res;
-    }
-
-    inline void printUnicode(const Unicode& unicode)
-    {
-        cout<<uniVecToStr(unicode)<<endl;
     }
 
     inline bool strStartsWith(const string& str, const string& prefix)
