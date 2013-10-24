@@ -32,7 +32,8 @@ bool utArgvContext()
 
 int main()
 {
-	utStrFunct();
-    utCastFunct();
+	//utStrFunct();
+    //utCastFunct();
+   
 	return 0;
 }

@@ -8,6 +8,8 @@ DOLINK = $(LINK) $(LINKOPT) -o $@ $^
 SOURCES := $(wildcard *.cpp)
 OBJS := $(patsubst %.cpp,%.o,$(SOURCES))
 
+INCS := -I../cppcommon
+
 LIBDIR = 
 LIBDB =  
 LIBDBOPT = 
@@ -22,6 +24,8 @@ CMLIB = cm
 #.c.o: 
 %.o: %.cpp
 	$(CC) $(CCOPT) -c -o $@ $<
+%.ut: %.cpp 
+	$(CC) $(CCOPT) -o $@ $< $(INCS) -L$(CMDIR) -l$(CMLIB)
 
 all: main
 
@@ -32,7 +36,7 @@ $(CMLIB):
 	cd $(CMDIR) && $(MAKE)
 
 clean:
-	rm -f main *.o *.d *.d.*
+	rm -f main *.o *.d *.d.* *.ut
 	cd $(CMDIR) && make clean
 
 sinclude $(SOURCES:.cpp=.d)
