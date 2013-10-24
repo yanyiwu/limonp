@@ -1,5 +1,7 @@
 #include <iostream>
-#include "../cppcommon/headers.h"
+#include "../cppcommon/vec_functs.h"
+#include "../cppcommon/cast_functs.h"
+#include "../cppcommon/str_functs.h"
 using namespace std;
 using namespace CPPCOMMON;
 
