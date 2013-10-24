@@ -7,8 +7,9 @@ int main()
     gConfig.init("1.conf");
     gConfig.init("1.conf");
     gConfig.display();
-    cout<<gConfig.get("a")<<endl;
-    cout<<gConfig.get("cm")<<endl;
+    string res;
+    gConfig.get("a", res);
+    gConfig.get("cm", res);
     return 0;
 }
 

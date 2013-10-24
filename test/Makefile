@@ -7,6 +7,7 @@ PARCAOPT = rc
 DOLINK = $(LINK) $(LINKOPT) -o $@ $^
 SOURCES := $(wildcard *.cpp)
 OBJS := $(patsubst %.cpp,%.o,$(SOURCES))
+UTS := $(patsubst %.cpp,%.ut,$(SOURCES))
 
 INCS := -I../cppcommon
 
@@ -27,10 +28,7 @@ CMLIB = cm
 %.ut: %.cpp 
 	$(CC) $(CCOPT) -o $@ $< $(INCS) -L$(CMDIR) -l$(CMLIB)
 
-all: main
-
-main: main.o $(CMLIB)
-	$(CC) $(CCOPT) -o $@ $< -L$(CMDIR) -l$(CMLIB)
+all: $(CMLIB) $(UTS)
 
 $(CMLIB):
 	cd $(CMDIR) && $(MAKE)

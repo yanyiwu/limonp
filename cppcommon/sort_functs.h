@@ -268,7 +268,7 @@ namespace CPPCOMMON
 				bool CMP_NODE(pair<NODE*,int> &nodeL,pair<NODE*,int>& nodeR)
 				{
 					return  M_CMP_ELEMENT(*(nodeL.first),*(nodeR.first))||
-						*(nodeL.first)==*(nodeR.first)&&nodeL.second<nodeR.second;
+						(*(nodeL.first)==*(nodeR.first)) && (nodeL.second<nodeR.second);
 
 				}
 			private:
