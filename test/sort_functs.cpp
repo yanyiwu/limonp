@@ -1,6 +1,5 @@
-#include "sort_functs.h"
+#include <sort_functs.h>
 
-#ifdef UT
 using namespace CPPCOMMON;
 struct NodeTest
 {
@@ -48,4 +47,3 @@ int main()
 	
 	return 0;
 }
-#endif
