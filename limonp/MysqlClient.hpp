@@ -1,14 +1,14 @@
-#ifndef CPPCOMMON_MYSQLCLIENT_H
-#define CPPCOMMON_MYSQLCLIENT_H
+#ifndef LIMONP_MYSQLCLIENT_H
+#define LIMONP_MYSQLCLIENT_H
 
 #include <mysql/mysql.h>
 #include <iostream>
 #include <vector>
 #include <string>
-#include "logger.h"
-#include "vec_functs.h"
+#include "logger.hpp"
+#include "vec_functs.hpp"
 
-namespace CPPCOMMON
+namespace Limonp
 {
     using namespace std;
     class MysqlClient

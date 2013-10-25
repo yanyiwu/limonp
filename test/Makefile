@@ -9,42 +9,19 @@ SOURCES := $(wildcard *.cpp)
 OBJS := $(patsubst %.cpp,%.o,$(SOURCES))
 UTS := $(patsubst %.cpp,%.ut,$(SOURCES))
 
-<<<<<<< HEAD
-LIBDIR = 
-LIBDB =  
-LIBDBOPT = 
-CMDIR = ../cppcommon
-CMLIB = $(CMDIR)/libcm.a
-
 LINK_LIB := -lmysqlclient
-=======
 INCS := -I../limonp
-
 LIMON_DIR = ../limonp
->>>>>>> dev
 
-# remove the objs after compilation
 .INTERMEDIATE: 
 .PHONY: clean 
 
-# This is a suffix rule 
-#.c.o: 
 %.o: %.cpp
 	$(CC) $(CCOPT) -c -o $@ $<
 %.ut: %.cpp 
-	$(CC) $(CCOPT) -o $@ $< $(INCS) 
+	$(CC) $(CCOPT) -o $@ $< $(INCS) $(LINK_LIB)
 
-<<<<<<< HEAD
-all: main
-
-main: main.o $(CMLIB)
-	$(CC) $(CCOPT) -o $@ $^ $(LINK_LIB)
-
-$(CMLIB):
-	cd $(CMDIR) && $(MAKE)
-=======
 all: $(UTS)
->>>>>>> dev
 
 clean:
 	rm -f main *.o *.d *.d.* *.ut

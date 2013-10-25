@@ -32,29 +32,23 @@ bool utArgvContext()
 	return true;
 }
 
-bool utMysqlClient()
-{
-    MysqlClient client("10.16.10.32",3306,"root","mysql","cms");
-    client.init();
-    MysqlClient::RowsType rows;
-    client.select("show tables;", rows);
-    FOR_VECTOR(rows, i)
-    {
-        cout<<vecToString(rows[i])<<endl;
-    }
-    return true;
-}
+//bool utMysqlClient()
+//{
+//    MysqlClient client("10.16.10.32",3306,"root","mysql","cms");
+//    client.init();
+//    MysqlClient::RowsType rows;
+//    client.select("show tables;", rows);
+//    FOR_VECTOR(rows, i)
+//    {
+//        cout<<vecToString(rows[i])<<endl;
+//    }
+//    return true;
+//}
 
 int main()
 {
-<<<<<<< HEAD
 	utStrFunct();
     utCastFunct();
-    utMysqlClient();
-=======
-	//utStrFunct();
-    //utCastFunct();
-   
->>>>>>> dev
+    //utMysqlClient();
 	return 0;
 }
