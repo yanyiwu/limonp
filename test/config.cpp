@@ -1,6 +1,6 @@
 #include <config.hpp>
 
-using namespace Limon;
+using namespace Limonp;
 int main()
 {
     Config gConfig;

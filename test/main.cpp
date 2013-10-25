@@ -3,7 +3,7 @@
 #include <cast_functs.hpp>
 #include <str_functs.hpp>
 using namespace std;
-using namespace Limon;
+using namespace Limonp;
 
 bool utStrFunct()
 {

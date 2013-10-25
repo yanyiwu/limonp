@@ -2,8 +2,8 @@
  * file enc : utf8
  * author   : wuyanyi09@gmail.com
  ************************************/
-#ifndef LIMON_CONFIG_H
-#define LIMON_CONFIG_H
+#ifndef LIMONP_CONFIG_H
+#define LIMONP_CONFIG_H
 
 
 #include <map>
@@ -12,7 +12,7 @@
 #include "logger.hpp"
 #include "str_functs.hpp"
 
-namespace Limon
+namespace Limonp
 {
     using std::map;
     using std::string;
@@ -99,7 +99,7 @@ namespace Limon
     };
 }
 
-namespace Limon
+namespace Limonp
 {
     extern Config gConfig;
 }

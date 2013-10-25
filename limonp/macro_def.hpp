@@ -1,5 +1,5 @@
-#ifndef LIMON_MACRO_DEF_H
-#define LIMON_MACRO_DEF_H
+#ifndef LIMONP_MACRO_DEF_H
+#define LIMONP_MACRO_DEF_H
 
 #define XX_GET_SET(varType, varName, funName)\
 private: varType varName;\

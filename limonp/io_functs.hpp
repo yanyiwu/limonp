@@ -2,12 +2,12 @@
  * file enc : utf8
  * author   : wuyanyi09@gmail.com
 ************************************/
-#ifndef LIMON_IO_FUNCTS_H
-#define LIMON_IO_FUNCTS_H
+#ifndef LIMONP_IO_FUNCTS_H
+#define LIMONP_IO_FUNCTS_H
 #include <fstream>
 #include <iostream>
 #include <stdlib.h>
-namespace Limon
+namespace Limonp
 {
     using namespace std;
     inline string loadFile2Str(const char * const filepath)

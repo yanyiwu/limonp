@@ -2,8 +2,8 @@
  * file enc : utf8
  * author   : wuyanyi09@gmail.com
  ************************************/
-#ifndef LIMON_LOGGER_H
-#define LIMON_LOGGER_H
+#ifndef LIMONP_LOGGER_H
+#define LIMONP_LOGGER_H
 
 #include <vector>
 #include <iostream>
@@ -22,7 +22,7 @@
 #define LogFatal(fmt, ...) Logger::LoggingF(LL_FATAL, __FILE__, __LINE__, fmt, ## __VA_ARGS__)
 
 
-namespace Limon
+namespace Limonp
 {
     using namespace std;
     enum {LL_DEBUG = 0, LL_INFO = 1, LL_WARN = 2, LL_ERROR = 3, LL_FATAL = 4, LEVEL_ARRAY_SIZE = 5, CSTR_BUFFER_SIZE = 1024};

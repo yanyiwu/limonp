@@ -3,8 +3,8 @@
  * author   : wuyanyi09@gmail.com
  ************************************/
 
-#ifndef LIMON_ARGV_FUNCTS_H
-#define LIMON_ARGV_FUNCTS_H
+#ifndef LIMONP_ARGV_FUNCTS_H
+#define LIMONP_ARGV_FUNCTS_H
 
 #include <set>
 #include <sstream>
@@ -12,7 +12,7 @@
 #include "map_functs.hpp"
 #include "vec_functs.hpp"
 
-namespace Limon
+namespace Limonp
 {
     using namespace std;
     class ArgvContext

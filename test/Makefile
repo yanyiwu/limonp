@@ -9,9 +9,9 @@ SOURCES := $(wildcard *.cpp)
 OBJS := $(patsubst %.cpp,%.o,$(SOURCES))
 UTS := $(patsubst %.cpp,%.ut,$(SOURCES))
 
-INCS := -I../limon
+INCS := -I../limonp
 
-LIMON_DIR = ../limon
+LIMON_DIR = ../limonp
 
 # remove the objs after compilation
 .INTERMEDIATE: 

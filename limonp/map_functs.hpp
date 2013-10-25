@@ -4,8 +4,8 @@
  ************************************/
 
 
-#ifndef LIMON_MAP_FUNCTS_H
-#define LIMON_MAP_FUNCTS_H
+#ifndef LIMONP_MAP_FUNCTS_H
+#define LIMONP_MAP_FUNCTS_H
 
 #include <map>
 #include <set>
@@ -13,7 +13,7 @@
 #include <sstream>
 #include "typedefs.h"
 
-namespace Limon
+namespace Limonp
 {
     using namespace std;
 
