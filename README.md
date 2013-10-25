@@ -8,6 +8,12 @@ limon + hpp
 
 主要是一些工具函数，比如字符串处理，日志文件之类的。
 
+##依赖
+
+使用MysqlClient.hpp时，需要安装c语言的mysql接口库，libmysqlclient。
+
+则链接的时候需要 -lmysqlclient
+
 ##使用方法
 ```sh
 
