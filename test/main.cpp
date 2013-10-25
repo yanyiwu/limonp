@@ -1,16 +1,18 @@
 #include <iostream>
-#include "../cppcommon/headers.h"
+#include <vec_functs.hpp>
+#include <cast_functs.hpp>
+#include <str_functs.hpp>
 using namespace std;
-using namespace CPPCOMMON;
+using namespace Limonp;
 
 bool utStrFunct()
 {
 	string s(" \t1 2 \t 3 4\t5 ");
 	vector<string> vs;
-	splitStr(s, vs);
+	splitStr(s, vs, "\t");
 	cout<<vecToString(vs)<<endl;
 	s = " \t";
-	splitStr(s, vs);
+	splitStr(s, vs, "\t");
 	cout<<vecToString(vs)<<endl;
 	return true;
 }
@@ -45,8 +47,14 @@ bool utMysqlClient()
 
 int main()
 {
+<<<<<<< HEAD
 	utStrFunct();
     utCastFunct();
     utMysqlClient();
+=======
+	//utStrFunct();
+    //utCastFunct();
+   
+>>>>>>> dev
 	return 0;
 }
