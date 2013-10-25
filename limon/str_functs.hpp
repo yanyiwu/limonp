@@ -2,8 +2,8 @@
  * file enc : ascii
  * author   : wuyanyi09@gmail.com
  ************************************/
-#ifndef CPPCOMMON_STR_FUNCTS_H
-#define CPPCOMMON_STR_FUNCTS_H
+#ifndef LIMON_STR_FUNCTS_H
+#define LIMON_STR_FUNCTS_H
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -18,7 +18,7 @@
 #include "typedefs.h"
 #include <functional> 
 #include <locale>
-namespace CPPCOMMON
+namespace Limon
 {
     using namespace std;
     inline string string_format(const char* fmt, ...) 

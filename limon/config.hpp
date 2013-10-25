@@ -2,17 +2,17 @@
  * file enc : utf8
  * author   : wuyanyi09@gmail.com
  ************************************/
-#ifndef CPPCOMMON_CONFIG_H
-#define CPPCOMMON_CONFIG_H
+#ifndef LIMON_CONFIG_H
+#define LIMON_CONFIG_H
 
 
 #include <map>
 #include <fstream>
 #include <iostream>
-#include "logger.h"
-#include "str_functs.h"
+#include "logger.hpp"
+#include "str_functs.hpp"
 
-namespace CPPCOMMON
+namespace Limon
 {
     using std::map;
     using std::string;
@@ -99,7 +99,7 @@ namespace CPPCOMMON
     };
 }
 
-namespace CPPCOMMON
+namespace Limon
 {
     extern Config gConfig;
 }

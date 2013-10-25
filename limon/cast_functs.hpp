@@ -1,7 +1,7 @@
-#ifndef CPPCOMMON_CAST_FUNCTS_H
-#define CPPCOMMON_CAST_FUNCTS_H
+#ifndef LIMON_CAST_FUNCTS_H
+#define LIMON_CAST_FUNCTS_H
 
-namespace CPPCOMMON
+namespace Limon
 {
     //logical and or
     static const int sign_32 = 0xC0000000;

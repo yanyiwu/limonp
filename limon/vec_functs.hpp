@@ -2,8 +2,8 @@
  * file enc : ascii
  * author   : wuyanyi09@gmail.com
 ************************************/
-#ifndef CPPCOMMON_VEC_FUNCTS_H
-#define CPPCOMMON_VEC_FUNCTS_H
+#ifndef LIMON_VEC_FUNCTS_H
+#define LIMON_VEC_FUNCTS_H
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -31,7 +31,7 @@
     }\
 }
 
-namespace CPPCOMMON
+namespace Limon
 {
     using namespace std;
     template <typename T>

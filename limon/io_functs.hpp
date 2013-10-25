@@ -2,11 +2,11 @@
  * file enc : utf8
  * author   : wuyanyi09@gmail.com
 ************************************/
-#ifndef CPPCOMMON_IO_FUNCTS_H
-#define CPPCOMMON_IO_FUNCTS_H
+#ifndef LIMON_IO_FUNCTS_H
+#define LIMON_IO_FUNCTS_H
 #include <fstream>
 #include <iostream>
-namespace CPPCOMMON
+namespace Limon
 {
     using namespace std;
     inline string loadFile2Str(const char * const filepath)
@@ -50,5 +50,32 @@ namespace CPPCOMMON
         fclose(fp);                            
         return n;                              
     }                                          
+
+    inline bool checkFileExist(const string& filePath)
+    {
+        fstream _file;
+        _file.open(filePath.c_str(), ios::in);
+        if(_file)
+          return true;
+        return false;
+    }
+
+    inline bool createDir(const string& dirPath, bool p = true)
+    {
+        string dir_str(dirPath);
+        string cmd = "mkdir";
+        if(p)
+        {
+            cmd += " -p";
+        }
+        cmd += " " + dir_str; 
+        int res = system(cmd.c_str());
+        return res;
+    }
+
+    inline bool checkDirExist(const string& dirPath)
+    {
+        return checkFileExist(dirPath);
+    }
 }
 #endif

@@ -3,16 +3,16 @@
  * author   : wuyanyi09@gmail.com
  ************************************/
 
-#ifndef CPPCOMMON_ARGV_FUNCTS_H
-#define CPPCOMMON_ARGV_FUNCTS_H
+#ifndef LIMON_ARGV_FUNCTS_H
+#define LIMON_ARGV_FUNCTS_H
 
 #include <set>
 #include <sstream>
-#include "str_functs.h"
-#include "map_functs.h"
-#include "vec_functs.h"
+#include "str_functs.hpp"
+#include "map_functs.hpp"
+#include "vec_functs.hpp"
 
-namespace CPPCOMMON
+namespace Limon
 {
     using namespace std;
     class ArgvContext

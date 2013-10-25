@@ -4,8 +4,8 @@
  ************************************/
 
 
-#ifndef CPPCOMMON_MAP_FUNCTS_H
-#define CPPCOMMON_MAP_FUNCTS_H
+#ifndef LIMON_MAP_FUNCTS_H
+#define LIMON_MAP_FUNCTS_H
 
 #include <map>
 #include <set>
@@ -13,7 +13,7 @@
 #include <sstream>
 #include "typedefs.h"
 
-namespace CPPCOMMON
+namespace Limon
 {
     using namespace std;
 
