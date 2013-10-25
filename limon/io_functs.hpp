@@ -6,6 +6,7 @@
 #define LIMON_IO_FUNCTS_H
 #include <fstream>
 #include <iostream>
+#include <stdlib.h>
 namespace Limon
 {
     using namespace std;

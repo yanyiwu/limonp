@@ -2,9 +2,9 @@
  * file enc : utf8
  * author   : wuyanyi09@gmail.com
 ************************************/
-#include <logger.h>
+#include <logger.hpp>
 
-using namespace CPPCOMMON;
+using namespace Limon;
 int main()
 {
 	cout<<__FUNCTION__<<endl;

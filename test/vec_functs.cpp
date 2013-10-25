@@ -2,9 +2,9 @@
  * file enc : utf8
  * author   : wuyanyi09@gmail.com
 ************************************/
-#include <vec_functs.h>
+#include <vec_functs.hpp>
 
-using namespace CPPCOMMON;
+using namespace Limon;
 int main()
 {
     vector<int> vec;

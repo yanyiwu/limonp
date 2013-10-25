@@ -1,6 +1,6 @@
-#include <config.h>
+#include <config.hpp>
 
-using namespace CPPCOMMON;
+using namespace Limon;
 int main()
 {
     Config gConfig;

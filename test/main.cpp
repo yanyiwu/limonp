@@ -1,9 +1,9 @@
 #include <iostream>
-#include "../cppcommon/vec_functs.h"
-#include "../cppcommon/cast_functs.h"
-#include "../cppcommon/str_functs.h"
+#include <vec_functs.hpp>
+#include <cast_functs.hpp>
+#include <str_functs.hpp>
 using namespace std;
-using namespace CPPCOMMON;
+using namespace Limon;
 
 bool utStrFunct()
 {

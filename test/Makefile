@@ -9,33 +9,25 @@ SOURCES := $(wildcard *.cpp)
 OBJS := $(patsubst %.cpp,%.o,$(SOURCES))
 UTS := $(patsubst %.cpp,%.ut,$(SOURCES))
 
-INCS := -I../cppcommon
+INCS := -I../limon
 
-LIBDIR = 
-LIBDB =  
-LIBDBOPT = 
-CMDIR = ../cppcommon
-CMLIB = cm
+LIMON_DIR = ../limon
 
 # remove the objs after compilation
 .INTERMEDIATE: 
-.PHONY: clean $(CMLIB)
+.PHONY: clean 
 
 # This is a suffix rule 
 #.c.o: 
 %.o: %.cpp
 	$(CC) $(CCOPT) -c -o $@ $<
 %.ut: %.cpp 
-	$(CC) $(CCOPT) -o $@ $< $(INCS) -L$(CMDIR) -l$(CMLIB)
+	$(CC) $(CCOPT) -o $@ $< $(INCS) 
 
-all: $(CMLIB) $(UTS)
-
-$(CMLIB):
-	cd $(CMDIR) && $(MAKE)
+all: $(UTS)
 
 clean:
 	rm -f main *.o *.d *.d.* *.ut
-	cd $(CMDIR) && make clean
 
 sinclude $(SOURCES:.cpp=.d)
 %.d:%.cpp

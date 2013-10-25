@@ -2,10 +2,10 @@
  * file enc : utf8
  * author   : wuyanyi09@gmail.com
 ************************************/
-#include <file_functs.h>
+#include <io_functs.hpp>
 
 #include <iostream>
-using namespace CPPCOMMON;
+using namespace Limon;
 using namespace std;
 int main()
 {
