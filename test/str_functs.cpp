@@ -27,5 +27,9 @@ int main()
     //string s(" \t\n ni hao ad \r\n");
     string s;
     cout<<":::"<<trim(s)<<":::"<<endl;
+    s = "";
+    cout<<string_format("select %s from %s  %s;", "*","table1","limit 1")<<endl;
+    string_format(s, "select %s from %s  %s;", "*","table1","limit 1");
+    cout<<s<<endl;
     return 0;
 }
