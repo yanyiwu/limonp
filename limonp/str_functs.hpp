@@ -18,6 +18,10 @@
 #include "typedefs.h"
 #include <functional> 
 #include <locale>
+#include <sstream>
+
+#define print(x) cout<<x<<endl
+
 namespace Limonp
 {
     using namespace std;
@@ -84,6 +88,32 @@ namespace Limonp
         joinStr(source, res, connector);
         return res;
     }
+
+    template<class T>
+        void join(T begin, T end, string& res, const string& connector)
+        {
+            if(begin == end)
+            {
+                return;
+            }
+            stringstream ss;
+            ss<<*begin;
+            begin++;
+            while(begin != end)
+            {
+                ss << connector << *begin;
+                begin ++;
+            }
+            res = ss.str();
+        }
+
+    template<class T>
+        string join(T begin, T end, const string& connector)
+        {
+            string res;
+            join(begin ,end, res, connector);
+            return res;
+        }
 
     inline bool splitStr(const string& src, vector<string>& res, const string& pattern)
     {

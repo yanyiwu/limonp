@@ -31,5 +31,16 @@ int main()
     cout<<string_format("select %s from %s  %s;", "*","table1","limit 1")<<endl;
     string_format(s, "select %s from %s  %s;", "*","table1","limit 1");
     cout<<s<<endl;
+    vec.clear();
+    vec.push_back("1");
+    vec.push_back("2");
+    vec.push_back("3");
+    s.clear();
+    join(vec.begin(), vec.end(), s,",");
+    print(s);
+    s.clear();
+    print(join(vec.begin(), vec.end(), ".."));
+    const char* arr[3] = {"2","3","5"};
+    print(join(arr, arr+3, ","));
     return 0;
 }
