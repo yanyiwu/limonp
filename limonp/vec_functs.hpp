@@ -15,6 +15,7 @@
 #include <utility>
 #include <algorithm>
 #include <sstream>
+#include "str_functs.hpp"
 
 #define FOR_VECTOR(vec, i) for(size_t i = 0; i < vec.size(); i++)
 

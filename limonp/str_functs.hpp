@@ -19,8 +19,9 @@
 #include <functional> 
 #include <locale>
 #include <sstream>
+#include <map_functs.hpp>
 
-#define print(x) cout<<x<<endl
+#define print(x) cout<<(x)<<endl
 
 namespace Limonp
 {
@@ -46,7 +47,7 @@ namespace Limonp
         }
         return str;
     }
-    
+
     inline void string_format(string& res, const char* fmt, ...)
     {
         int size = 256;
@@ -115,6 +116,26 @@ namespace Limonp
             return res;
         }
 
+    template<class T1, class T2>
+        ostream& operator << (ostream& os, const pair<T1, T2>& pr)
+        {
+            os << pr.first << ":" << pr.second ;
+            return os;
+        }
+
+    template<class T1, class T2>
+        ostream& operator << (ostream& os, const map<T1, T2>& mp)
+        {
+            os << "{";
+            typename map<T1, T2>::const_iterator it;
+            for(it = mp.begin(); it != mp.end(); it++)
+            {
+                os << *it << ",";
+            }
+            os << "}" ;
+            return os;
+        }
+
     inline bool splitStr(const string& src, vector<string>& res, const string& pattern)
     {
         if(src.empty())
@@ -134,11 +155,11 @@ namespace Limonp
                 return true;
             }
             res.push_back(src.substr(start, end - start));
-			if(end == src.size() - 1)
-			{
-				res.push_back("");
-				break;
-			}
+            if(end == src.size() - 1)
+            {
+                res.push_back("");
+                break;
+            }
             start = end + 1;
         }
         return true;

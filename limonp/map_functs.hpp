@@ -13,6 +13,7 @@
 #include <sstream>
 #include "typedefs.h"
 
+
 namespace Limonp
 {
     using namespace std;
@@ -86,15 +87,6 @@ namespace Limonp
             stringstream ss;
             ss<<p.first<<":"<<p.second;
             return ss.str();
-        }
-
-    template<class kT, class vT>
-        void printMap(const map<kT, vT>& mp)
-        {
-            for(typename map<kT, vT>::const_iterator it = mp.begin(); it != mp.end(); it++)
-            {
-                cout<<it->first<<' '<<it->second<<endl;
-            }
         }
 
     template<class kT, class vT>

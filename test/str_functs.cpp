@@ -3,6 +3,7 @@
  * author   : wuyanyi09@gmail.com
  ************************************/
 #include <str_functs.hpp>
+#include <map_functs.hpp>
 
 #include <iostream>
 using namespace Limonp;
@@ -42,5 +43,8 @@ int main()
     print(join(vec.begin(), vec.end(), ".."));
     const char* arr[3] = {"2","3","5"};
     print(join(arr, arr+3, ","));
+    map<string , int> mp;
+    mp["key1"] =2;
+    print(mp);
     return 0;
 }
