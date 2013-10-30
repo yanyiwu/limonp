@@ -43,13 +43,7 @@ namespace Limonp
             }
             ~ArgvContext(){};
         public:
-            //ostream << 
-            //string toString()
-            //{
-            //    stringstream ss;
-            //    ss<<vecToString<string>(_args)<<mapToString<string, string>(_mpss)<<setToString<string>(_sset);
-            //    return ss.str();
-            //}
+            friend ostream& operator << (ostream& os, const ArgvContext& args); 
             string operator [](uint i)
             {
                 if(i < _args.size())
@@ -82,6 +76,16 @@ namespace Limonp
             set<string> _sset; 
 
     };
+
+    inline ostream& operator << (ostream& os, const ArgvContext& args)
+    {
+        return os<<args._args<<args._mpss<<args._sset;
+    }
+            //string toString()
+            //{
+            //    stringstream ss;
+            //    return ss.str();
+            //}
 }
 
 #endif

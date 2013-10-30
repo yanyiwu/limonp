@@ -123,6 +123,30 @@ namespace Limonp
             return os;
         }
 
+    template<class T>
+        ostream& operator << (ostream& os, const vector<T>& vec)
+        {
+            if(vec.empty())
+            {
+                return os << "[]";
+            }
+            os<<"[\""<<vec[0];
+            for(uint i = 1; i < vec.size(); i++)
+            {
+                os<<"\", \""<<vec[i];
+            }
+            os<<"\"]";
+            return os;
+        }
+
+    template<class T>
+        string& operator << (string& str, const T& obj)
+        {
+            stringstream ss;
+            ss << obj; // call ostream& operator << (ostream& os,
+            return str = ss.str();
+        }
+
     template<class T1, class T2>
         ostream& operator << (ostream& os, const map<T1, T2>& mp)
         {
@@ -145,73 +169,74 @@ namespace Limonp
         }
     
 
-    template<class T1, class T2>
-        string& operator << (string& str, const map<T1, T2>& mp)
-        {
-            if(mp.empty())
-            {
-                str = "{}";
-                return str;
-            }
-            stringstream ss;
-            ss<<'{';
-            typename map<T1, T2>::const_iterator it = mp.begin();
-            ss<<*it;
-            it++;
-            while(it != mp.end())
-            {
-                ss<<", "<<*it;
-                    it++;
-            }
-            ss<<'}';
-            str = ss.str();
-            return str;
-        }
+    //template<class T1, class T2>
+    //    string& operator << (string& str, const map<T1, T2>& mp)
+    //    {
+    //        if(mp.empty())
+    //        {
+    //            str = "{}";
+    //            return str;
+    //        }
+    //        stringstream ss;
+    //        ss<<'{';
+    //        typename map<T1, T2>::const_iterator it = mp.begin();
+    //        ss<<*it;
+    //        it++;
+    //        while(it != mp.end())
+    //        {
+    //            ss<<", "<<*it;
+    //                it++;
+    //        }
+    //        ss<<'}';
+    //        str = ss.str();
+    //        return str;
+    //    }
 
     template<class T1, class T2>
-        string& operator << (string& str, const HashMap<T1, T2>& mp)
+        ostream& operator << (ostream& os, const HashMap<T1, T2>& mp)
         {
             if(mp.empty())
             {
-                str = "{}";
-                return str;
+                return os << "{}";
             }
-            stringstream ss;
-            ss<<'{';
+            os<<'{';
             typename map<T1, T2>::const_iterator it = mp.begin();
-            ss<<*it;
+            os<<*it;
             it++;
             while(it != mp.end())
             {
-                ss<<", "<<*it;
-                    it++;
+                os<<", "<<*it++;
             }
-            ss<<'}';
-            str = ss.str();
-            return str;
+            return os<<'}';
         }
+
+    //template<class T>
+    //    string& operator << (string& str, const set<T>& st)
+    //    {
+    //        stringstream ss;
+    //        ss << st;
+    //        return str = ss.str();
+    //    }
 
     template<class T>
-        string& operator << (string& str, const set<T>& st)
+        ostream& operator << (ostream& os, const set<T>& st)
         {
             if(st.empty())
             {
-                str = "{}";
-                return str;
+                os << "{}";
+                return os;
             }
-            stringstream ss;
-            ss<<'{';
+            os<<'{';
             typename set<T>::const_iterator it = st.begin();
-            ss<<*it;
+            os<<*it;
             it++;
             while(it != st.end())
             {
-                ss<<", "<<*it;
+                os<<", "<<*it;
                 it++;
             }
-            ss<<'}';
-            str = ss.str();
-            return str;
+            os<<'}';
+            return os;
         }
 
     inline bool splitStr(const string& src, vector<string>& res, const string& pattern)

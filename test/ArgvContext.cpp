@@ -8,11 +8,14 @@ int main(int argc, char** argv)
     //getArgvMap(argc, argv, argvMap);
     //PRINT_MAPSS(argvMap);
     ArgvContext arg(argc, argv);
-    //cout<<arg.toString()<<endl;
+    cout<<arg<<endl;
     cout<<arg[1]<<endl;
     cout<<arg["--hehe"]<<endl;
     //cout<<pairToString<int,double>(pair<int, double>(1,1.2))<<endl;
     cout<<arg.hasKey("-help")<<endl;
+    string s;
+    s<<arg;
+    cout<<s;
     return 0;
 }
 
