@@ -268,16 +268,14 @@ namespace Limonp
         return true;
     }
 
-    inline string upperStr(const string& strIn)
+    inline string& upper(string& str)
     {
-        string str = strIn;
         transform(str.begin(), str.end(), str.begin(), (int (*)(int))toupper);
         return str;
     }
 
-    inline string lowerStr(const string& strIn)
+    inline string& lower(string& str)
     {
-        string str = strIn;
         transform(str.begin(), str.end(), str.begin(), (int (*)(int))tolower);
         return str;
     }
