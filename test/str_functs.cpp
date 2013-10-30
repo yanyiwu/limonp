@@ -46,5 +46,7 @@ int main()
     map<string , int> mp;
     mp["key1"] =2;
     print(mp);
+    s <<  mp;
+    print(s);
     return 0;
 }

@@ -15,10 +15,10 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <memory.h>
-#include "typedefs.h"
 #include <functional> 
 #include <locale>
 #include <sstream>
+#include <sys/types.h>
 #include <map_functs.hpp>
 
 #define print(x) cout<<(x)<<endl
@@ -126,14 +126,92 @@ namespace Limonp
     template<class T1, class T2>
         ostream& operator << (ostream& os, const map<T1, T2>& mp)
         {
-            os << "{";
-            typename map<T1, T2>::const_iterator it;
-            for(it = mp.begin(); it != mp.end(); it++)
+            if(mp.empty())
             {
-                os << *it << ",";
+                os<<"{}";
+                return os;
             }
-            os << "}" ;
+            os<<'{';
+            typename map<T1, T2>::const_iterator it = mp.begin();
+            os<<*it;
+            it++;
+            while(it != mp.end())
+            {
+                os<<", "<<*it;
+                it++;
+            }
+            os<<'}';
             return os;
+        }
+    
+
+    template<class T1, class T2>
+        string& operator << (string& str, const map<T1, T2>& mp)
+        {
+            if(mp.empty())
+            {
+                str = "{}";
+                return str;
+            }
+            stringstream ss;
+            ss<<'{';
+            typename map<T1, T2>::const_iterator it = mp.begin();
+            ss<<*it;
+            it++;
+            while(it != mp.end())
+            {
+                ss<<", "<<*it;
+                    it++;
+            }
+            ss<<'}';
+            str = ss.str();
+            return str;
+        }
+
+    template<class T1, class T2>
+        string& operator << (string& str, const HashMap<T1, T2>& mp)
+        {
+            if(mp.empty())
+            {
+                str = "{}";
+                return str;
+            }
+            stringstream ss;
+            ss<<'{';
+            typename map<T1, T2>::const_iterator it = mp.begin();
+            ss<<*it;
+            it++;
+            while(it != mp.end())
+            {
+                ss<<", "<<*it;
+                    it++;
+            }
+            ss<<'}';
+            str = ss.str();
+            return str;
+        }
+
+    template<class T>
+        string& operator << (string& str, const set<T>& st)
+        {
+            if(st.empty())
+            {
+                str = "{}";
+                return str;
+            }
+            stringstream ss;
+            ss<<'{';
+            typename set<T>::const_iterator it = st.begin();
+            ss<<*it;
+            it++;
+            while(it != st.end())
+            {
+                ss<<", "<<*it;
+                it++;
+            }
+            ss<<'}';
+            str = ss.str();
+            return str;
         }
 
     inline bool splitStr(const string& src, vector<string>& res, const string& pattern)
@@ -234,40 +312,40 @@ namespace Limonp
         return str.find(ch) != string::npos;
     }
 
-    inline void extractWords(const string& sentence, vector<string>& words)
-    {
-        bool flag = false;
-        uint lhs = 0, len = 0;
-        for(uint i = 0; i < sentence.size(); i++)
-        {
-            char x = sentence[i];
-            if((0x0030 <= x && x<= 0x0039) || (0x0041 <= x && x <= 0x005a ) || (0x0061 <= x && x <= 0x007a))
-            {
-                if(flag)
-                {
-                    len ++;
-                }
-                else
-                {
-                    lhs = i;
-                    len = 1;
-                }
-                flag = true;
-            }
-            else
-            {
-                if(flag)
-                {
-                    words.push_back(string(sentence, lhs, len));
-                }
-                flag = false;
-            }
-        }
-        if(flag)
-        {
-            words.push_back(string(sentence, lhs, len));
-        }
-    }
+    //inline void extractWords(const string& sentence, vector<string>& words)
+    //{
+    //    bool flag = false;
+    //    uint lhs = 0, len = 0;
+    //    for(uint i = 0; i < sentence.size(); i++)
+    //    {
+    //        char x = sentence[i];
+    //        if((0x0030 <= x && x<= 0x0039) || (0x0041 <= x && x <= 0x005a ) || (0x0061 <= x && x <= 0x007a))
+    //        {
+    //            if(flag)
+    //            {
+    //                len ++;
+    //            }
+    //            else
+    //            {
+    //                lhs = i;
+    //                len = 1;
+    //            }
+    //            flag = true;
+    //        }
+    //        else
+    //        {
+    //            if(flag)
+    //            {
+    //                words.push_back(string(sentence, lhs, len));
+    //            }
+    //            flag = false;
+    //        }
+    //    }
+    //    if(flag)
+    //    {
+    //        words.push_back(string(sentence, lhs, len));
+    //    }
+    //}
 
 
 }
