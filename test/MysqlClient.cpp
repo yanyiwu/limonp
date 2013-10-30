@@ -8,10 +8,7 @@ int main()
     client.init();
     MysqlClient::RowsType rows;
     client.select("show tables;", rows);
-    FOR_VECTOR(rows, i)
-    {
-        cout<<vecToString(rows[i])<<endl;
-    }
+    print(rows);
     return 0;
 }
 

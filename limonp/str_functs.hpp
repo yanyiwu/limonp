@@ -68,27 +68,27 @@ namespace Limonp
         }
     }
 
-    inline bool joinStr(const vector<string>& src, string& dest, const string& connectorStr)
-    {
-        if(src.empty())
-        {
-            return false;
-        }
-        for(uint i = 0; i < src.size() - 1; i++)
-        {
-            dest += src[i];
-            dest += connectorStr;
-        }
-        dest += src[src.size() - 1];
-        return true;
-    }
+    //inline bool joinStr(const vector<string>& src, string& dest, const string& connectorStr)
+    //{
+    //    if(src.empty())
+    //    {
+    //        return false;
+    //    }
+    //    for(uint i = 0; i < src.size() - 1; i++)
+    //    {
+    //        dest += src[i];
+    //        dest += connectorStr;
+    //    }
+    //    dest += src[src.size() - 1];
+    //    return true;
+    //}
 
-    inline string joinStr(const vector<string>& source, const string& connector)
-    {
-        string res;
-        joinStr(source, res, connector);
-        return res;
-    }
+    //inline string joinStr(const vector<string>& source, const string& connector)
+    //{
+    //    string res;
+    //    joinStr(source, res, connector);
+    //    return res;
+    //}
 
     template<class T>
         void join(T begin, T end, string& res, const string& connector)

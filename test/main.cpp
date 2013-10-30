@@ -1,21 +1,8 @@
 #include <iostream>
-#include <vec_functs.hpp>
 #include <cast_functs.hpp>
 #include <str_functs.hpp>
 using namespace std;
 using namespace Limonp;
-
-bool utStrFunct()
-{
-	string s(" \t1 2 \t 3 4\t5 ");
-	vector<string> vs;
-	splitStr(s, vs, "\t");
-	cout<<vecToString(vs)<<endl;
-	s = " \t";
-	splitStr(s, vs, "\t");
-	cout<<vecToString(vs)<<endl;
-	return true;
-}
 
 bool utCastFunct()
 {
@@ -47,8 +34,7 @@ bool utArgvContext()
 
 int main()
 {
-	utStrFunct();
-    utCastFunct();
+    //utCastFunct();
     //utMysqlClient();
 	return 0;
 }

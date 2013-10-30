@@ -6,7 +6,6 @@
 #include <vector>
 #include <string>
 #include "logger.hpp"
-#include "vec_functs.hpp"
 
 namespace Limonp
 {
