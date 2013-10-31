@@ -4,6 +4,7 @@
  ************************************/
 #include <str_functs.hpp>
 #include <map_functs.hpp>
+#include <logger.hpp>
 
 #include <iostream>
 using namespace Limonp;
