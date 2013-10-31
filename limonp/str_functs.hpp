@@ -200,7 +200,7 @@ namespace Limonp
                 return os << "{}";
             }
             os<<'{';
-            typename map<T1, T2>::const_iterator it = mp.begin();
+            typename HashMap<T1, T2>::const_iterator it = mp.begin();
             os<<*it;
             it++;
             while(it != mp.end())

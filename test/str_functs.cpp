@@ -48,5 +48,8 @@ int main()
     print(mp);
     s <<  mp;
     print(s);
+    HashMap<int,int> hmp;
+    hmp[1]=2;
+    print(hmp);
     return 0;
 }
