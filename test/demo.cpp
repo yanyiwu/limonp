@@ -1,6 +1,6 @@
 
-#include "../limonp/logger.hpp"
-#include "../limonp/str_functs.hpp"
+#include <Limonp/logger.hpp>
+#include <Limonp/str_functs.hpp>
 
 using namespace Limonp;
 

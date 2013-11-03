@@ -43,10 +43,18 @@ unzip limonp_0.1.1.zip
 cd limonp-v.0.1.1/
 mkdir build
 cd build/
-cmake ..
+cmake -DCMAKE_INSTALL_PREFIX=/usr .. #如果没有-DCMAKE_INSTALL_PREFIX指定时，默认是安装到/usr/local 后面的 .. 是指cmake的CMakeLists.txt所在目录是在此目录的上一级目录
 make
 sudo make install
 ```
+
+####验证
+
+进入test/目录，执行
+
+`g++ demo.cpp && ./a.out`
+
+如果没有报错就说明安装成功
 
 ####卸载
 
