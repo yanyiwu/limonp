@@ -2,13 +2,14 @@
 
 limon + hpp 
 
-##内容
+##简介
 
 带有明显python风格的c++处理库。
 
 主要是一些工具函数，比如字符串处理，日志文件之类的。
 
 比如字符串格式化，格式化日志输出。
+
 比如print(x)来输出变量。
 
 
@@ -24,12 +25,46 @@ limon + hpp
 
 除此之外，都直接include进来即可使用。
 
+##安装
+
+不安装也可以使用，安装其实就是把头文件拷贝到/usr/xx(安装步骤中指定)中而已。
+
+需要系统中有cmake这个程序，在ubuntu中安装方法是：`sudo apt-get install cmake`
+
+###安装步骤
+
+####安装
+
+已安装v0.1.1版本为例:
+
+```sh
+wget https://github.com/aszxqw/limonp/archive/v.0.1.1.zip -O limonp_0.1.1.zip
+unzip limonp_0.1.1.zip
+cd limonp-v.0.1.1/
+mkdir build
+cd build/
+cmake ..
+make
+sudo make install
+```
+
+####卸载
+
+```sh
+cd limonp-v.0.1.1/build/
+cat install_manifest.txt | sudo xargs rm -rf
+```
 
 ##使用方法
 ```sh
 //g++ demo.cpp && ./a.out
 //test/demo.cpp
 
+//if installed, 
+//#include <limonp/logger.cpp>
+//#include <limonp/str_functs.hpp>
+
+//not installed:
 #include "limonp/logger.hpp"
 #include "limonp/str_functs.hpp"
 
