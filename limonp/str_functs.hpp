@@ -55,6 +55,7 @@ namespace Limonp
     {
         int size = 256;
         va_list ap;
+        res.clear();
         while (1) {
             res.resize(size);
             va_start(ap, fmt);
