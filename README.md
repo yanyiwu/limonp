@@ -58,10 +58,13 @@ sudo make install
 
 ####卸载
 
+build目录下面的`install_manifest.txt`就是这个安装的所以文件的路径，删除它们即可。
+
 ```sh
 cd limonp-v.0.1.1/build/
 cat install_manifest.txt | sudo xargs rm -rf
 ```
+
 
 ##使用方法
 ```sh
