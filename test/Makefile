@@ -1,5 +1,5 @@
 CC = g++
-CCOPT = -Wall -O3
+CCOPT = -Wall -O3 -std=c++0x
 LINK = g++
 LINKOPT =
 PACKA = ar
