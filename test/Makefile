@@ -5,12 +5,12 @@ LINKOPT =
 PACKA = ar
 PARCAOPT = rc
 DOLINK = $(LINK) $(LINKOPT) -o $@ $^
-SOURCES := $(wildcard *.cpp)
+SOURCES := ArgvContext.cpp  demo.cpp io_functs.cpp  main.cpp str_functs.cpp config.cpp  file_functs.cpp  logger.cpp     MysqlClient.cpp
 OBJS := $(patsubst %.cpp,%.o,$(SOURCES))
 UTS := $(patsubst %.cpp,%.ut,$(SOURCES))
 
 LINK_LIB := -lmysqlclient
-INCS := -I../limonp
+INCS := -I../limonp -I
 LIMON_DIR = ../limonp
 
 .INTERMEDIATE: 
