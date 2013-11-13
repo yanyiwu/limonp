@@ -5,7 +5,7 @@ LINKOPT =
 PACKA = ar
 PARCAOPT = rc
 DOLINK = $(LINK) $(LINKOPT) -o $@ $^
-SOURCES := ArgvContext.cpp  demo.cpp io_functs.cpp  main.cpp str_functs.cpp config.cpp  file_functs.cpp  logger.cpp     MysqlClient.cpp
+SOURCES := ArgvContext.cpp  demo.cpp io_functs.cpp  main.cpp str_functs.cpp Config.cpp  file_functs.cpp  logger.cpp     MysqlClient.cpp
 OBJS := $(patsubst %.cpp,%.o,$(SOURCES))
 UTS := $(patsubst %.cpp,%.ut,$(SOURCES))
 

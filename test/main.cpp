@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cast_functs.hpp>
 #include <str_functs.hpp>
-#include <config.hpp>
 #include <MysqlClient.hpp>
 
 using namespace std;

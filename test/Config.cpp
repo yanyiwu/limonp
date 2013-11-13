@@ -1,12 +1,10 @@
-#include <config.hpp>
+#include <Config.hpp>
 
 using namespace Limonp;
 int main()
 {
     Config gConfig;
-    gConfig.init("1.conf");
-    gConfig.init("1.conf");
-    gConfig.display();
+    gConfig.loadFile("testdata/1.conf");
     string res;
     gConfig.get("a", res);
     gConfig.get("cm", res);
