@@ -10,7 +10,7 @@ OBJS := $(patsubst %.cpp,%.o,$(SOURCES))
 UTS := $(patsubst %.cpp,%.ut,$(SOURCES))
 
 LINK_LIB := -lmysqlclient
-INCS := -I../limonp -I
+INCS := -I../limonp -I/usr/include/mysql
 LIMON_DIR = ../limonp
 
 .INTERMEDIATE: 
