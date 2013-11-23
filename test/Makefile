@@ -1,16 +1,16 @@
 CC = g++
-CCOPT = -Wall -O3
+CCOPT = -Wall -O3 -std=c++0x
 LINK = g++
 LINKOPT =
 PACKA = ar
 PARCAOPT = rc
 DOLINK = $(LINK) $(LINKOPT) -o $@ $^
-SOURCES := $(wildcard *.cpp)
+SOURCES := ArgvContext.cpp  demo.cpp io_functs.cpp  main.cpp str_functs.cpp Config.cpp  file_functs.cpp  logger.cpp     MysqlClient.cpp
 OBJS := $(patsubst %.cpp,%.o,$(SOURCES))
 UTS := $(patsubst %.cpp,%.ut,$(SOURCES))
 
 LINK_LIB := -lmysqlclient
-INCS := -I../limonp
+INCS := -I../limonp -I/usr/include/mysql
 LIMON_DIR = ../limonp
 
 .INTERMEDIATE: 
