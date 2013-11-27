@@ -92,7 +92,7 @@ namespace CPPCOMMON
             static inline void II(uint4 &a, uint4 b, uint4 c, uint4 d, uint4 x, uint4 s, uint4 ac);
     };
 
-    inline std::string md5(const std::string str)
+    inline std::string md5(const std::string& str)
     {
         MD5 md5 = MD5(str);
         return md5.hexdigest();
