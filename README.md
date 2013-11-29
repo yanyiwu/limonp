@@ -70,3 +70,6 @@ cat install_manifest.txt | sudo xargs rm -rf
 
 详见 test/demo.cpp
 
+##相关声明
+
+1.  md5.hpp 是网上搜到的一份md5.cpp/h的文件，自己修改成hpp文件。原作者信息请看代码注释。
