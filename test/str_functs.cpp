@@ -52,5 +52,14 @@ int main()
     HashMap<int,int> hmp;
     hmp[1]=2;
     print(hmp);
+    string gbks;
+    ifstream ifs("testdata/dict.gbk");
+    vector<uint16_t> uni;
+    while(getline(ifs, gbks))
+    {
+        gbkTrans(gbks, uni);
+        gbkTrans(uni.begin(), uni.end(), gbks);
+        print(gbks);
+    }
     return 0;
 }
