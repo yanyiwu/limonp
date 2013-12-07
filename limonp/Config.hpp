@@ -73,7 +73,7 @@ namespace Limonp
             friend ostream& operator << (ostream& os, const Config& config);
     };
     
-    ostream& operator << (ostream& os, const Config& config)
+    inline ostream& operator << (ostream& os, const Config& config)
     {
         return os << config._map;
     }
