@@ -1,351 +1,423 @@
-/* MD5
-   converted to C++ class by Frank Thilo (thilo@unix-ag.org)
-   for bzflag (http://www.bzflag.org)
+#ifndef __MD5_H__
+#define __MD5_H__
 
-   based on:
+// Copyright (C) 1991-2, RSA Data Security, Inc. Created 1991. All
+// rights reserved.
 
-   md5.h and md5.c
-   reference implementation of RFC 1321
+// License to copy and use this software is granted provided that it
+// is identified as the "RSA Data Security, Inc. MD5 Message-Digest
+// Algorithm" in all material mentioning or referencing this software
+// or this function.
+//
+// License is also granted to make and use derivative works provided
+// that such works are identified as "derived from the RSA Data
+// Security, Inc. MD5 Message-Digest Algorithm" in all material
+// mentioning or referencing the derived work.
+//
+// RSA Data Security, Inc. makes no representations concerning either
+// the merchantability of this software or the suitability of this
+// software for any particular purpose. It is provided "as is"
+// without express or implied warranty of any kind.
+//
+// These notices must be retained in any copies of any part of this
+// documentation and/or software.
 
-   Copyright (C) 1991-2, RSA Data Security, Inc. Created 1991. All
-   rights reserved.
 
-   License to copy and use this software is granted provided that it
-   is identified as the "RSA Data Security, Inc. MD5 Message-Digest
-   Algorithm" in all material mentioning or referencing this software
-   or this function.
 
-   License is also granted to make and use derivative works provided
-   that such works are identified as "derived from the RSA Data
-   Security, Inc. MD5 Message-Digest Algorithm" in all material
-   mentioning or referencing the derived work.
-
-   RSA Data Security, Inc. makes no representations concerning either
-   the merchantability of this software or the suitability of this
-   software for any particular purpose. It is provided "as is"
-   without express or implied warranty of any kind.
-
-   These notices must be retained in any copies of any part of this
-   documentation and/or software.
-
-*/
-
-#ifndef BZF_MD5_H
-#define BZF_MD5_H
-
-#include <string>
+// The original md5 implementation avoids external libraries.
+// This version has dependency on stdio.h for file input and
+// string.h for memcpy.
+#include <cstdio>
+#include <cstring>
 #include <iostream>
-#include <memory.h>
-#include <stdio.h>
 
-//#define S11 7
-//#define S12 12
-//#define S13 17
-//#define S14 22
-//#define S21 5
-//#define S22 9
-//#define S23 14
-//#define S24 20
-//#define S31 4
-//#define S32 11
-//#define S33 16
-//#define S34 23
-//#define S41 6
-//#define S42 10
-//#define S43 15
-//#define S44 21
-
-// a small class for calculating MD5 hashes of strings or byte arrays
-// it is not meant to be fast or secure
-//
-// usage: 1) feed it blocks of uchars with update()
-//      2) finalize()
-//      3) get hexdigest() string
-//      or
-//      MD5(std::string).hexdigest()
-//
-// assumes that char is 8 bit and int is 32 bit
-
-namespace Limonp
+namespace Limonp 
 {
-    const unsigned char padding[64] = 
-    {
-        0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    class MD5
-    {
-        private:
-            enum{S11 = 7, S12 = 12, S13 = 17, S14 = 22, S21 = 5, S22 = 9, S23 = 14, S24 = 20, S31 = 4, S32 = 11, S33 = 16, S34 = 23, S41 = 6, S42 = 10, S43 = 15, S44 = 21};
-        public:
-            typedef unsigned int size_type; // must be 32bit
 
-            MD5()
-            {
-                init();
-            }
-            MD5(const std::string& text)
-            {
-                init();
-                update(text.c_str(), text.length());
-                finalize();
-            }
-            void update(const unsigned char *input, size_type length)
-            {
-                // compute number of bytes mod 64
-                size_type index = count[0] / 8 % blocksize;
-
-                // Update number of bits
-                if ((count[0] += (length << 3)) < (length << 3))
-                  count[1]++;
-                count[1] += (length >> 29);
-
-                // number of bytes we need to fill in buffer
-                size_type firstpart = 64 - index;
-
-                size_type i;
-
-                // transform as many times as possible.
-                if (length >= firstpart)
-                {
-                    // fill buffer first, transform
-                    memcpy(&buffer[index], input, firstpart);
-                    transform(buffer);
-
-                    // transform chunks of blocksize (64 bytes)
-                    for (i = firstpart; i + blocksize <= length; i += blocksize)
-                      transform(&input[i]);
-
-                    index = 0;
-                }
-                else
-                  i = 0;
-
-                // buffer remaining input
-                memcpy(&buffer[index], &input[i], length-i);
-            }
-            void update(const char *input, size_type length)
-            {
-
-                update((const unsigned char*)input, length);
-            }
-            MD5& finalize()
-            {
-        if (!finalized) {
-            // Save number of bits
-            unsigned char bits[8];
-            encode(bits, count, 8);
-
-            // pad out to 56 mod 64.
-            size_type index = count[0] / 8 % 64;
-            size_type padLen = (index < 56) ? (56 - index) : (120 - index);
-            update(padding, padLen);
-
-            // Append length (before padding)
-            update(bits, 8);
-
-            // Store state in digest
-            encode(digest, state, 16);
-
-            // Zeroize sensitive information.
-            memset(buffer, 0, sizeof buffer);
-            memset(count, 0, sizeof count);
-
-            finalized=true;
-        }
-
-        return *this;
-            }
-            std::string hexdigest() const
-            {
-                if (!finalized)
-                  return "";
-
-                char buf[33];
-                for (int i=0; i<16; i++)
-                  sprintf(buf+i*2, "%02x", digest[i]);
-                buf[32]=0;
-
-                return std::string(buf);
-            }
-            friend std::ostream& operator<<(std::ostream&, MD5 md5);
-
-        private:
-            void init()
-            {
-                finalized=false;
-
-                count[0] = 0;
-                count[1] = 0;
-
-                // load magic initialization constants.
-                state[0] = 0x67452301;
-                state[1] = 0xefcdab89;
-                state[2] = 0x98badcfe;
-                state[3] = 0x10325476;
-            }
-            typedef unsigned char uint1; //  8bit
-            typedef unsigned int uint4;  // 32bit
-            enum {blocksize = 64}; // VC6 won't eat a const static int here
-
-            void transform(const uint1 block[blocksize])
-            {
-                uint4 a = state[0], b = state[1], c = state[2], d = state[3], x[16];
-                decode (x, block, blocksize);
-
-                /* Round 1 */
-                FF (a, b, c, d, x[ 0], S11, 0xd76aa478); /* 1 */
-                FF (d, a, b, c, x[ 1], S12, 0xe8c7b756); /* 2 */
-                FF (c, d, a, b, x[ 2], S13, 0x242070db); /* 3 */
-                FF (b, c, d, a, x[ 3], S14, 0xc1bdceee); /* 4 */
-                FF (a, b, c, d, x[ 4], S11, 0xf57c0faf); /* 5 */
-                FF (d, a, b, c, x[ 5], S12, 0x4787c62a); /* 6 */
-                FF (c, d, a, b, x[ 6], S13, 0xa8304613); /* 7 */
-                FF (b, c, d, a, x[ 7], S14, 0xfd469501); /* 8 */
-                FF (a, b, c, d, x[ 8], S11, 0x698098d8); /* 9 */
-                FF (d, a, b, c, x[ 9], S12, 0x8b44f7af); /* 10 */
-                FF (c, d, a, b, x[10], S13, 0xffff5bb1); /* 11 */
-                FF (b, c, d, a, x[11], S14, 0x895cd7be); /* 12 */
-                FF (a, b, c, d, x[12], S11, 0x6b901122); /* 13 */
-                FF (d, a, b, c, x[13], S12, 0xfd987193); /* 14 */
-                FF (c, d, a, b, x[14], S13, 0xa679438e); /* 15 */
-                FF (b, c, d, a, x[15], S14, 0x49b40821); /* 16 */
-
-                /* Round 2 */
-                GG (a, b, c, d, x[ 1], S21, 0xf61e2562); /* 17 */
-                GG (d, a, b, c, x[ 6], S22, 0xc040b340); /* 18 */
-                GG (c, d, a, b, x[11], S23, 0x265e5a51); /* 19 */
-                GG (b, c, d, a, x[ 0], S24, 0xe9b6c7aa); /* 20 */
-                GG (a, b, c, d, x[ 5], S21, 0xd62f105d); /* 21 */
-                GG (d, a, b, c, x[10], S22,  0x2441453); /* 22 */
-                GG (c, d, a, b, x[15], S23, 0xd8a1e681); /* 23 */
-                GG (b, c, d, a, x[ 4], S24, 0xe7d3fbc8); /* 24 */
-                GG (a, b, c, d, x[ 9], S21, 0x21e1cde6); /* 25 */
-                GG (d, a, b, c, x[14], S22, 0xc33707d6); /* 26 */
-                GG (c, d, a, b, x[ 3], S23, 0xf4d50d87); /* 27 */
-                GG (b, c, d, a, x[ 8], S24, 0x455a14ed); /* 28 */
-                GG (a, b, c, d, x[13], S21, 0xa9e3e905); /* 29 */
-                GG (d, a, b, c, x[ 2], S22, 0xfcefa3f8); /* 30 */
-                GG (c, d, a, b, x[ 7], S23, 0x676f02d9); /* 31 */
-                GG (b, c, d, a, x[12], S24, 0x8d2a4c8a); /* 32 */
-
-                /* Round 3 */
-                HH (a, b, c, d, x[ 5], S31, 0xfffa3942); /* 33 */
-                HH (d, a, b, c, x[ 8], S32, 0x8771f681); /* 34 */
-                HH (c, d, a, b, x[11], S33, 0x6d9d6122); /* 35 */
-                HH (b, c, d, a, x[14], S34, 0xfde5380c); /* 36 */
-                HH (a, b, c, d, x[ 1], S31, 0xa4beea44); /* 37 */
-                HH (d, a, b, c, x[ 4], S32, 0x4bdecfa9); /* 38 */
-                HH (c, d, a, b, x[ 7], S33, 0xf6bb4b60); /* 39 */
-                HH (b, c, d, a, x[10], S34, 0xbebfbc70); /* 40 */
-                HH (a, b, c, d, x[13], S31, 0x289b7ec6); /* 41 */
-                HH (d, a, b, c, x[ 0], S32, 0xeaa127fa); /* 42 */
-                HH (c, d, a, b, x[ 3], S33, 0xd4ef3085); /* 43 */
-                HH (b, c, d, a, x[ 6], S34,  0x4881d05); /* 44 */
-                HH (a, b, c, d, x[ 9], S31, 0xd9d4d039); /* 45 */
-                HH (d, a, b, c, x[12], S32, 0xe6db99e5); /* 46 */
-                HH (c, d, a, b, x[15], S33, 0x1fa27cf8); /* 47 */
-                HH (b, c, d, a, x[ 2], S34, 0xc4ac5665); /* 48 */
-
-                /* Round 4 */
-                II (a, b, c, d, x[ 0], S41, 0xf4292244); /* 49 */
-                II (d, a, b, c, x[ 7], S42, 0x432aff97); /* 50 */
-                II (c, d, a, b, x[14], S43, 0xab9423a7); /* 51 */
-                II (b, c, d, a, x[ 5], S44, 0xfc93a039); /* 52 */
-                II (a, b, c, d, x[12], S41, 0x655b59c3); /* 53 */
-                II (d, a, b, c, x[ 3], S42, 0x8f0ccc92); /* 54 */
-                II (c, d, a, b, x[10], S43, 0xffeff47d); /* 55 */
-                II (b, c, d, a, x[ 1], S44, 0x85845dd1); /* 56 */
-                II (a, b, c, d, x[ 8], S41, 0x6fa87e4f); /* 57 */
-                II (d, a, b, c, x[15], S42, 0xfe2ce6e0); /* 58 */
-                II (c, d, a, b, x[ 6], S43, 0xa3014314); /* 59 */
-                II (b, c, d, a, x[13], S44, 0x4e0811a1); /* 60 */
-                II (a, b, c, d, x[ 4], S41, 0xf7537e82); /* 61 */
-                II (d, a, b, c, x[11], S42, 0xbd3af235); /* 62 */
-                II (c, d, a, b, x[ 2], S43, 0x2ad7d2bb); /* 63 */
-                II (b, c, d, a, x[ 9], S44, 0xeb86d391); /* 64 */
-
-                state[0] += a;
-                state[1] += b;
-                state[2] += c;
-                state[3] += d;
-
-                // Zeroize sensitive information.
-                memset(x, 0, sizeof x);
-            }
-            static void decode(uint4 output[], const uint1 input[], size_type len)
-            {
-                for (unsigned int i = 0, j = 0; j < len; i++, j += 4)
-                  output[i] = ((uint4)input[j]) | (((uint4)input[j+1]) << 8) |
-                      (((uint4)input[j+2]) << 16) | (((uint4)input[j+3]) << 24);
-            }
-            static void encode(uint1 output[], const uint4 input[], size_type len)
-            {
-                for (size_type i = 0, j = 0; j < len; i++, j += 4) {
-                    output[j] = input[i] & 0xff;
-                    output[j+1] = (input[i] >> 8) & 0xff;
-                    output[j+2] = (input[i] >> 16) & 0xff;
-                    output[j+3] = (input[i] >> 24) & 0xff;
-                }
-            }
+#pragma region MD5 defines
+// Constants for MD5Transform routine.
+#define S11 7
+#define S12 12
+#define S13 17
+#define S14 22
+#define S21 5
+#define S22 9
+#define S23 14
+#define S24 20
+#define S31 4
+#define S32 11
+#define S33 16
+#define S34 23
+#define S41 6
+#define S42 10
+#define S43 15
+#define S44 21
 
 
-            bool finalized;
-            uint1 buffer[blocksize]; // bytes that didn't fit in last 64 byte chunk
-            uint4 count[2];   // 64bit counter for number of bits (lo, hi)
-            uint4 state[4];   // digest so far
-            uint1 digest[16]; // the result
+// F, G, H and I are basic MD5 functions.
+#define F(x, y, z) (((x) & (y)) | ((~x) & (z)))
+#define G(x, y, z) (((x) & (z)) | ((y) & (~z)))
+#define H(x, y, z) ((x) ^ (y) ^ (z))
+#define I(x, y, z) ((y) ^ ((x) | (~z)))
 
-            // low level logic operations
-            static uint4 F(uint4 x, uint4 y, uint4 z)
-            {
-                return (x&y) | (~x&z);
-            }
-            static uint4 G(uint4 x, uint4 y, uint4 z)
-            {
-                return (x&z) | (y&~z);
-            }
-            static uint4 H(uint4 x, uint4 y, uint4 z)
-            {
-                return x^y^z;
-            }
-            static uint4 I(uint4 x, uint4 y, uint4 z)
-            {
-                return y ^ (x | ~z);
-            }
-            static uint4 rotate_left(uint4 x, int n)
-            {
-                return (x << n) | (x >> (32-n));
-            }
-            static void FF(uint4 &a, uint4 b, uint4 c, uint4 d, uint4 x, uint4 s, uint4 ac)
-            {
-                a = rotate_left(a+ F(b,c,d) + x + ac, s) + b;
-            }
-            static void GG(uint4 &a, uint4 b, uint4 c, uint4 d, uint4 x, uint4 s, uint4 ac)
-            {
-                a = rotate_left(a + G(b,c,d) + x + ac, s) + b;
-            }
-            static void HH(uint4 &a, uint4 b, uint4 c, uint4 d, uint4 x, uint4 s, uint4 ac)
-            {
-                a = rotate_left(a + H(b,c,d) + x + ac, s) + b;
-            }
-            static void II(uint4 &a, uint4 b, uint4 c, uint4 d, uint4 x, uint4 s, uint4 ac)
-            {
-                a = rotate_left(a + I(b,c,d) + x + ac, s) + b;
-            }
-        private:
+// ROTATE_LEFT rotates x left n bits.
+#define ROTATE_LEFT(x, n) (((x) << (n)) | ((x) >> (32-(n))))
 
-    };
+// FF, GG, HH, and II transformations for rounds 1, 2, 3, and 4.
+// Rotation is separate from addition to prevent recomputation.
+#define FF(a, b, c, d, x, s, ac) { \
+  (a) += F ((b), (c), (d)) + (x) + (UINT4)(ac); \
+  (a) = ROTATE_LEFT ((a), (s)); \
+  (a) += (b); \
+  }
+#define GG(a, b, c, d, x, s, ac) { \
+  (a) += G ((b), (c), (d)) + (x) + (UINT4)(ac); \
+  (a) = ROTATE_LEFT ((a), (s)); \
+  (a) += (b); \
+  }
+#define HH(a, b, c, d, x, s, ac) { \
+  (a) += H ((b), (c), (d)) + (x) + (UINT4)(ac); \
+  (a) = ROTATE_LEFT ((a), (s)); \
+  (a) += (b); \
+  }
+#define II(a, b, c, d, x, s, ac) { \
+  (a) += I ((b), (c), (d)) + (x) + (UINT4)(ac); \
+  (a) = ROTATE_LEFT ((a), (s)); \
+  (a) += (b); \
+  }
+#pragma endregion
 
-    inline std::string md5(const std::string& str)
-    {
-        MD5 md5 = MD5(str);
-        return md5.hexdigest();
+
+typedef unsigned char BYTE ;
+
+// POINTER defines a generic pointer type
+typedef unsigned char *POINTER;
+
+// UINT2 defines a two byte word
+typedef unsigned short int UINT2;
+
+// UINT4 defines a four byte word
+typedef unsigned long int UINT4;
+
+static unsigned char PADDING[64] = {
+  0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+};
+// convenient object that wraps
+// the C-functions for use in C++ only
+class MD5
+{
+private:
+  struct __context_t {
+    UINT4 state[4];                                   /* state (ABCD) */
+    UINT4 count[2];        /* number of bits, modulo 2^64 (lsb first) */
+    unsigned char buffer[64];                         /* input buffer */
+  } context ;
+
+  #pragma region static helper functions
+  // The core of the MD5 algorithm is here.
+  // MD5 basic transformation. Transforms state based on block.
+  static void MD5Transform( UINT4 state[4], unsigned char block[64] )
+  {
+    UINT4 a = state[0], b = state[1], c = state[2], d = state[3], x[16];
+
+    Decode (x, block, 64);
+
+    /* Round 1 */
+    FF (a, b, c, d, x[ 0], S11, 0xd76aa478); /* 1 */
+    FF (d, a, b, c, x[ 1], S12, 0xe8c7b756); /* 2 */
+    FF (c, d, a, b, x[ 2], S13, 0x242070db); /* 3 */
+    FF (b, c, d, a, x[ 3], S14, 0xc1bdceee); /* 4 */
+    FF (a, b, c, d, x[ 4], S11, 0xf57c0faf); /* 5 */
+    FF (d, a, b, c, x[ 5], S12, 0x4787c62a); /* 6 */
+    FF (c, d, a, b, x[ 6], S13, 0xa8304613); /* 7 */
+    FF (b, c, d, a, x[ 7], S14, 0xfd469501); /* 8 */
+    FF (a, b, c, d, x[ 8], S11, 0x698098d8); /* 9 */
+    FF (d, a, b, c, x[ 9], S12, 0x8b44f7af); /* 10 */
+    FF (c, d, a, b, x[10], S13, 0xffff5bb1); /* 11 */
+    FF (b, c, d, a, x[11], S14, 0x895cd7be); /* 12 */
+    FF (a, b, c, d, x[12], S11, 0x6b901122); /* 13 */
+    FF (d, a, b, c, x[13], S12, 0xfd987193); /* 14 */
+    FF (c, d, a, b, x[14], S13, 0xa679438e); /* 15 */
+    FF (b, c, d, a, x[15], S14, 0x49b40821); /* 16 */
+
+    /* Round 2 */
+    GG (a, b, c, d, x[ 1], S21, 0xf61e2562); /* 17 */
+    GG (d, a, b, c, x[ 6], S22, 0xc040b340); /* 18 */
+    GG (c, d, a, b, x[11], S23, 0x265e5a51); /* 19 */
+    GG (b, c, d, a, x[ 0], S24, 0xe9b6c7aa); /* 20 */
+    GG (a, b, c, d, x[ 5], S21, 0xd62f105d); /* 21 */
+    GG (d, a, b, c, x[10], S22,  0x2441453); /* 22 */
+    GG (c, d, a, b, x[15], S23, 0xd8a1e681); /* 23 */
+    GG (b, c, d, a, x[ 4], S24, 0xe7d3fbc8); /* 24 */
+    GG (a, b, c, d, x[ 9], S21, 0x21e1cde6); /* 25 */
+    GG (d, a, b, c, x[14], S22, 0xc33707d6); /* 26 */
+    GG (c, d, a, b, x[ 3], S23, 0xf4d50d87); /* 27 */
+    GG (b, c, d, a, x[ 8], S24, 0x455a14ed); /* 28 */
+    GG (a, b, c, d, x[13], S21, 0xa9e3e905); /* 29 */
+    GG (d, a, b, c, x[ 2], S22, 0xfcefa3f8); /* 30 */
+    GG (c, d, a, b, x[ 7], S23, 0x676f02d9); /* 31 */
+    GG (b, c, d, a, x[12], S24, 0x8d2a4c8a); /* 32 */
+
+    /* Round 3 */
+    HH (a, b, c, d, x[ 5], S31, 0xfffa3942); /* 33 */
+    HH (d, a, b, c, x[ 8], S32, 0x8771f681); /* 34 */
+    HH (c, d, a, b, x[11], S33, 0x6d9d6122); /* 35 */
+    HH (b, c, d, a, x[14], S34, 0xfde5380c); /* 36 */
+    HH (a, b, c, d, x[ 1], S31, 0xa4beea44); /* 37 */
+    HH (d, a, b, c, x[ 4], S32, 0x4bdecfa9); /* 38 */
+    HH (c, d, a, b, x[ 7], S33, 0xf6bb4b60); /* 39 */
+    HH (b, c, d, a, x[10], S34, 0xbebfbc70); /* 40 */
+    HH (a, b, c, d, x[13], S31, 0x289b7ec6); /* 41 */
+    HH (d, a, b, c, x[ 0], S32, 0xeaa127fa); /* 42 */
+    HH (c, d, a, b, x[ 3], S33, 0xd4ef3085); /* 43 */
+    HH (b, c, d, a, x[ 6], S34,  0x4881d05); /* 44 */
+    HH (a, b, c, d, x[ 9], S31, 0xd9d4d039); /* 45 */
+    HH (d, a, b, c, x[12], S32, 0xe6db99e5); /* 46 */
+    HH (c, d, a, b, x[15], S33, 0x1fa27cf8); /* 47 */
+    HH (b, c, d, a, x[ 2], S34, 0xc4ac5665); /* 48 */
+
+    /* Round 4 */
+    II (a, b, c, d, x[ 0], S41, 0xf4292244); /* 49 */
+    II (d, a, b, c, x[ 7], S42, 0x432aff97); /* 50 */
+    II (c, d, a, b, x[14], S43, 0xab9423a7); /* 51 */
+    II (b, c, d, a, x[ 5], S44, 0xfc93a039); /* 52 */
+    II (a, b, c, d, x[12], S41, 0x655b59c3); /* 53 */
+    II (d, a, b, c, x[ 3], S42, 0x8f0ccc92); /* 54 */
+    II (c, d, a, b, x[10], S43, 0xffeff47d); /* 55 */
+    II (b, c, d, a, x[ 1], S44, 0x85845dd1); /* 56 */
+    II (a, b, c, d, x[ 8], S41, 0x6fa87e4f); /* 57 */
+    II (d, a, b, c, x[15], S42, 0xfe2ce6e0); /* 58 */
+    II (c, d, a, b, x[ 6], S43, 0xa3014314); /* 59 */
+    II (b, c, d, a, x[13], S44, 0x4e0811a1); /* 60 */
+    II (a, b, c, d, x[ 4], S41, 0xf7537e82); /* 61 */
+    II (d, a, b, c, x[11], S42, 0xbd3af235); /* 62 */
+    II (c, d, a, b, x[ 2], S43, 0x2ad7d2bb); /* 63 */
+    II (b, c, d, a, x[ 9], S44, 0xeb86d391); /* 64 */
+
+    state[0] += a;
+    state[1] += b;
+    state[2] += c;
+    state[3] += d;
+
+    // Zeroize sensitive information.
+    memset((POINTER)x, 0, sizeof (x));
+  }
+
+  // Encodes input (UINT4) into output (unsigned char). Assumes len is
+  // a multiple of 4.
+  static void Encode( unsigned char *output, UINT4 *input, unsigned int len )
+  {
+    unsigned int i, j;
+
+    for (i = 0, j = 0; j < len; i++, j += 4) {
+      output[j] = (unsigned char)(input[i] & 0xff);
+      output[j+1] = (unsigned char)((input[i] >> 8) & 0xff);
+      output[j+2] = (unsigned char)((input[i] >> 16) & 0xff);
+      output[j+3] = (unsigned char)((input[i] >> 24) & 0xff);
     }
-    inline std::ostream& operator<<(std::ostream& out, MD5 md5)
-    {
-        return out << md5.hexdigest();
+  }
+
+  // Decodes input (unsigned char) into output (UINT4). Assumes len is
+  // a multiple of 4.
+  static void Decode( UINT4 *output, unsigned char *input, unsigned int len )
+  {
+    unsigned int i, j;
+
+    for (i = 0, j = 0; j < len; i++, j += 4)
+      output[i] = ((UINT4)input[j]) | (((UINT4)input[j+1]) << 8) |
+      (((UINT4)input[j+2]) << 16) | (((UINT4)input[j+3]) << 24);
+  }
+  #pragma endregion
+
+
+public:
+  // MAIN FUNCTIONS
+  MD5()
+  {
+    Init() ;
+  }
+
+  // MD5 initialization. Begins an MD5 operation, writing a new context.
+  void Init()
+  {
+    context.count[0] = context.count[1] = 0;
+  
+    // Load magic initialization constants.
+    context.state[0] = 0x67452301;
+    context.state[1] = 0xefcdab89;
+    context.state[2] = 0x98badcfe;
+    context.state[3] = 0x10325476;
+  }
+
+  // MD5 block update operation. Continues an MD5 message-digest
+  // operation, processing another message block, and updating the
+  // context.
+  void Update(
+    unsigned char *input,   // input block
+    unsigned int inputLen ) // length of input block
+  {
+    unsigned int i, index, partLen;
+
+    // Compute number of bytes mod 64
+    index = (unsigned int)((context.count[0] >> 3) & 0x3F);
+
+    // Update number of bits
+    if ((context.count[0] += ((UINT4)inputLen << 3))
+      < ((UINT4)inputLen << 3))
+      context.count[1]++;
+    context.count[1] += ((UINT4)inputLen >> 29);
+
+    partLen = 64 - index;
+
+    // Transform as many times as possible.
+    if (inputLen >= partLen) {
+      memcpy((POINTER)&context.buffer[index], (POINTER)input, partLen);
+      MD5Transform (context.state, context.buffer);
+
+      for (i = partLen; i + 63 < inputLen; i += 64)
+        MD5Transform (context.state, &input[i]);
+
+      index = 0;
     }
+    else
+      i = 0;
+
+    /* Buffer remaining input */
+    memcpy((POINTER)&context.buffer[index], (POINTER)&input[i], inputLen-i);
+  }
+
+  // MD5 finalization. Ends an MD5 message-digest operation, writing the
+  // the message digest and zeroizing the context.
+  // Writes to digestRaw
+  void Final()
+  {
+    unsigned char bits[8];
+    unsigned int index, padLen;
+
+    // Save number of bits
+    Encode( bits, context.count, 8 );
+
+    // Pad out to 56 mod 64.
+    index = (unsigned int)((context.count[0] >> 3) & 0x3f);
+    padLen = (index < 56) ? (56 - index) : (120 - index);
+    Update( PADDING, padLen );
+
+    // Append length (before padding)
+    Update( bits, 8 );
+
+    // Store state in digest
+    Encode( digestRaw, context.state, 16);
+
+    // Zeroize sensitive information.
+    memset((POINTER)&context, 0, sizeof (context));
+
+    writeToString() ;
+  }
+
+  /// Buffer must be 32+1 (nul) = 33 chars long at least 
+  void writeToString()
+  {
+    int pos ;
+
+    for( pos = 0 ; pos < 16 ; pos++ )
+      sprintf( digestChars+(pos*2), "%02x", digestRaw[pos] ) ;
+  }
+
+
+public:
+  // an MD5 digest is a 16-byte number (32 hex digits)
+  BYTE digestRaw[ 16 ] ;
+
+  // This version of the digest is actually
+  // a "printf'd" version of the digest.
+  char digestChars[ 33 ] ;
+
+  /// Load a file from disk and digest it
+  // Digests a file and returns the result.
+  char* digestFile( char *filename )
+  {
+    Init() ;
+
+    FILE *file;
+    
+    int len;
+    unsigned char buffer[1024] ;
+
+    if(NULL == filename || (file = fopen (filename, "rb")) == NULL )
+    {
+      return "";
+    }
+    else
+    {
+      while( len = fread( buffer, 1, 1024, file ) )
+        Update( buffer, len ) ;
+      Final();
+
+      fclose( file );
+    }
+
+    return digestChars ;
+  }
+
+  /// Digests a byte-array already in memory
+  char* digestMemory( BYTE *memchunk, int len )
+  {
+    if (NULL == memchunk)
+        return "";
+
+    Init() ;
+    Update( memchunk, len ) ;
+    Final() ;
+    
+    return digestChars ;
+  }
+
+  // Digests a string and prints the result.
+  char* digestString( char *string )
+  {
+    if (string == NULL)
+        return "";
+
+    Init() ;
+    Update( (unsigned char*)string, strlen(string) ) ;
+    Final() ;
+
+    return digestChars ;
+  }
+};
+
+inline bool md5String(char* str, std::string& res)
+{
+    if (NULL == str)
+    {
+        res = "";
+        return false;
+    }
+
+    MD5 md5;
+    res = md5.digestString(str);
+
+    if (res == "")
+        return false;
+    return true;
 }
 
+inline bool md5File(char* filepath, std::string& res)
+{
+    if (NULL == filepath || strcmp(filepath, "") == 0)
+    {
+        res = "";
+        return false;
+    }
+
+    MD5 md5;
+    res = md5.digestFile(filepath);
+
+    if (res == "")
+        return false;
+    return true;
+}
+}
 #endif
