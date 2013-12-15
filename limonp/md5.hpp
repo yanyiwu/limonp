@@ -336,7 +336,7 @@ public:
 
   /// Load a file from disk and digest it
   // Digests a file and returns the result.
-  char* digestFile( char *filename )
+  char* digestFile( const char *filename )
   {
     Init() ;
 
@@ -375,7 +375,7 @@ public:
   }
 
   // Digests a string and prints the result.
-  char* digestString( char *string )
+  char* digestString(const char *string )
   {
     if (string == NULL)
         return "";
@@ -388,7 +388,7 @@ public:
   }
 };
 
-inline bool md5String(char* str, std::string& res)
+inline bool md5String(const char* str, std::string& res)
 {
     if (NULL == str)
     {
@@ -404,7 +404,7 @@ inline bool md5String(char* str, std::string& res)
     return true;
 }
 
-inline bool md5File(char* filepath, std::string& res)
+inline bool md5File(const char* filepath, std::string& res)
 {
     if (NULL == filepath || strcmp(filepath, "") == 0)
     {
