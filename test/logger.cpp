@@ -1,11 +1,7 @@
-/************************************
- * file enc : utf8
- * author   : wuyanyi09@gmail.com
-************************************/
 #include <logger.hpp>
 
 using namespace Limonp;
-int main()
+int testLogger()
 {
 	cout<<__FUNCTION__<<endl;
     LogDebug("debug log!");

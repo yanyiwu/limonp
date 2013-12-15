@@ -1,15 +1,10 @@
-/************************************
- * file enc : utf8
- * author   : wuyanyi09@gmail.com
- ************************************/
-#include <str_functs.hpp>
-#include <map_functs.hpp>
-#include <logger.hpp>
+#include "../limonp/str_functs.hpp"
+#include "../limonp/map_functs.hpp"
 
 #include <iostream>
 using namespace Limonp;
 using namespace std;
-int main()
+bool testStrFuncts()
 {
     vector<string> vec;
     splitStr("\t1\t3\t4\t", vec, "\t");
@@ -61,5 +56,5 @@ int main()
         gbkTrans(uni.begin(), uni.end(), gbks);
         print(gbks);
     }
-    return 0;
+    return true;
 }

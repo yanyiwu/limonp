@@ -1,12 +1,9 @@
-#include <iostream>
-#include <cast_functs.hpp>
-#include <str_functs.hpp>
-#include <MysqlClient.hpp>
+#include "../limonp/cast_functs.hpp"
 
 using namespace std;
 using namespace Limonp;
 
-bool utCastFunct()
+bool testCastFunct()
 {
     for(short i = -128 ; i <= 127; i++)
     {
@@ -16,27 +13,15 @@ bool utCastFunct()
     return true;
 }
 
-bool utArgvContext()
-{
-	return true;
-}
 
-//bool utMysqlClient()
-//{
-//    MysqlClient client("10.16.10.32",3306,"root","mysql","cms");
-//    client.init();
-//    MysqlClient::RowsType rows;
-//    client.select("show tables;", rows);
-//    FOR_VECTOR(rows, i)
-//    {
-//        cout<<vecToString(rows[i])<<endl;
-//    }
-//    return true;
-//}
+void test()
+{
+    typedef bool (*ptTestFunct)();
+    ptTestFunct arr[] = {}
+}
 
 int main()
 {
-    //utCastFunct();
-    //utMysqlClient();
+    test();
 	return 0;
 }

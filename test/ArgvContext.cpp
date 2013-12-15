@@ -1,8 +1,8 @@
-#include <ArgvContext.hpp>
+#include "../limonp/ArgvContext.hpp"
 
 using namespace Limonp;
 
-int main(int argc, char** argv)
+bool testArgvContext()
 {
     //map<string,string> argvMap;
     //getArgvMap(argc, argv, argvMap);
@@ -16,6 +16,6 @@ int main(int argc, char** argv)
     string s;
     s<<arg;
     cout<<s;
-    return 0;
+    return true;
 }
 
