@@ -18,6 +18,15 @@ namespace Limonp
     class Config
     {
         public:
+            Config(const char * const filePath)
+            {
+                loadFile(filePath);
+            }
+        public:
+            operator bool ()
+            {
+                return !_map.empty();
+            }
             bool loadFile(const char * const filePath)
             {
                 ifstream ifs(filePath);
