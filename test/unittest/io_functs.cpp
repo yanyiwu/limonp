@@ -1,9 +1,11 @@
-#include "../limonp/io_functs.hpp"
-
+#include "limonp/io_functs.hpp"
+#include "gtest/gtest.h"
 #include <iostream>
 using namespace Limonp;
-bool testIoFuncts()
+TEST(IoFunctsTest, Test1)
 {
-    cout<<loadFile2Str("testfile")<<endl;
-    return true;
+    string s;
+    loadFile2Str("../test/testdata/io_testfile", s);
+    EXPECT_EQ("line1\nline2\n", s);
 }
+
