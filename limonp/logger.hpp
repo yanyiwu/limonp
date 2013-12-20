@@ -24,6 +24,7 @@
 #define LogFatal(fmt, ...) Logger::LoggingF(LL_FATAL, FILE_BASENAME, __LINE__, fmt, ## __VA_ARGS__)
 
 
+
 namespace Limonp
 {
     using namespace std;
@@ -51,6 +52,9 @@ namespace Limonp
             }
             static bool LoggingF(uint level, const char* fileName, int lineNo, const string& fmt, ...)
             {
+#ifdef LOGGER_LEVEL
+                if(level < LOGGER_LEVEL) return true;
+#endif
                 int size = 256;
                 string msg;
                 va_list ap;
