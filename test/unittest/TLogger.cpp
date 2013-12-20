@@ -9,5 +9,6 @@ TEST(LoggerTest, Test1)
     ASSERT_TRUE(LogWarn("hehe"));
     ASSERT_TRUE(LogError("hehe"));
     ASSERT_TRUE(LogFatal("hehe"));
+    ASSERT_TRUE(LogInfo("str[%s] int[%d]", "str1",15));
 }
 
