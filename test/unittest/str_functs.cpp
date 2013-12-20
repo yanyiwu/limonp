@@ -1,15 +1,10 @@
-/************************************
- * file enc : utf8
- * author   : wuyanyi09@gmail.com
- ************************************/
-#include <str_functs.hpp>
-#include <map_functs.hpp>
-#include <logger.hpp>
+#include "../limonp/str_functs.hpp"
+#include "../limonp/map_functs.hpp"
 
 #include <iostream>
 using namespace Limonp;
 using namespace std;
-int main()
+bool testStrFuncts()
 {
     vector<string> vec;
     splitStr("\t1\t3\t4\t", vec, "\t");
@@ -52,5 +47,14 @@ int main()
     HashMap<int,int> hmp;
     hmp[1]=2;
     print(hmp);
-    return 0;
+    string gbks;
+    ifstream ifs("testdata/dict.gbk");
+    vector<uint16_t> uni;
+    while(getline(ifs, gbks))
+    {
+        gbkTrans(gbks, uni);
+        gbkTrans(uni.begin(), uni.end(), gbks);
+        print(gbks);
+    }
+    return true;
 }

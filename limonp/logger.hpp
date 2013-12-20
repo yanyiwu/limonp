@@ -11,6 +11,7 @@
 #include <string>
 #include <stdio.h>
 #include <stdarg.h>
+#include <cassert>
 #include "io_functs.hpp"
 #include "str_functs.hpp"
 
@@ -36,16 +37,11 @@ namespace Limonp
         public:
             static bool Logging(uint level, const string& msg, const char* fileName, int lineNo)
             {
-                if(level > LL_FATAL)
-                {
-                    cerr<<"level's value is out of range"<<endl;
-                    return false;
-                }
+                assert(level <= LL_FATAL);
                 char buf[CSTR_BUFFER_SIZE];
                 time_t timeNow;
                 time(&timeNow);
-                size_t ret = strftime(buf, sizeof(buf), LOG_TIME_FORMAT, localtime(&timeNow));
-                if(0 == ret)
+                if(!strftime(buf, sizeof(buf), LOG_TIME_FORMAT, localtime(&timeNow)))
                 {
                     fprintf(stderr, "stftime failed.\n");
                     return false;
