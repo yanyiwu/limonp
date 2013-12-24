@@ -54,3 +54,18 @@ TEST(StrFunctsTest, Test2)
         ASSERT_EQ(s, gbks);
     }
 }
+
+TEST(StrFunctsTest, Test3)
+{
+    string s, utf8;
+    ifstream ifs("../test/testdata/dict.utf8");
+    ASSERT_TRUE(ifs);
+
+    vector<uint16_t> uni;
+    while(getline(ifs, s))
+    {
+        ASSERT_TRUE(utf8ToUnicode(s, uni));
+        ASSERT_TRUE(unicodeToUtf8(uni.begin(), uni.end(), utf8));
+        ASSERT_EQ(s, utf8);
+    }
+}
