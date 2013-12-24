@@ -122,7 +122,7 @@ namespace Limonp
 
 
 
-    inline bool splitStr(const string& src, vector<string>& res, const string& pattern)
+    inline bool split(const string& src, vector<string>& res, const string& pattern)
     {
         if(src.empty())
         {
@@ -194,7 +194,7 @@ namespace Limonp
         return res;
     }
 
-    inline bool strStartsWith(const string& str, const string& prefix)
+    inline bool startsWith(const string& str, const string& prefix)
     {
         //return str.substr(0, prefix.size()) == prefix;
         if(prefix.length() > str.length())
@@ -204,7 +204,7 @@ namespace Limonp
         return 0 == str.compare(0, prefix.length(), prefix);
     }
 
-    inline bool strEndsWith(const string& str, const string& suffix)
+    inline bool endsWith(const string& str, const string& suffix)
     {
         if(suffix.length() > str.length())
         {
