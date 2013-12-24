@@ -20,14 +20,15 @@ namespace Limonp
         public:
             Config(const char * const filePath)
             {
-                loadFile(filePath);
+                _loadFile(filePath);
             }
         public:
             operator bool ()
             {
                 return !_map.empty();
             }
-            bool loadFile(const char * const filePath)
+        private:
+            bool _loadFile(const char * const filePath)
             {
                 ifstream ifs(filePath);
                 if(!ifs)
@@ -42,12 +43,12 @@ namespace Limonp
                 {
                     lineno ++;
                     trim(line);
-                    if(line.empty() || strStartsWith(line, "#"))
+                    if(line.empty() || startsWith(line, "#"))
                     {
                         continue;
                     }
                     vecBuf.clear();
-                    if(!splitStr(line, vecBuf, "=") || 2 != vecBuf.size())
+                    if(!split(line, vecBuf, "=") || 2 != vecBuf.size())
                     {
                         LogFatal("line[%d:%s] is illegal.", lineno, line.c_str());
                         return false;
@@ -66,6 +67,7 @@ namespace Limonp
                 ifs.close();
                 return true;
             }
+        public:
             bool get(const string& key, string& value) const
             {
                 map<string, string>::const_iterator it = _map.find(key);
