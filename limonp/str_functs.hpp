@@ -158,12 +158,8 @@ namespace Limonp
         return ltrim(rtrim(s));
     }
 
-
-
-
     inline bool startsWith(const string& str, const string& prefix)
     {
-        //return str.substr(0, prefix.size()) == prefix;
         if(prefix.length() > str.length())
         {
             return false;

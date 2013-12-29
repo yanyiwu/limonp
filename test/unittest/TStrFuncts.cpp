@@ -8,14 +8,6 @@ TEST(StrFunctsTest, Test1)
     string s;
     split("\t1\t3\t4\t", vec, "\t");
     ASSERT_EQ(s << vec, "[\"\", \"1\", \"3\", \"4\", \"\"]");
-    ASSERT_TRUE(startsWith("--help","--"));
-    ASSERT_TRUE(startsWith("--help","-"));
-    ASSERT_FALSE(startsWith("--help","he"));
-    ASSERT_TRUE(startsWith("help","help"));
-    ASSERT_FALSE(startsWith("","help"));
-    ASSERT_TRUE(startsWith("hel",""));
-    ASSERT_TRUE(endsWith("hel",""));
-    ASSERT_TRUE(endsWith("hel","el"));
     s = " \t\n ni hao ad \r\n";
     ASSERT_EQ("ni hao ad", trim(s));
     ASSERT_EQ("select * from table1  limit 1;" ,string_format("select %s from %s  %s;", "*","table1","limit 1"));
@@ -68,4 +60,17 @@ TEST(StrFunctsTest, Test3)
         ASSERT_TRUE(unicodeToUtf8(uni.begin(), uni.end(), utf8));
         ASSERT_EQ(s, utf8);
     }
+}
+
+TEST(StrFunctsTest, Test4)
+{
+    //ASSERT_TRUE(startsWith("--help",NULL));
+    ASSERT_TRUE(startsWith("--help","--"));
+    ASSERT_TRUE(startsWith("--help","-"));
+    ASSERT_FALSE(startsWith("--help","he"));
+    ASSERT_TRUE(startsWith("help","help"));
+    ASSERT_FALSE(startsWith("","help"));
+    ASSERT_TRUE(startsWith("hel",""));
+    ASSERT_TRUE(endsWith("hel",""));
+    ASSERT_TRUE(endsWith("hel","el"));
 }
