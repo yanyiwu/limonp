@@ -7,7 +7,7 @@ TEST(StrFunctsTest, Test1)
     vector<string> vec;
     string s;
     split("\t1\t3\t4\t", vec, "\t");
-    ASSERT_EQ(s << vec, "[\"\", \"1\", \"3\", \"4\", \"\"]");
+    ASSERT_EQ(s << vec, "[\"\", \"1\", \"3\", \"4\"]");
     s = " \t\n ni hao ad \r\n";
     ASSERT_EQ("ni hao ad", trim(s));
     ASSERT_EQ("select * from table1  limit 1;" ,string_format("select %s from %s  %s;", "*","table1","limit 1"));
@@ -73,4 +73,26 @@ TEST(StrFunctsTest, Test4)
     ASSERT_TRUE(startsWith("hel",""));
     ASSERT_TRUE(endsWith("hel",""));
     ASSERT_TRUE(endsWith("hel","el"));
+}
+
+TEST(StrFunctsTest, Test5)
+{
+    const char* str = "1,2,3,4";
+    vector<string> vec;
+    string res;
+    split(str, vec, ",");
+    ASSERT_EQ("[\"1\", \"2\", \"3\", \"4\"]", res << vec);
+    split("1,2,3,4,", vec, ",");
+    ASSERT_EQ("[\"1\", \"2\", \"3\", \"4\"]", res << vec);
+    split(str, vec, ",", 0, 4);
+    ASSERT_EQ("[\"1\", \"2\", \"3\", \"4\"]", res << vec);
+
+    split(str, vec, ",", 1, 2);
+    ASSERT_EQ("[\"2\", \"3\"]", res << vec);
+    //print(vec);
+    split(str, vec, ",", 4, 5);
+    ASSERT_EQ("[]", res << vec);
+    //print(vec);
+    //exit(0);
+    //ASSERT_EQ(s << vec, "[\"\", \"1\", \"3\", \"4\", \"\"]");
 }
