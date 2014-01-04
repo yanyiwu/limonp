@@ -87,6 +87,9 @@ TEST(StrFunctsTest, Test5)
     split(str, vec, ",", 0, 4);
     ASSERT_EQ("[\"1\", \"2\", \"3\", \"4\"]", res << vec);
 
+    split("1", vec, ",");
+    ASSERT_EQ("[\"1\"]", res << vec);
+
     split(str, vec, ",", 1, 2);
     ASSERT_EQ("[\"2\", \"3\"]", res << vec);
     //print(vec);
