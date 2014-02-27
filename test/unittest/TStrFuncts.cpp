@@ -99,3 +99,13 @@ TEST(StrFunctsTest, Test5)
     //exit(0);
     //ASSERT_EQ(s << vec, "[\"\", \"1\", \"3\", \"4\", \"\"]");
 }
+
+TEST(StrFunctsTest, trim)
+{
+    string s;
+    s = "xxxyyyxx";
+    ASSERT_EQ(rtrim(s, 'x'), "xxxyyy");
+    ASSERT_EQ(ltrim(s, 'x'), "yyy");
+    s = "xxxyyyxx";
+    ASSERT_EQ(trim(s, 'x'), "yyy");
+}
