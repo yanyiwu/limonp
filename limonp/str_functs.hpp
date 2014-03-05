@@ -24,7 +24,7 @@
 #include "std_outbound.hpp"
 #include "map_functs.hpp"
 
-#define print(x) cout<<(x)<<endl
+#define print(x) cout<< #x": " << x <<endl
 
 namespace Limonp
 {
