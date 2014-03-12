@@ -96,6 +96,12 @@ namespace std
             os<<'}';
             return os;
         }
+
+    template<class KeyType, class ContainType>
+        bool isIn(const ContainType& contain, const KeyType& key)
+        {
+            return contain.end() != contain.find(key);
+        }
 }
 
 #endif
