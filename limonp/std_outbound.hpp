@@ -104,6 +104,7 @@ namespace std
         bool isIn(const ContainType& contain, const KeyType& key)
         {
             return contain.end() != contain.find(key);
+        }
 
     template<class T>
         basic_string<T> & operator << (basic_string<T> & s, ifstream & ifs)
