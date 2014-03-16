@@ -14,7 +14,6 @@
 #include <sstream>
 
 #include <unordered_map>
-#define HashMap std::unordered_map
 
 namespace Limonp
 {

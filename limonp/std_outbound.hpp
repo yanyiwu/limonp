@@ -62,14 +62,14 @@ namespace std
             return os;
         }
     template<class T1, class T2>
-        ostream& operator << (ostream& os, const HashMap<T1, T2>& mp)
+        ostream& operator << (ostream& os, const std::unordered_map<T1, T2>& mp)
         {
             if(mp.empty())
             {
                 return os << "{}";
             }
             os<<'{';
-            typename HashMap<T1, T2>::const_iterator it = mp.begin();
+            typename std::unordered_map<T1, T2>::const_iterator it = mp.begin();
             os<<*it;
             it++;
             while(it != mp.end())

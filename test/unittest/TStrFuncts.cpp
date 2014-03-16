@@ -27,7 +27,7 @@ TEST(StrFunctsTest, Test1)
     map<string , int> mp;
     mp["key1"] =2;
     ASSERT_EQ("{key1:2}", s <<  mp);
-    HashMap<int,int> hmp;
+    std::unordered_map<int,int> hmp;
     hmp[1]=2;
     ASSERT_EQ("{1:2}", s <<  hmp);
 }
