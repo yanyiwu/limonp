@@ -1,15 +1,15 @@
 #ifndef LIMONP_STD_OUTBOUND_H
 #define LIMONP_STD_OUTBOUND_H
 
-#include "map_functs.hpp"
 #include <map>
+#include <unordered_map>
 #include <set>
 #include <vector>
 #include <fstream>
+#include <sstream>
 
 namespace std
 {
-    using namespace std;
     template<typename T>
         ostream& operator << (ostream& os, const vector<T>& vec)
         {
