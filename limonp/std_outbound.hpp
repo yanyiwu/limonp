@@ -2,7 +2,18 @@
 #define LIMONP_STD_OUTBOUND_H
 
 #include <map>
+
+#if(__cplusplus == 201103L)
 #include <unordered_map>
+#else
+#include <tr1/unordered_map>
+namespace std
+{
+    using std::tr1::unordered_map;
+}
+
+#endif
+
 #include <set>
 #include <vector>
 #include <fstream>
@@ -18,7 +29,7 @@ namespace std
                 return os << "[]";
             }
             os<<"[\""<<vec[0];
-            for(uint i = 1; i < vec.size(); i++)
+            for(size_t i = 1; i < vec.size(); i++)
             {
                 os<<"\", \""<<vec[i];
             }
