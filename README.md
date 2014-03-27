@@ -38,37 +38,23 @@ limon + hpp
 已安装v0.1.1版本为例:
 
 ```sh
-wget https://github.com/aszxqw/limonp/archive/v.0.1.1.zip -O limonp_0.1.1.zip
-unzip limonp_0.1.1.zip
-cd limonp-v.0.1.1/
+git clone https://github.com/aszxqw/limonp.git
 mkdir build
 cd build/
-cmake -DCMAKE_INSTALL_PREFIX=/usr .. #如果没有-DCMAKE_INSTALL_PREFIX指定时，默认是安装到/usr/local 后面的 .. 是指cmake的CMakeLists.txt所在目录是在此目录的上一级目录
+cmake .. 
 make
+make test
 sudo make install
 ```
-
-####验证
-
-进入test/目录，执行
-
-`g++ demo.cpp && ./a.out`
-
-如果没有报错就说明安装成功
 
 ####卸载
 
 build目录下面的`install_manifest.txt`就是这个安装的所以文件的路径，删除它们即可。
 
 ```sh
-cd limonp-v.0.1.1/build/
+cd limonp/build/
 cat install_manifest.txt | sudo xargs rm -rf
 ```
-
-
-##使用方法
-
-详见 test/demo.cpp
 
 ##相关声明
 
