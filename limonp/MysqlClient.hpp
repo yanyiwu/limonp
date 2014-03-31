@@ -6,26 +6,36 @@
 #include <vector>
 #include <string>
 #include "logger.hpp"
+#include "InitOnOff.hpp"
 
 namespace Limonp
 {
     using namespace std;
-    class MysqlClient
+    class MysqlClient: public InitOnOff
     {
         public:
             typedef vector< vector<string> > RowsType;
         private:
-            const char * const HOST;
-            const unsigned int PORT;
-            const char * const USER;
-            const char * const PASSWD;
-            const char * const DB;
-            const char * const CHARSET;
+            const string& HOST;
+            const size_t PORT;
+            const string& USER;
+            const string& PASSWD;
+            const string& DB;
+            const string& CHARSET;
         public:
-            MysqlClient(const char* host, uint port, const char* user, const char* passwd, const char* db, const char* charset = "utf8"): HOST(host), PORT(port), USER(user), PASSWD(passwd), DB(db), CHARSET(charset){ _conn = NULL;};
-            ~MysqlClient(){dispose();};
-        public:
-            bool init()
+            MysqlClient(const string& host, size_t port, const string& user, const string& passwd, const string& db, const string& charset = "utf8"): HOST(host), PORT(port), USER(user), PASSWD(passwd), DB(db), CHARSET(charset), _conn(NULL)
+            {
+                _setInitFlag(_init());
+            }
+            ~MysqlClient()
+            {
+                if(NULL != _conn)
+                {
+                    mysql_close(_conn);
+                }
+            };
+        private:
+            bool _init()
             {
                 //cout<<mysql_get_client_info()<<endl;
                 if(NULL == (_conn = mysql_init(NULL)))
@@ -34,7 +44,7 @@ namespace Limonp
                     return false;
                 }
 
-                if (mysql_real_connect(_conn, HOST, USER, PASSWD, DB, PORT, NULL, 0) == NULL)
+                if (mysql_real_connect(_conn, HOST.c_str(), USER.c_str(), PASSWD.c_str(), DB.c_str(), PORT, NULL, 0) == NULL)
                 {
                     LogError("mysql_real_connect failed. %s", mysql_error(_conn));
                     mysql_close(_conn);
@@ -42,9 +52,9 @@ namespace Limonp
                     return false;
                 }  
 
-                if(mysql_set_character_set(_conn, CHARSET))
+                if(mysql_set_character_set(_conn, CHARSET.c_str()))
                 {
-                    LogError("mysql_set_character_set [%s] failed.", CHARSET);
+                    LogError("mysql_set_character_set [%s] failed.", CHARSET.c_str());
                     return false;
                 }
 
@@ -52,49 +62,37 @@ namespace Limonp
                 char value = 1;
                 mysql_options(_conn, MYSQL_OPT_RECONNECT, &value);
 
-                LogInfo("MysqlClient {host: %s, port:%d, database:%s, charset:%s}", HOST, PORT, DB, CHARSET);
+                LogInfo("MysqlClient {host: %s, database:%s, charset:%s}", HOST.c_str(), DB.c_str(), CHARSET.c_str());
                 return true;
             }
-            bool dispose()
+        public:
+            bool executeSql(const string& sql)
             {
-                if(NULL != _conn)
-                {
-                    mysql_close(_conn);
-                }
-                _conn = NULL;
-                return true;
-            }
-            bool executeSql(const char* sql)
-            {
-                if(NULL == _conn)
-                {
-                    LogError("_conn is NULL");
-                    return false;
-                }
-                if(mysql_query(_conn, sql)) 
+                assert(_getInitFlag());
+                if(mysql_query(_conn, sql.c_str())) 
                 {
                     LogError("mysql_query failed.  %s", mysql_error(_conn));
                     return false;
                 }
                 return true;
             }
-            uint insert(const char* tb_name, const char* keys, const vector<string>& vals)
+            size_t insert(const string& tableName, const string& keys, const vector<string>& vals)
             {
-                uint retn = 0;
+                size_t retn = 0;
                 string sql;
                 for(uint i = 0; i < vals.size(); i ++)
                 {
                     sql.clear();
-                    string_format(sql, "insert into %s (%s) values %s", tb_name, keys, vals[i].c_str());
+                    string_format(sql, "insert into %s (%s) values %s", tableName.c_str(), keys.c_str(), vals[i].c_str());
                     retn += executeSql(sql.c_str());
                 }
                 return retn;
             }
-            bool select(const char* sql, RowsType& rows)
+            bool select(const string& sql, RowsType& rows)
             {
                 if(!executeSql(sql))
                 {
-                    LogError("executeSql failed. [%s]", sql);
+                    LogError("executeSql failed. [%s]", sql.c_str());
                     return false;
                 }
                 MYSQL_RES * result = mysql_store_result(_conn);
