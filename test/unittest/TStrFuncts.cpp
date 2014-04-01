@@ -109,3 +109,10 @@ TEST(StrFunctsTest, trim)
     s = "xxxyyyxx";
     ASSERT_EQ(trim(s, 'x'), "yyy");
 }
+
+TEST(StrFunctsTest, getTime)
+{
+    string s;
+    getTime("%Y-%m-%d %H:%M:%S", s);
+    //print(s);
+}

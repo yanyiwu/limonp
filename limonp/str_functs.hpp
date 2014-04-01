@@ -323,14 +323,6 @@ namespace Limonp
         return gbkTrans(str.c_str(), str.size(), vec);
     }
 
-    //inline pair<char, char> uint16ToChar2(uint16_t in)
-    //{
-    //    pair<char, char> res;
-    //    res.first = (in>>8) & 0x00ff; //high
-    //    res.second = (in) & 0x00ff; //low
-    //    return res;
-    //}
-
     inline bool gbkTrans(vector<uint16_t>::const_iterator begin, vector<uint16_t>::const_iterator end, string& res)
     {
         if(begin >= end)
@@ -359,5 +351,16 @@ namespace Limonp
         return true;
     }
 
+    /*
+     * format example: "%Y-%m-%d %H:%M:%S"
+     */
+    inline void getTime(const string& format, string&  timeStr)
+    {
+        time_t timeNow;
+        time(&timeNow);
+        timeStr.resize(64);
+        size_t len = strftime((char*)timeStr.c_str(), timeStr.size(), format.c_str(), localtime(&timeNow));
+        timeStr.resize(len);
+    }
 }
 #endif
