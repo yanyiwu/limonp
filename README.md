@@ -1,47 +1,94 @@
 # Limonp 
 
-limon + hpp 
+## Introduction
 
-## 简介
+`C++` headers(hpp) with Python style. 
 
-带有明显python风格的c++处理库。
+## Dependence
 
-主要是一些工具函数，比如字符串处理，日志文件之类的。
+linking is a annoying thing, so I write these source code in headers file(`*.hpp`), you can use them only with `#include "xx.hpp"`, without linking *.a or *.so .
 
-比如字符串格式化，格式化日志输出。
+**`no linking , no hurts`** 
 
-比如print(x)来输出变量。
+But except for `MysqlClient.hpp`, if you `#include "MysqlClient.hpp"`, you need linking with `-lmysqlclient`.
+
+## Example
+
+### `#include "str_functs.hpp"`
+
+`using namespace Limonp;`
+
+#### `print`
 
 
-## 依赖
+```
+string strname = "hello, world";
+print(strname); //strname: hello, world.
+map<string, int> mp;
+mp["hello"] = 1;
+mp["world"] = 2;
+print(mp); // mp: {"hello": 1, "world": 2}
 
-文件依赖一直是很让人讨厌的东西。全做成hpp头文件形式的目的就是为了省去链接的步骤。
-
-**没有依赖，就没有伤害。**
-
-使用MysqlClient.hpp时，需要安装c语言的mysql接口库，libmysqlclient。
-
-则链接的时候需要 -lmysqlclient
-
-除此之外，都直接include进来即可使用。
-
-```sh
-mkdir build
-cd build/
-cmake .. 
-make
-make test
+string res;
+res << mp;
+print(res); // res: {"hello": 1, "world": 2}
 ```
 
-## 使用示例
+Because of having overrided `<<` operator in file `src/std_outbound.hpp`, it not only suitable for map but also can be used for `vector, set, unordered_map`.
+
+#### `string_format`
+
+```
+string str;
+string_format(str, "%s, %s", "hello", "world"); 
+print(str);
+//str: hello, world.
+```
+
+#### `join`
+
+```
+string str;
+char * a[] = {"hello", "world"}; 
+join(a, a + sizeof(a)/sizeof(a[0]), str, ",");
+print(str);
+//str: hello, world;
+```
+
+#### `split`
+
+```
+string str = "hello, world";
+vector<string> buf;
+split(str, buf, ",");
+print(buf);
+//buf: ["hello", "world"];
+```
+
+### `#include "logger.hpp"`
 
 
+#### `logger`
 
-## 相关声明
+```
+LogInfo("%s, %s.", "hello", "world");
+//2014-04-05 20:52:37 demo.cpp:20 INFO hello, world
+```
 
-1.  md5.hpp 是网上搜到的一份md5.cpp/h的文件，自己修改成hpp文件。原作者信息请看代码注释。
+In the same way, `LogDebug,LogWarn,LogError,LogFatal`.
+
+## Application
+
+1. [CppJieba]
 
 
-## 客服
+## Reference
+
+1.  `md5.hpp` is copied from network, you can find original author in source code(in comments).
+
+## Contact
 
 wuyanyi09@foxmail.com
+
+
+[CppJieba]:https://github.com/aszxqw/cppjieba.git
