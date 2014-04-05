@@ -77,6 +77,10 @@ LogInfo("%s, %s.", "hello", "world");
 
 In the same way, `LogDebug,LogWarn,LogError,LogFatal`.
 
+### other features
+
+see details in the code.
+
 ## Application
 
 1. [CppJieba]
