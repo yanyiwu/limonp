@@ -1,4 +1,4 @@
-#include "limonp/str_functs.hpp"
+#include "str_functs.hpp"
 #include "gtest/gtest.h"
 using namespace Limonp;
 

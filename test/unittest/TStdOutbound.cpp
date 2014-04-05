@@ -1,5 +1,5 @@
-#include "limonp/std_outbound.hpp"
-#include "limonp/str_functs.hpp"
+#include "std_outbound.hpp"
+#include "str_functs.hpp"
 #include "gtest/gtest.h"
 #include <iostream>
 using namespace Limonp;

@@ -1,8 +1,8 @@
-#Limonp 
+# Limonp 
 
 limon + hpp 
 
-##简介
+## 简介
 
 带有明显python风格的c++处理库。
 
@@ -13,11 +13,11 @@ limon + hpp
 比如print(x)来输出变量。
 
 
-##依赖
+## 依赖
 
 文件依赖一直是很让人讨厌的东西。全做成hpp头文件形式的目的就是为了省去链接的步骤。
 
-没有依赖，就没有伤害。
+**没有依赖，就没有伤害。**
 
 使用MysqlClient.hpp时，需要安装c语言的mysql接口库，libmysqlclient。
 
@@ -25,37 +25,23 @@ limon + hpp
 
 除此之外，都直接include进来即可使用。
 
-##安装
-
-不安装也可以使用，安装其实就是把头文件拷贝到/usr/xx(安装步骤中指定)中而已。
-
-需要系统中有cmake这个程序，在ubuntu中安装方法是：`sudo apt-get install cmake`
-
-###安装步骤
-
-####安装
-
-已安装v0.1.1版本为例:
-
 ```sh
-git clone https://github.com/aszxqw/limonp.git
 mkdir build
 cd build/
 cmake .. 
 make
 make test
-sudo make install
 ```
 
-####卸载
+## 使用示例
 
-build目录下面的`install_manifest.txt`就是这个安装的所以文件的路径，删除它们即可。
 
-```sh
-cd limonp/build/
-cat install_manifest.txt | sudo xargs rm -rf
-```
 
-##相关声明
+## 相关声明
 
 1.  md5.hpp 是网上搜到的一份md5.cpp/h的文件，自己修改成hpp文件。原作者信息请看代码注释。
+
+
+## 客服
+
+wuyanyi09@foxmail.com
