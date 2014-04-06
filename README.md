@@ -4,7 +4,7 @@
 
 `C++` headers(hpp) with Python style. 
 
-## Dependence
+## Feature
 
 linking is a annoying thing, so I write these source code in headers file(`*.hpp`), you can use them only with `#include "xx.hpp"`, without linking *.a or *.so .
 
