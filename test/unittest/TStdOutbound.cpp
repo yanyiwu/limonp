@@ -11,6 +11,7 @@ TEST(StdOutbound, Test1)
     string eRes("key1 = val1\n##this is comment\nkey2=val2\n");
     ASSERT_EQ(eRes, s);
 }
+
 TEST(StdOutbound, Funct_IsIn)
 {
     map<int, int> mp;
@@ -23,3 +24,15 @@ TEST(StdOutbound, Funct_IsIn)
     ASSERT_FALSE(isIn(mp, 0));
 }
 
+TEST(StdOutbound, Test2)
+{
+    map<int, int> mp1;
+    mp1[1] = 2;
+    mp1[2] = 3;
+    string s;
+    ASSERT_EQ(s << mp1, "{1:2, 2:3}");
+    unordered_map<int,int> mp2;
+    mp2[1] = 2;
+    mp2[2] = 3;
+    ASSERT_EQ(s << mp2, "{1:2, 2:3}");
+}
