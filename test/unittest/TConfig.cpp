@@ -11,5 +11,8 @@ TEST(COnfigTest, Test1)
     ASSERT_EQ("val1", res);
     gConfig.get("key2", res);
     ASSERT_EQ("val2", res);
+    const char * str = gConfig["key3"];
+    ASSERT_FALSE(str);
+    ASSERT_TRUE(0 == strcmp(gConfig["key2"], "val2"));
 }
 

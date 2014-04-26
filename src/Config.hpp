@@ -18,7 +18,7 @@ namespace Limonp
     class Config
     {
         public:
-            Config(const char * const filePath)
+            Config(const string& filePath)
             {
                 _loadFile(filePath);
             }
@@ -28,12 +28,12 @@ namespace Limonp
                 return !_map.empty();
             }
         private:
-            bool _loadFile(const char * const filePath)
+            bool _loadFile(const string& filePath)
             {
-                ifstream ifs(filePath);
+                ifstream ifs(filePath.c_str());
                 if(!ifs)
                 {
-                    LogFatal("open file[%s] failed.", filePath);
+                    LogFatal("open file[%s] failed.", filePath.c_str());
                     return false;
                 }
                 string line;
@@ -59,6 +59,7 @@ namespace Limonp
                     trim(value);
                     if(_map.end() != _map.find(key))
                     {
+
                         LogFatal("key[%s] already exists.", key.c_str());
                         return false;
                     }
@@ -77,6 +78,19 @@ namespace Limonp
                     return true;
                 }
                 return false;
+            }
+            const char* operator [] (const char* key) const
+            {
+                if(NULL == key)
+                {
+                    return NULL;
+                }
+                map<string, string>::const_iterator it = _map.find(key);
+                if(_map.end() != it)
+                {
+                    return it->second.c_str();
+                }
+                return NULL;
             }
         private:
             map<string, string> _map;
