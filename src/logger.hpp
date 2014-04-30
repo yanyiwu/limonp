@@ -9,7 +9,9 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <cstring>
 #include <stdio.h>
+#include <cstdlib>
 #include <stdarg.h>
 #include <cassert>
 
@@ -22,6 +24,11 @@
 #define LogFatal(fmt, ...) Limonp::Logger::LoggingF(Limonp::LL_FATAL, FILE_BASENAME, __LINE__, fmt, ## __VA_ARGS__)
 
 
+#ifndef CHECK
+    #define CHECK(boolean) if(boolean){LogFatal(#boolean "is true."); abort();}
+#else
+    #error "CHECK is already defined."
+#endif
 
 namespace Limonp
 {
