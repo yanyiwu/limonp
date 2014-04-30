@@ -8,8 +8,18 @@ TEST(StdOutbound, Test1)
     ifstream ifs("../test/testdata/std_outbound.data");
     string s;
     s << ifs;
-    string eRes("key1 = val1\n##this is comment\nkey2=val2\n");
-    ASSERT_EQ(eRes, s);
+    ASSERT_EQ("key1 = val1\n##this is comment\nkey2=val2\n", s);
+
+    const char * outFileName = "stdoutbuond.test.tmp";
+    ofstream ofs(outFileName);
+    s = outFileName;
+    ofs << s;
+    ASSERT_TRUE(ofs);
+    ofs.close();
+
+    ifstream ifs2(outFileName);
+    s << ifs2;
+    ASSERT_EQ(outFileName, s);
 }
 
 TEST(StdOutbound, Funct_IsIn)

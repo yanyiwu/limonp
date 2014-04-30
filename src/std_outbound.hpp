@@ -125,6 +125,14 @@ namespace std
         {
             return s.assign((istreambuf_iterator<T>(ifs)), istreambuf_iterator<T>());
         }
+
+    template<class T>
+        ofstream & operator << (ofstream & ofs, const basic_string<T>& s)
+        {
+            ostreambuf_iterator<T> itr (ofs);
+            copy(s.begin(), s.end(), itr);
+            return ofs;
+        }
 }
 
 #endif
