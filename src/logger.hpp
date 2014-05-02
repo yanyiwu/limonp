@@ -25,7 +25,7 @@
 
 
 #ifndef CHECK
-    #define CHECK(boolean) if(boolean){LogFatal(#boolean "is true."); abort();}
+    #define CHECK(exp) if(exp){LogFatal(#exp "is true."); abort();}
 #else
     #error "CHECK is already defined."
 #endif
