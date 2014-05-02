@@ -22,6 +22,8 @@ namespace std
 #include <fstream>
 #include <sstream>
 
+#define print(x) cout<< #x": " << x <<endl
+
 namespace std
 {
     template<typename T>

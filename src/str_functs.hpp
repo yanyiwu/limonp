@@ -23,8 +23,6 @@
 #include <algorithm>
 #include "std_outbound.hpp"
 
-#define print(x) cout<< #x": " << x <<endl
-
 namespace Limonp
 {
     using namespace std;
