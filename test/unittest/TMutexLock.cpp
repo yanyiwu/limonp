@@ -95,10 +95,10 @@ class ThreadsLocked
 TEST(MutexLock, Test1)
 {
     string str;
-    ThreadsNoLocked noLock(THREAD_SUM);
-    res.clear();
-    noLock.start();
-    ASSERT_EQ(str << res, "[\"0\", \"0\", \"0\", \"1\", \"1\", \"1\", \"2\", \"2\", \"2\"]");
+    //ThreadsNoLocked noLock(THREAD_SUM);
+    //res.clear();
+    //noLock.start();
+    //ASSERT_EQ(str << res, "[\"0\", \"0\", \"0\", \"1\", \"1\", \"1\", \"2\", \"2\", \"2\"]");
     ThreadsLocked locked(THREAD_SUM);
     res.clear();
     locked.start();
