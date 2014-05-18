@@ -4,10 +4,10 @@
 
 using namespace Limonp;
 
-const size_t THREAD_SUM = 3;
-const size_t FOR_SIZE = 3;
+static const size_t THREAD_SUM = 3;
+static const size_t FOR_SIZE = 3;
 
-vector<size_t> res;
+static vector<size_t> res;
 
 struct PthreadInfo
 {
@@ -16,7 +16,7 @@ struct PthreadInfo
     MutexLock* ptMutexLock;
 };
 
-void* workerNoLocked(void * arg)
+static void* workerNoLocked(void * arg)
 {
     for(size_t i = 0; i < FOR_SIZE; i ++)
     {
@@ -27,7 +27,7 @@ void* workerNoLocked(void * arg)
     return NULL;
 }
 
-void* workerLocked(void * arg)
+static void* workerLocked(void * arg)
 {
     PthreadInfo * ptInfo = (PthreadInfo *) arg;
     MutexLockGuard lock(*ptInfo->ptMutexLock);
@@ -83,7 +83,7 @@ class ThreadsLocked
         }
         ~ThreadsLocked(){}
     public:
-        void start()
+        void wait()
         {
             for(size_t i = 0; i < _pthreadInfos.size(); i++)
             {
@@ -101,7 +101,7 @@ TEST(MutexLock, Test1)
     //ASSERT_EQ(str << res, "[\"0\", \"0\", \"0\", \"1\", \"1\", \"1\", \"2\", \"2\", \"2\"]");
     ThreadsLocked locked(THREAD_SUM);
     res.clear();
-    locked.start();
+    locked.wait();
     ASSERT_EQ(str << res,  "[\"0\", \"1\", \"2\", \"0\", \"1\", \"2\", \"0\", \"1\", \"2\"]");
 }
 

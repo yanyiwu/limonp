@@ -13,6 +13,11 @@ namespace Limonp
         private:
             pthread_mutex_t _mutex;
         public:
+            pthread_mutex_t* getPthreadMutex()
+            {
+                return &_mutex;
+            }
+        public:
             MutexLock()
             {
                 CHECK(pthread_mutex_init(&_mutex, NULL));
