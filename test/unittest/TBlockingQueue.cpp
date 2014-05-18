@@ -10,12 +10,9 @@ class CBlockingQueueTest1
     public:
         static void* workerLocked(void * arg)
         {
-            cout << __LINE__ << endl;
             BlockingQueue<size_t> * res = (BlockingQueue<size_t> *)arg;
             size_t t = res->pop();
-            cout << __LINE__ << endl;
             res->push(t);
-            cout << __LINE__ << endl;
             return NULL;
         }
     public:
@@ -39,19 +36,57 @@ class CBlockingQueueTest1
         
 };
 
+class CBlockingQueueTest2
+{
+    public:
+        static void * thread_pop(void * arg)
+        {
+            BlockingQueue<size_t> * res = (BlockingQueue<size_t> *)arg;
+            for(size_t i = 0; i < 10; i++)
+            {
+                res->pop();
+            }
+            return NULL;
+        }
+        static void * thread_push(void * arg)
+        {
+            BlockingQueue<size_t> * res = (BlockingQueue<size_t> *)arg;
+            for(size_t i = 0; i < 10; i++)
+            {
+                usleep(10);
+                res->push(i);
+            }
+            return NULL;
+        }
+};
+
 TEST(BlockingQueue, Test1)
 {
     size_t threadnum = 3;
     BlockingQueue<size_t> res;
     CBlockingQueueTest1 obj(threadnum, &res);
-    cout << __LINE__ << endl;
     //sleep(1);
-    cout << __LINE__ << endl;
     res.push(1);
-    cout << __LINE__ << endl;
     obj.wait();
-    cout << __LINE__ << endl;
-    cout << res.pop() << endl;
+    ASSERT_EQ(1u, res.size());
+    ASSERT_EQ(1u, res.pop());
+    
 }
 
+TEST(BlockingQueue, Test2)
+{
+    BlockingQueue<size_t> queue;
+    pthread_t pth_push;
+    pthread_t pth_pop;
+    pthread_create(&pth_push, NULL, CBlockingQueueTest2::thread_push, &queue);
+    pthread_create(&pth_pop, NULL, CBlockingQueueTest2::thread_pop, &queue);
+    pthread_join(pth_push, NULL);
+    pthread_join(pth_pop, NULL);
+    size_t i = 10;
+    while(queue.size())
+    {
+        ASSERT_EQ(i, queue.pop());
+        i++;
+    }
+}
 

@@ -22,34 +22,22 @@ namespace Limonp
 
                 void push(const T& x)
                 {
-                    cout << __LINE__ << endl;
                     MutexLockGuard lock(_mutex);
-                    cout << __LINE__ << endl;
                     _queue.push(x);
-                    cout << __LINE__ << endl;
                     _notEmpty.notify(); // wait morphing saves us
-                    cout << __LINE__ << endl;
                 }
 
                 T pop()
                 {
-                    cout << __LINE__ << endl;
                     MutexLockGuard lock(_mutex);
-                    cout << __LINE__ << endl;
                     // always use a while-loop, due to spurious wakeup
                     while (_queue.empty())
                     {
-                    cout << __LINE__ << endl;
                         _notEmpty.wait();
-                    cout << __LINE__ << endl;
                     }
-                    cout << __LINE__ << endl;
                     assert(!_queue.empty());
-                    cout << __LINE__ << endl;
                     T front(_queue.front());
-                    cout << __LINE__ << endl;
                     _queue.pop();
-                    cout << __LINE__ << endl;
                     return front;
                 }
 
