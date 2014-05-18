@@ -15,6 +15,7 @@ class CBlockingQueueTest1
             size_t t = res->pop();
             cout << __LINE__ << endl;
             res->push(t);
+            cout << __LINE__ << endl;
             return NULL;
         }
     public:
