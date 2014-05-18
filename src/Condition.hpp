@@ -25,7 +25,6 @@ namespace Limonp
 
             void wait()
             {
-                MutexLockGuard lock(_mutex);
                 CHECK(pthread_cond_wait(&_pcond, _mutex.getPthreadMutex()));
             }
 
