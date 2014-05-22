@@ -18,7 +18,7 @@ namespace Limonp
     class Config
     {
         public:
-            Config(const string& filePath)
+            explicit Config(const string& filePath)
             {
                 _loadFile(filePath);
             }
