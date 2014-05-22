@@ -17,7 +17,7 @@ But except for `MysqlClient.hpp`, if you `#include "MysqlClient.hpp"`, you need 
 
 ## Example
 
-### `#include "str_functs.hpp"`
+### `#include "StringUtil.hpp"`
 
 `using namespace Limonp;`
 
@@ -68,10 +68,10 @@ print(buf);
 //buf: ["hello", "world"];
 ```
 
-### `#include "logger.hpp"`
+### `#include "Logger.hpp"`
 
 
-#### `logger`
+#### `Logger`
 
 ```
 LogInfo("%s, %s.", "hello", "world");
