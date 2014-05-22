@@ -1,5 +1,5 @@
-#ifndef KRYPTON_BOUNDED_QUEUE_HPP
-#define KRYPTON_BOUNDED_QUEUE_HPP
+#ifndef LIMONP_BOUNDED_QUEUE_HPP
+#define LIMONP_BOUNDED_QUEUE_HPP
 
 #include <vector>
 #include <fstream>
