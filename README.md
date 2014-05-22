@@ -92,6 +92,7 @@ see details in the code.
 ## Reference
 
 1.  `md5.hpp` is copied from network, you can find original author in source code(in comments).
+2.  `MutexLock.hpp`, `BlockingQueue.hpp`, `Condition.hpp` reference from [muduo].
 
 ## Contact
 
@@ -99,3 +100,4 @@ wuyanyi09@foxmail.com
 
 
 [CppJieba]:https://github.com/aszxqw/cppjieba.git
+[muduo]:https://github.com/chenshuo/muduo.git
