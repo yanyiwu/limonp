@@ -1,5 +1,5 @@
 #define LOGGER_LEVEL LL_INFO
-#include "logger.hpp"
+#include "Logger.hpp"
 #include "gtest/gtest.h"
 using namespace Limonp;
 #define LOGGER_LEVEL LL_INFO

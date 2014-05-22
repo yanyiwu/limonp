@@ -10,7 +10,7 @@
 #include <fstream>
 #include <iostream>
 #include <assert.h>
-#include "str_functs.hpp"
+#include "StringUtil.hpp"
 
 namespace Limonp
 {
@@ -46,7 +46,7 @@ namespace Limonp
                     vecBuf.clear();
                     if(!split(line, vecBuf, "=") || 2 != vecBuf.size())
                     {
-                        fprintf(stderr, "line[%s] illegal.", line.c_str());
+                        fprintf(stderr, "line[%s] illegal.\n", line.c_str());
                         assert(false);
                         continue;
                     }
@@ -56,7 +56,7 @@ namespace Limonp
                     trim(value);
                     if(!_map.insert(make_pair(key, value)).second)
                     {
-                        fprintf(stderr, "key[%s] already exits.", key.c_str());
+                        fprintf(stderr, "key[%s] already exits.\n", key.c_str());
                         assert(false);
                         continue;
                     }

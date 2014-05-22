@@ -1,11 +1,11 @@
-#include "std_outbound.hpp"
-#include "str_functs.hpp"
+#include "StdExtension.hpp"
+#include "StringUtil.hpp"
 #include "gtest/gtest.h"
 #include <iostream>
 using namespace Limonp;
 TEST(StdOutbound, Test1)
 {
-    ifstream ifs("../test/testdata/std_outbound.data");
+    ifstream ifs("../test/testdata/StdExtension.data");
     string s;
     s << ifs;
     ASSERT_EQ("key1 = val1\n##this is comment\nkey2=val2\n", s);

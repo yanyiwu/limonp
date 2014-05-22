@@ -1,8 +1,10 @@
 #include "gtest/gtest.h"
-#include "std_outbound.hpp"
+#include "StdExtension.hpp"
 #include "MutexLock.hpp"
+#include <vector>
 
 using namespace Limonp;
+using namespace std;
 
 static const size_t THREAD_SUM = 3;
 static const size_t FOR_SIZE = 3;
@@ -52,7 +54,7 @@ class ThreadsNoLocked
             {
                 _pthreadInfos[i].id = i;
                 _pthreadInfos[i].ptMutexLock = &_mutex;
-                CHECK(pthread_create(&_pthreadInfos[i].pthread_id, NULL, workerNoLocked, &_pthreadInfos[i]));
+                LIMONP_CHECK(pthread_create(&_pthreadInfos[i].pthread_id, NULL, workerNoLocked, &_pthreadInfos[i]));
             }
         }
         ~ThreadsNoLocked(){}
@@ -61,7 +63,7 @@ class ThreadsNoLocked
         {
             for(size_t i = 0; i < _pthreadInfos.size(); i++)
             {
-                CHECK(pthread_join(_pthreadInfos[i].pthread_id, NULL));
+                LIMONP_CHECK(pthread_join(_pthreadInfos[i].pthread_id, NULL));
             }
         }
 };
@@ -78,7 +80,7 @@ class ThreadsLocked
             {
                 _pthreadInfos[i].id = i;
                 _pthreadInfos[i].ptMutexLock = &_mutex;
-                CHECK(pthread_create(&_pthreadInfos[i].pthread_id, NULL, workerLocked, &_pthreadInfos[i]));
+                LIMONP_CHECK(pthread_create(&_pthreadInfos[i].pthread_id, NULL, workerLocked, &_pthreadInfos[i]));
             }
         }
         ~ThreadsLocked(){}
@@ -87,7 +89,7 @@ class ThreadsLocked
         {
             for(size_t i = 0; i < _pthreadInfos.size(); i++)
             {
-                CHECK(pthread_join(_pthreadInfos[i].pthread_id, NULL));
+                LIMONP_CHECK(pthread_join(_pthreadInfos[i].pthread_id, NULL));
             }
         }
 };

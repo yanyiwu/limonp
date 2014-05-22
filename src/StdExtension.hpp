@@ -1,5 +1,5 @@
-#ifndef LIMONP_STD_OUTBOUND_H
-#define LIMONP_STD_OUTBOUND_H
+#ifndef LIMONP_STD_EXTEMSION_HPP
+#define LIMONP_STD_EXTEMSION_HPP
 
 #include <map>
 
@@ -22,7 +22,6 @@ namespace std
 #include <fstream>
 #include <sstream>
 
-#define print(x) cout<< #x": " << x <<endl
 
 namespace std
 {

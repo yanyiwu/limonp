@@ -16,20 +16,20 @@ namespace Limonp
         public:
             typedef vector< vector<string> > RowsType;
         private:
-            const string& HOST;
-            const size_t PORT;
-            const string& USER;
-            const string& PASSWD;
-            const string& DB;
-            const string& CHARSET;
+            const string _host;
+            const size_t _port;
+            const string _user;
+            const string _passwd;
+            const string _db;
+            const string _charset;
         public:
-            MysqlClient(const string& host, size_t port, const string& user, const string& passwd, const string& db, const string& charset = "utf8"): HOST(host), PORT(port), USER(user), PASSWD(passwd), DB(db), CHARSET(charset), _conn(NULL)
+            MysqlClient(const string& host, size_t port, const string& user, const string& passwd, const string& db, const string& charset = "utf8"): _host(host), _port(port), _user(user), _passwd(passwd), _db(db), _charset(charset), _conn(NULL)
             {
                 _setInitFlag(_init());
             }
             ~MysqlClient()
             {
-                if(NULL != _conn)
+                if(_conn)
                 {
                     mysql_close(_conn);
                 }
@@ -44,7 +44,7 @@ namespace Limonp
                     return false;
                 }
 
-                if (mysql_real_connect(_conn, HOST.c_str(), USER.c_str(), PASSWD.c_str(), DB.c_str(), PORT, NULL, 0) == NULL)
+                if (mysql_real_connect(_conn, _host.c_str(), _user.c_str(), _passwd.c_str(), _db.c_str(), _port, NULL, 0) == NULL)
                 {
                     LogError("mysql_real_connect failed. %s", mysql_error(_conn));
                     mysql_close(_conn);
@@ -52,9 +52,9 @@ namespace Limonp
                     return false;
                 }  
 
-                if(mysql_set_character_set(_conn, CHARSET.c_str()))
+                if(mysql_set_character_set(_conn, _charset.c_str()))
                 {
-                    LogError("mysql_set_character_set [%s] failed.", CHARSET.c_str());
+                    LogError("mysql_set_character_set [%s] failed.", _charset.c_str());
                     return false;
                 }
 
@@ -62,7 +62,7 @@ namespace Limonp
                 char value = 1;
                 mysql_options(_conn, MYSQL_OPT_RECONNECT, &value);
 
-                LogInfo("MysqlClient {host: %s, database:%s, charset:%s}", HOST.c_str(), DB.c_str(), CHARSET.c_str());
+                LogInfo("MysqlClient {host: %s, database:%s, charset:%s}", _host.c_str(), _db.c_str(), _charset.c_str());
                 return true;
             }
         public:
@@ -96,9 +96,10 @@ namespace Limonp
                     return false;
                 }
                 MYSQL_RES * result = mysql_store_result(_conn);
-                if(NULL == result)
+                if(!result)
                 {
                     LogError("mysql_store_result failed.[%d]", mysql_error(_conn));
+                    return false;
                 }
                 uint num_fields = mysql_num_fields(result);
                 MYSQL_ROW row;

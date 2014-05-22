@@ -8,7 +8,7 @@
 
 #include <set>
 #include <sstream>
-#include "str_functs.hpp"
+#include "StringUtil.hpp"
 
 namespace Limonp
 {

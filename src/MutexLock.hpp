@@ -1,10 +1,9 @@
-#ifndef LIMONP_MUTEX_HPP
-#define LIMONP_MUTEX_HPP
+#ifndef LIMONP_MUTEX_LOCK_HPP
+#define LIMONP_MUTEX_LOCK_HPP
 
 #include <pthread.h>
 #include "NonCopyable.hpp"
-#include "logger.hpp"
-
+#include "HandyMacro.hpp"
 
 namespace Limonp
 {
@@ -20,20 +19,20 @@ namespace Limonp
         public:
             MutexLock()
             {
-                CHECK(pthread_mutex_init(&_mutex, NULL));
+                LIMONP_CHECK(pthread_mutex_init(&_mutex, NULL));
             }
             ~MutexLock()
             {
-                CHECK(pthread_mutex_destroy(&_mutex));
+                LIMONP_CHECK(pthread_mutex_destroy(&_mutex));
             }
         private:
             void lock()
             {
-                CHECK(pthread_mutex_lock(&_mutex));
+                LIMONP_CHECK(pthread_mutex_lock(&_mutex));
             }
             void unlock()
             {
-                CHECK(pthread_mutex_unlock(&_mutex));
+                LIMONP_CHECK(pthread_mutex_unlock(&_mutex));
             }
             friend class MutexLockGuard;
     };

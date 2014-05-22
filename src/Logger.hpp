@@ -23,13 +23,6 @@
 #define LogError(fmt, ...) Limonp::Logger::LoggingF(Limonp::LL_ERROR, FILE_BASENAME, __LINE__, fmt, ## __VA_ARGS__)
 #define LogFatal(fmt, ...) Limonp::Logger::LoggingF(Limonp::LL_FATAL, FILE_BASENAME, __LINE__, fmt, ## __VA_ARGS__)
 
-
-#ifndef CHECK
-    #define CHECK(exp) if(exp){LogFatal(#exp "is true."); abort();}
-#else
-    #error "CHECK is already defined."
-#endif
-
 namespace Limonp
 {
     using namespace std;

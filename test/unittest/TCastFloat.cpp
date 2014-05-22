@@ -1,9 +1,10 @@
-#include "cast_functs.hpp"
+#include "CastFloat.hpp"
 #include "gtest/gtest.h"
 #include <cmath>
 
 using namespace std;
 using namespace Limonp;
+using namespace CastFloat;
 
 TEST(CastFunctTest, Test1)
 {
