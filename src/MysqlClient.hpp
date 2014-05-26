@@ -80,7 +80,7 @@ namespace Limonp
             {
                 size_t retn = 0;
                 string sql;
-                for(uint i = 0; i < vals.size(); i ++)
+                for(size_t i = 0; i < vals.size(); i ++)
                 {
                     sql.clear();
                     string_format(sql, "insert into %s (%s) values %s", tableName.c_str(), keys.c_str(), vals[i].c_str());
@@ -101,12 +101,12 @@ namespace Limonp
                     LogError("mysql_store_result failed.[%d]", mysql_error(_conn));
                     return false;
                 }
-                uint num_fields = mysql_num_fields(result);
+                size_t num_fields = mysql_num_fields(result);
                 MYSQL_ROW row;
                 while((row = mysql_fetch_row(result)))
                 {
                     vector<string> vec;
-                    for(uint i = 0; i < num_fields; i ++)
+                    for(size_t i = 0; i < num_fields; i ++)
                     {
                         row[i] ? vec.push_back(row[i]) : vec.push_back("NULL");
                     }

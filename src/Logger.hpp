@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <cstdlib>
 #include <stdarg.h>
+#include <time.h>
 #include <cassert>
 
 #define FILE_BASENAME strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__

@@ -208,7 +208,7 @@ namespace Limonp
         return (((uint16_t(high) & 0x00ff ) << 8) | (uint16_t(low) & 0x00ff));
     }
 
-    inline bool utf8ToUnicode(const char * const str, uint len, vector<uint16_t>& vec)
+    inline bool utf8ToUnicode(const char * const str, size_t len, vector<uint16_t>& vec)
     {
         if(!str)
         {
@@ -217,7 +217,7 @@ namespace Limonp
         char ch1, ch2;
         uint16_t tmp;
         vec.clear();
-        for(uint i = 0;i < len;)
+        for(size_t i = 0;i < len;)
         {
             if(!(str[i] & 0x80)) // 0xxxxxxx
             {
@@ -284,14 +284,14 @@ namespace Limonp
     }
 
     
-    inline bool gbkTrans(const char* const str, uint len, vector<uint16_t>& vec)
+    inline bool gbkTrans(const char* const str, size_t len, vector<uint16_t>& vec)
     {
         vec.clear();
         if(!str)
         {
             return false;
         }
-        uint i = 0;
+        size_t i = 0;
         while(i < len)
         {
             if(0 == (str[i] & 0x80))

@@ -42,7 +42,7 @@ namespace Limonp
             ~ArgvContext(){};
         public:
             friend ostream& operator << (ostream& os, const ArgvContext& args); 
-            string operator [](uint i) const
+            string operator [](size_t i) const
             {
                 if(i < _args.size())
                 {

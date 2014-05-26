@@ -34,7 +34,7 @@ namespace Limonp
                 assert(ifs);
                 string line;
                 vector<string> vecBuf;
-                uint lineno = 0;
+                size_t lineno = 0;
                 while(getline(ifs, line))
                 {
                     lineno ++;
