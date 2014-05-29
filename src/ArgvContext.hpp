@@ -79,11 +79,6 @@ namespace Limonp
     {
         return os<<args._args<<args._mpss<<args._sset;
     }
-            //string toString()
-            //{
-            //    stringstream ss;
-            //    return ss.str();
-            //}
 }
 
 #endif
