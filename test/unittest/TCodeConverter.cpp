@@ -5,20 +5,55 @@
 
 using namespace Limonp;
 
-TEST(TCodeConverter, Utf8ToGb2312)
+struct ArgType
+{
+    CodeConverter* cc;
+    string from;
+};
+
+static void* worker(void * arg)
+{
+    ArgType* a = (ArgType*) arg;
+    string res;
+    usleep(10);
+    bool ret = a->cc->convert(a->from, res);
+    assert(ret);
+    return NULL;
+};
+
+TEST(TCodeConverter, ThreadSafety)
 {
     CodeConverter cc = CodeConverter("utf-8","gb2312"); 
-    string gbkdict;
+    string from, to;
+    ifstream ifs("../test/testdata/dict.utf8");
+    string line;
+    ArgType arg;
+    arg.cc = &cc;
+    size_t thread_num = 5;
+    while(getline(ifs, arg.from))
+    {
+        for(size_t i = 0 ;i < thread_num; i++)
+        {
+            pthread_t p;
+            ASSERT_EQ(0, pthread_create(&p, NULL, worker, &arg));
+            ASSERT_EQ(0, pthread_join(p, NULL));
+        }
+    }
+}
 
-    string utf8dict;
+TEST(TCodeConverter, Utf8ToGb2312)
+{
+    string to;
+    CodeConverter cc = CodeConverter("utf-8","gb2312"); 
+
+    string from;
     {
         ifstream ifs("../test/testdata/dict.utf8");
         ASSERT_TRUE(ifs);
-        utf8dict << ifs;
+        from << ifs;
     }
 
-    
-    ASSERT_TRUE(cc.convert(utf8dict, gbkdict));
+    ASSERT_TRUE(cc.convert(from, to));
 
     string ans;
     {
@@ -27,7 +62,7 @@ TEST(TCodeConverter, Utf8ToGb2312)
         ans << ifs;
     }
 
-    ASSERT_EQ(ans, gbkdict);
+    ASSERT_EQ(ans, to);
 
 }
 

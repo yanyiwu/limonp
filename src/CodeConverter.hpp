@@ -8,7 +8,7 @@
 namespace Limonp
 {
     using namespace std; 
-    class CodeConverter  // not guarantee about thread safety.
+    class CodeConverter
     { 
         public: 
             CodeConverter(const char *from_charset,const char *to_charset) 
