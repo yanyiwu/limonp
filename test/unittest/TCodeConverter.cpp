@@ -89,3 +89,33 @@ TEST(TCodeConverter, Gb2312ToUtf8)
 
     ASSERT_EQ(ans, to);
 }
+
+TEST(TCodeConverter, performance1)
+{
+    string from;
+    {
+        ifstream ifs("../test/testdata/dict.utf8");
+        ASSERT_TRUE(ifs);
+        from << ifs;
+    }
+    string to;
+    for(size_t i = 0; i < 50000; i++)
+    {
+        ASSERT_TRUE(code_convert("utf-8", "gb2312", from, to));
+    }
+}
+TEST(TCodeConverter, performance2)
+{
+    string from;
+    string to;
+    {
+        ifstream ifs("../test/testdata/dict.utf8");
+        ASSERT_TRUE(ifs);
+        from << ifs;
+    }
+    CodeConverter cc = CodeConverter("utf-8","gb2312"); 
+    for(size_t i = 0; i < 50000; i++)
+    {
+        ASSERT_TRUE(cc.convert(from, to));
+    }
+}
