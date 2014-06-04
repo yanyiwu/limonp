@@ -208,7 +208,8 @@ namespace Limonp
         return (((uint16_t(high) & 0x00ff ) << 8) | (uint16_t(low) & 0x00ff));
     }
 
-    inline bool utf8ToUnicode(const char * const str, size_t len, vector<uint16_t>& vec)
+    template <class Uint16Container>
+    bool utf8ToUnicode(const char * const str, size_t len, Uint16Container& vec)
     {
         if(!str)
         {
@@ -247,12 +248,14 @@ namespace Limonp
         }
         return true;
     }
-    inline bool utf8ToUnicode(const string& str, vector<uint16_t>& vec)
+    template <class Uint16Container>
+    bool utf8ToUnicode(const string& str, Uint16Container& vec)
     {
         return utf8ToUnicode(str.c_str(), str.size(), vec);
     }
 
-    inline bool unicodeToUtf8(vector<uint16_t>::const_iterator begin, vector<uint16_t>::const_iterator end, string& res)
+    template <class Uint16ContainerConIter>
+    bool unicodeToUtf8(Uint16ContainerConIter begin, Uint16ContainerConIter end, string& res)
     {
         if(begin >= end)
         {

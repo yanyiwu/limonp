@@ -14,6 +14,7 @@ namespace Limonp
         class LocalVector
         {
             public:
+                typedef T* const_iterator ;
             public:
                 LocalVector(): _ptr(_buffer), _size(0), _capacity(LOCAL_VECTOR_BUFFER_SIZE)
                 {
@@ -72,6 +73,14 @@ namespace Limonp
                 size_t capacity() const
                 {
                     return _capacity;
+                }
+                const_iterator begin() const
+                {
+                    return _ptr;
+                }
+                const_iterator end() const
+                {
+                    return _ptr + _size;
                 }
             private:
                 T _buffer[LOCAL_VECTOR_BUFFER_SIZE];
