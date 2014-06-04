@@ -61,6 +61,29 @@ class CBlockingQueueTest2
             return NULL;
         }
 };
+class CBoundedBlockingQueueTest3
+{
+    public:
+        static void * thread_pop(void * arg)
+        {
+            BoundedBlockingQueue<size_t> * res = (BoundedBlockingQueue<size_t> *)arg;
+            for(size_t i = 0; i < 10; i++)
+            {
+                res->pop();
+            }
+            return NULL;
+        }
+        static void * thread_push(void * arg)
+        {
+            BoundedBlockingQueue<size_t> * res = (BoundedBlockingQueue<size_t> *)arg;
+            for(size_t i = 0; i < 10; i++)
+            {
+                usleep(10);
+                res->push(i);
+            }
+            return NULL;
+        }
+};
 
 TEST(BlockingQueue, Test1)
 {
@@ -84,11 +107,18 @@ TEST(BlockingQueue, Test2)
     pthread_create(&pth_pop, NULL, CBlockingQueueTest2::thread_pop, &queue);
     pthread_join(pth_push, NULL);
     pthread_join(pth_pop, NULL);
-    size_t i = 10;
-    while(queue.size())
-    {
-        ASSERT_EQ(i, queue.pop());
-        i++;
-    }
+    ASSERT_TRUE(queue.empty());
+}
+
+TEST(BlockingQueue, Test3)
+{
+    BoundedBlockingQueue<size_t> queue(3);
+    pthread_t pth_push;
+    pthread_t pth_pop;
+    pthread_create(&pth_push, NULL, CBoundedBlockingQueueTest3::thread_push, &queue);
+    pthread_create(&pth_pop, NULL, CBoundedBlockingQueueTest3::thread_pop, &queue);
+    pthread_join(pth_push, NULL);
+    pthread_join(pth_pop, NULL);
+    ASSERT_TRUE(queue.empty());
 }
 
