@@ -5,7 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "logger.hpp"
+#include "Logger.hpp"
 #include "InitOnOff.hpp"
 
 namespace Limonp
