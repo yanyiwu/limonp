@@ -8,7 +8,7 @@ using namespace Limonp;
 TEST(LocalVector, test1)
 {
     LocalVector<size_t> vec;
-    ASSERT_EQ(vec.size(), 0);
+    ASSERT_EQ(vec.size(), 0u);
     ASSERT_EQ(vec.capacity(), LOCAL_VECTOR_BUFFER_SIZE);
     ASSERT_TRUE(vec.empty());
     size_t size = 129;
@@ -17,7 +17,7 @@ TEST(LocalVector, test1)
         vec.push_back(i);
     }
     ASSERT_EQ(vec.size(), size);
-    ASSERT_EQ(vec.capacity(), 256);
+    ASSERT_EQ(vec.capacity(), 256u);
     ASSERT_FALSE(vec.empty());
     LocalVector<size_t> vec2(vec);
     ASSERT_EQ(vec2.capacity(), vec.capacity());
@@ -27,7 +27,7 @@ TEST(LocalVector, test1)
 TEST(LocalVector, test2)
 {
     LocalVector<size_t> vec;
-    ASSERT_EQ(vec.size(), 0);
+    ASSERT_EQ(vec.size(), 0u);
     ASSERT_EQ(vec.capacity(), LOCAL_VECTOR_BUFFER_SIZE);
     ASSERT_TRUE(vec.empty());
     size_t size = 1;
