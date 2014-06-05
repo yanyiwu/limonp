@@ -11,7 +11,6 @@ TEST(LocalVector, test1)
     ASSERT_EQ(vec.size(), 0);
     ASSERT_EQ(vec.capacity(), LOCAL_VECTOR_BUFFER_SIZE);
     ASSERT_TRUE(vec.empty());
-    ASSERT_FALSE(vec.full());
     size_t size = 129;
     for(size_t i = 0; i < size; i++)
     {
@@ -31,7 +30,6 @@ TEST(LocalVector, test2)
     ASSERT_EQ(vec.size(), 0);
     ASSERT_EQ(vec.capacity(), LOCAL_VECTOR_BUFFER_SIZE);
     ASSERT_TRUE(vec.empty());
-    ASSERT_FALSE(vec.full());
     size_t size = 1;
     for(size_t i = 0; i < size; i++)
     {
