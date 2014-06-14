@@ -16,35 +16,35 @@ namespace Limonp
         {
             public:
                 BlockingQueue()
-                    : _mutex(), _notEmpty(_mutex), _queue()
+                    : mutex_(), notEmpty_(mutex_), queue_()
                 {
                 }
 
                 void push(const T& x)
                 {
-                    MutexLockGuard lock(_mutex);
-                    _queue.push(x);
-                    _notEmpty.notify(); // wait morphing saves us
+                    MutexLockGuard lock(mutex_);
+                    queue_.push(x);
+                    notEmpty_.notify(); // wait morphing saves us
                 }
 
                 T pop()
                 {
-                    MutexLockGuard lock(_mutex);
+                    MutexLockGuard lock(mutex_);
                     // always use a while-loop, due to spurious wakeup
-                    while (_queue.empty())
+                    while (queue_.empty())
                     {
-                        _notEmpty.wait();
+                        notEmpty_.wait();
                     }
-                    assert(!_queue.empty());
-                    T front(_queue.front());
-                    _queue.pop();
+                    assert(!queue_.empty());
+                    T front(queue_.front());
+                    queue_.pop();
                     return front;
                 }
 
                 size_t size() const
                 {
-                    MutexLockGuard lock(_mutex);
-                    return _queue.size();
+                    MutexLockGuard lock(mutex_);
+                    return queue_.size();
                 }
                 bool empty() const
                 {
@@ -52,9 +52,9 @@ namespace Limonp
                 }
 
             private:
-                mutable MutexLock _mutex;
-                Condition         _notEmpty;
-                std::queue<T>     _queue;
+                mutable MutexLock mutex_;
+                Condition         notEmpty_;
+                std::queue<T>     queue_;
         };
 
     template<typename T>
@@ -62,65 +62,65 @@ namespace Limonp
         {
             public:
                 explicit BoundedBlockingQueue(size_t maxSize)
-                    : _mutex(),
-                    _notEmpty(_mutex),
-                    _notFull(_mutex),
-                    _queue(maxSize)
+                    : mutex_(),
+                    notEmpty_(mutex_),
+                    notFull_(mutex_),
+                    queue_(maxSize)
                 {}
 
                 void push(const T& x)
                 {
-                    MutexLockGuard lock(_mutex);
-                    while (_queue.full())
+                    MutexLockGuard lock(mutex_);
+                    while (queue_.full())
                     {
-                        _notFull.wait();
+                        notFull_.wait();
                     }
-                    assert(!_queue.full());
-                    _queue.push(x);
-                    _notEmpty.notify();
+                    assert(!queue_.full());
+                    queue_.push(x);
+                    notEmpty_.notify();
                 }
 
                 T pop()
                 {
-                    MutexLockGuard lock(_mutex);
-                    while (_queue.empty())
+                    MutexLockGuard lock(mutex_);
+                    while (queue_.empty())
                     {
-                        _notEmpty.wait();
+                        notEmpty_.wait();
                     }
-                    assert(!_queue.empty());
-                    T res = _queue.pop();
-                    _notFull.notify();
+                    assert(!queue_.empty());
+                    T res = queue_.pop();
+                    notFull_.notify();
                     return res;
                 }
 
                 bool empty() const
                 {
-                    MutexLockGuard lock(_mutex);
-                    return _queue.empty();
+                    MutexLockGuard lock(mutex_);
+                    return queue_.empty();
                 }
 
                 bool full() const
                 {
-                    MutexLockGuard lock(_mutex);
-                    return _queue.full();
+                    MutexLockGuard lock(mutex_);
+                    return queue_.full();
                 }
 
                 size_t size() const
                 {
-                    MutexLockGuard lock(_mutex);
-                    return _queue.size();
+                    MutexLockGuard lock(mutex_);
+                    return queue_.size();
                 }
 
                 size_t capacity() const
                 {
-                    return _queue.capacity();
+                    return queue_.capacity();
                 }
 
             private:
-                mutable MutexLock          _mutex;
-                Condition                  _notEmpty;
-                Condition                  _notFull;
-                BoundedQueue<T>  _queue;
+                mutable MutexLock          mutex_;
+                Condition                  notEmpty_;
+                Condition                  notFull_;
+                BoundedQueue<T>  queue_;
         };
 
 }

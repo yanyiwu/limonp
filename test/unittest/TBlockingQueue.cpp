@@ -8,7 +8,7 @@ using namespace std;
 class CBlockingQueueTest1
 {
     private:
-        vector<pthread_t> _pthreads;
+        vector<pthread_t> pthreads_;
     public:
         static void* workerLocked(void * arg)
         {
@@ -18,11 +18,11 @@ class CBlockingQueueTest1
             return NULL;
         }
     public:
-        CBlockingQueueTest1(const size_t threadSum, void* arg): _pthreads(threadSum)
+        CBlockingQueueTest1(const size_t threadSum, void* arg): pthreads_(threadSum)
         {
-            for(size_t i = 0; i < _pthreads.size(); i++)
+            for(size_t i = 0; i < pthreads_.size(); i++)
             {
-                LIMONP_CHECK(pthread_create(&_pthreads[i], NULL, workerLocked, arg));
+                LIMONP_CHECK(pthread_create(&pthreads_[i], NULL, workerLocked, arg));
             }
         }
         ~CBlockingQueueTest1()
@@ -30,9 +30,9 @@ class CBlockingQueueTest1
     public:
         void wait()
         {
-            for(size_t i = 0; i < _pthreads.size(); i++)
+            for(size_t i = 0; i < pthreads_.size(); i++)
             {
-                LIMONP_CHECK(pthread_join(_pthreads[i], NULL));
+                LIMONP_CHECK(pthread_join(pthreads_[i], NULL));
             }
         }
         

@@ -33,25 +33,25 @@ struct PthreadInfo
 //class ThreadsNoLocked
 //{
 //    private:
-//        MutexLock _mutex;
-//        vector<PthreadInfo> _pthreadInfos;
+//        MutexLock mutex_;
+//        vector<PthreadInfo> pthreadInfos_;
 //    public:
-//        ThreadsNoLocked(size_t threadSum): _pthreadInfos(threadSum)
+//        ThreadsNoLocked(size_t threadSum): pthreadInfos_(threadSum)
 //        {
-//            for(size_t i = 0; i < _pthreadInfos.size(); i++)
+//            for(size_t i = 0; i < pthreadInfos_.size(); i++)
 //            {
-//                _pthreadInfos[i].id = i;
-//                _pthreadInfos[i].ptMutexLock = &_mutex;
-//                LIMONP_CHECK(pthread_create(&_pthreadInfos[i].pthread_id, NULL, workerNoLocked, &_pthreadInfos[i]));
+//                pthreadInfos_[i].id = i;
+//                pthreadInfos_[i].ptMutexLock = &mutex_;
+//                LIMONP_CHECK(pthread_create(&pthreadInfos_[i].pthread_id, NULL, workerNoLocked, &pthreadInfos_[i]));
 //            }
 //        }
 //        ~ThreadsNoLocked(){}
 //    public:
 //        void start()
 //        {
-//            for(size_t i = 0; i < _pthreadInfos.size(); i++)
+//            for(size_t i = 0; i < pthreadInfos_.size(); i++)
 //            {
-//                LIMONP_CHECK(pthread_join(_pthreadInfos[i].pthread_id, NULL));
+//                LIMONP_CHECK(pthread_join(pthreadInfos_[i].pthread_id, NULL));
 //            }
 //        }
 //};
@@ -59,10 +59,10 @@ struct PthreadInfo
 class ThreadsLocked
 {
     private:
-        MutexLock _mutex;
-        vector<PthreadInfo> _pthreadInfos;
+        MutexLock mutex_;
+        vector<PthreadInfo> pthreadInfos_;
     public:
-        ThreadsLocked(size_t threadSum): _pthreadInfos(threadSum)
+        ThreadsLocked(size_t threadSum): pthreadInfos_(threadSum)
         {
         }
         ~ThreadsLocked(){}
@@ -82,15 +82,15 @@ class ThreadsLocked
     public:
         void start()
         {
-            for(size_t i = 0; i < _pthreadInfos.size(); i++)
+            for(size_t i = 0; i < pthreadInfos_.size(); i++)
             {
-                _pthreadInfos[i].id = i;
-                _pthreadInfos[i].ptMutexLock = &_mutex;
-                LIMONP_CHECK(pthread_create(&_pthreadInfos[i].pthread_id, NULL, workerLocked, &_pthreadInfos[i]));
+                pthreadInfos_[i].id = i;
+                pthreadInfos_[i].ptMutexLock = &mutex_;
+                LIMONP_CHECK(pthread_create(&pthreadInfos_[i].pthread_id, NULL, workerLocked, &pthreadInfos_[i]));
             }
-            for(size_t i = 0; i < _pthreadInfos.size(); i++)
+            for(size_t i = 0; i < pthreadInfos_.size(); i++)
             {
-                LIMONP_CHECK(pthread_join(_pthreadInfos[i].pthread_id, NULL));
+                LIMONP_CHECK(pthread_join(pthreadInfos_[i].pthread_id, NULL));
             }
         }
 };

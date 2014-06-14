@@ -12,59 +12,59 @@ namespace Limonp
         class BoundedQueue
         {
             private:
-                size_t _head;
-                size_t _tail;
-                size_t _size;
-                const size_t _capacity;
-                vector<T> _circular_buffer;
+                size_t head_;
+                size_t tail_;
+                size_t size_;
+                const size_t capacity_;
+                vector<T> circular__buffer;
             public:
-                explicit BoundedQueue(size_t capacity): _capacity(capacity), _circular_buffer(capacity)
+                explicit BoundedQueue(size_t capacity): capacity_(capacity), circular__buffer(capacity)
                 {
-                    _head = 0;
-                    _tail = 0;
-                    _size = 0;
-                    assert(_capacity);
+                    head_ = 0;
+                    tail_ = 0;
+                    size_ = 0;
+                    assert(capacity_);
                 }
                 ~BoundedQueue(){}
             public:
                 void clear()
                 {
-                    _head = 0;
-                    _tail = 0;
-                    _size = 0;
+                    head_ = 0;
+                    tail_ = 0;
+                    size_ = 0;
                 }
                 bool empty() const
                 {
-                    return !_size;
+                    return !size_;
                 }
                 bool full() const
                 {
-                    return _capacity == _size;
+                    return capacity_ == size_;
                 }
                 size_t size() const
                 {
-                    return _size;
+                    return size_;
                 }
                 size_t capacity() const
                 {
-                    return _capacity;
+                    return capacity_;
                 }
 
                 void push(const T& t)
                 {
                     assert(!full());
-                    _circular_buffer[_tail] = t;
-                    _tail = (_tail + 1) % _capacity;
-                    _size ++;
+                    circular__buffer[tail_] = t;
+                    tail_ = (tail_ + 1) % capacity_;
+                    size_ ++;
                 }
 
                 T pop()
                 {
                     assert(!empty());
-                    size_t oldPos = _head;
-                    _head = (_head + 1) % _capacity;
-                    _size --;
-                    return _circular_buffer[oldPos];
+                    size_t oldPos = head_;
+                    head_ = (head_ + 1) % capacity_;
+                    size_ --;
+                    return circular__buffer[oldPos];
                 }
 
         };

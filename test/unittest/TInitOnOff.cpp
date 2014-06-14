@@ -8,7 +8,7 @@ class Tmp : public InitOnOff
         {}
         Tmp(bool flag)
         {
-            _setInitFlag(flag);
+            setInitFlag_(flag);
         }
 };
 TEST(InitOnOffTest, Test1)

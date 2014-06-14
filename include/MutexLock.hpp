@@ -10,29 +10,29 @@ namespace Limonp
     class MutexLock: NonCopyable
     {
         private:
-            pthread_mutex_t _mutex;
+            pthread_mutex_t mutex_;
         public:
             pthread_mutex_t* getPthreadMutex()
             {
-                return &_mutex;
+                return &mutex_;
             }
         public:
             MutexLock()
             {
-                LIMONP_CHECK(pthread_mutex_init(&_mutex, NULL));
+                LIMONP_CHECK(pthread_mutex_init(&mutex_, NULL));
             }
             ~MutexLock()
             {
-                LIMONP_CHECK(pthread_mutex_destroy(&_mutex));
+                LIMONP_CHECK(pthread_mutex_destroy(&mutex_));
             }
         private:
             void lock()
             {
-                LIMONP_CHECK(pthread_mutex_lock(&_mutex));
+                LIMONP_CHECK(pthread_mutex_lock(&mutex_));
             }
             void unlock()
             {
-                LIMONP_CHECK(pthread_mutex_unlock(&_mutex));
+                LIMONP_CHECK(pthread_mutex_unlock(&mutex_));
             }
             friend class MutexLockGuard;
     };
@@ -40,16 +40,16 @@ namespace Limonp
     {
         public:
             explicit MutexLockGuard(MutexLock & mutex)
-                : _mutex(mutex)
+                : mutex_(mutex)
             {
-                _mutex.lock();
+                mutex_.lock();
             }
             ~MutexLockGuard()
             {
-                _mutex.unlock();
+                mutex_.unlock();
             }
         private:
-            MutexLock & _mutex;
+            MutexLock & mutex_;
     };
 #define MutexLockGuard(x) assert(false);
 }
