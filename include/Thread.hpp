@@ -1,8 +1,8 @@
 #ifndef LIMONP_THREAD_HPP
 #define LIMONP_THREAD_HPP
 
-#include "Condition.hpp"
 #include "HandyMacro.hpp"
+#include "NonCopyable.hpp"
 
 namespace Limonp
 {
@@ -14,7 +14,11 @@ namespace Limonp
             Thread()
             {
             }
-            virtual ~Thread(){};
+            virtual ~Thread()
+            {
+                //TODO
+                //pthread_exit or pthread_datach
+            };
         public:
             virtual void run() = 0;
             void start()

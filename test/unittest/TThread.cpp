@@ -20,10 +20,18 @@ TEST(Thread, Test1)
         public:
             size_t num;
     };
-    ThreadDerive thr;
-    thr.start();
-    thr.join();
-    ASSERT_EQ(thr.num, 2);
+    {
+        ThreadDerive thr;
+        thr.start();
+        thr.join();
+        ASSERT_EQ(thr.num, 2);
+    }
+    {
+        Thread* ptr = new ThreadDerive();
+        ptr->start();
+        ptr->join();
+        delete ptr;
+    }
 }
 
 
