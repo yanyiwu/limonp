@@ -345,21 +345,18 @@ public:
 
     FILE *file;
     
-    int len;
     unsigned char buffer[1024] ;
 
     if((file = fopen (filename, "rb")) == NULL)
     {
       return NULL;
     }
-    else
-    {
-      while( (len = fread( buffer, 1, 1024, file )) )
-        Update( buffer, len ) ;
-      Final();
+    int len;
+    while( (len = fread( buffer, 1, 1024, file )) )
+      Update( buffer, len ) ;
+    Final();
 
-      fclose( file );
-    }
+    fclose( file );
 
     return digestChars ;
   }
