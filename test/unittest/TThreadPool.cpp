@@ -21,10 +21,15 @@ TEST(ThreadPool, Test1)
         Task task(addOne, &numbers[i]);
         threadPool.push(task);
     }
-    threadPool.join();
-    for(size_t i = 0 ; i < numbers.size(); i++)
+    threadPool.wait();
+    for(size_t i = 0; i < numbers.size(); i++)
     {
+        ASSERT_EQ(i + 1, numbers[i]);
     }
+    //threadPool.join();
+    //for(size_t i = 0 ; i < numbers.size(); i++)
+    //{
+    //}
 }
 
 

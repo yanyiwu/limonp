@@ -19,6 +19,7 @@ namespace Limonp
         public:
             void run()
             {
+                assert(funct);
                 funct(param);
             }
     };
@@ -33,7 +34,10 @@ namespace Limonp
             {
                 assert(ptThreadPool_);
             }
-            virtual ~Worker(){}
+            virtual ~Worker()
+            {
+                
+            }
         public:
             virtual void run();
     };
@@ -45,8 +49,10 @@ namespace Limonp
         private:
             vector<Thread*> threads_;
             BoundedBlockingQueue<Task> queue_;
+            //mutable MutexLock mutex_;
+            //Condition isEmpty__;
         public:
-            ThreadPool(size_t threadNum, size_t queueMaxSize): threads_(threadNum), queue_(queueMaxSize)
+            ThreadPool(size_t threadNum, size_t queueMaxSize): threads_(threadNum), queue_(queueMaxSize)//, mutex_(), isEmpty__(mutex_)
             {
                 assert(threadNum);
                 assert(queueMaxSize);
@@ -71,18 +77,17 @@ namespace Limonp
                     threads_[i]->start();
                 }
             }
-            void wait()
+            //TODO
+            void stop()
             {
-                queue_.empty();;
-                //TODO
             }
         public:
-            void push(const Task& task)
+            void post(const Task& task)
             {
                 return queue_.push(task);
             }
         private:
-            Task pop_()
+            Task take_()
             {
                 return queue_.pop();
             }

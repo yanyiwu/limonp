@@ -10,24 +10,32 @@ namespace Limonp
     {
         private:
             pthread_t thread_;
+            bool isStarted;
+            bool isJoined;
         public:
-            Thread()
+            Thread(): isStarted(false), isJoined(false)
             {
             }
             virtual ~Thread()
             {
-                //TODO
-                //pthread_exit or pthread_datach
+                if(isStarted && !isJoined)
+                {
+                    pthread_detach(thread_);
+                }
             };
         public:
             virtual void run() = 0;
             void start()
             {
+                assert(!isStarted);
                 LIMONP_CHECK(pthread_create(&thread_, NULL, worker_, this));
+                isStarted = true;
             }
             void join()
             {
+                assert(!isJoined);
                 LIMONP_CHECK(pthread_join(thread_, NULL));
+                isJoined = true;
             }
         private:
             static void * worker_(void * data)
