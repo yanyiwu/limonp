@@ -15,27 +15,27 @@ namespace Limonp
             explicit Condition(MutexLock& mutex)
                 : _mutex(mutex)
             {
-                LIMONP_CHECK(pthread_cond_init(&_pcond, NULL));
+                LIMONP_CHECK(!pthread_cond_init(&_pcond, NULL));
             }
 
             ~Condition()
             {
-                LIMONP_CHECK(pthread_cond_destroy(&_pcond));
+                LIMONP_CHECK(!pthread_cond_destroy(&_pcond));
             }
 
             void wait()
             {
-                LIMONP_CHECK(pthread_cond_wait(&_pcond, _mutex.getPthreadMutex()));
+                LIMONP_CHECK(!pthread_cond_wait(&_pcond, _mutex.getPthreadMutex()));
             }
 
             void notify()
             {
-                LIMONP_CHECK(pthread_cond_signal(&_pcond));
+                LIMONP_CHECK(!pthread_cond_signal(&_pcond));
             }
 
             void notifyAll()
             {
-                LIMONP_CHECK(pthread_cond_broadcast(&_pcond));
+                LIMONP_CHECK(!pthread_cond_broadcast(&_pcond));
             }
 
         private:

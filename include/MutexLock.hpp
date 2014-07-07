@@ -19,20 +19,20 @@ namespace Limonp
         public:
             MutexLock()
             {
-                LIMONP_CHECK(pthread_mutex_init(&_mutex, NULL));
+                LIMONP_CHECK(!pthread_mutex_init(&_mutex, NULL));
             }
             ~MutexLock()
             {
-                LIMONP_CHECK(pthread_mutex_destroy(&_mutex));
+                LIMONP_CHECK(!pthread_mutex_destroy(&_mutex));
             }
         private:
             void lock()
             {
-                LIMONP_CHECK(pthread_mutex_lock(&_mutex));
+                LIMONP_CHECK(!pthread_mutex_lock(&_mutex));
             }
             void unlock()
             {
-                LIMONP_CHECK(pthread_mutex_unlock(&_mutex));
+                LIMONP_CHECK(!pthread_mutex_unlock(&_mutex));
             }
             friend class MutexLockGuard;
     };
