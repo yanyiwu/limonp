@@ -2,14 +2,13 @@
 #include "Thread.hpp"
 using namespace Limonp;
 
-
-TEST(Thread, Test1)
+TEST(IThread, Test1)
 {
-    class ThreadDerive: public Thread
+    class ThreadHandle: public IThread
     {
         public:
-            ThreadDerive():num(1){}
-            virtual ~ThreadDerive(){}
+            ThreadHandle():num(1){}
+            virtual ~ThreadHandle(){}
         private:
         public:
             virtual void run()
@@ -21,13 +20,13 @@ TEST(Thread, Test1)
             size_t num;
     };
     {
-        ThreadDerive thr;
+        ThreadHandle thr;
         thr.start();
         thr.join();
         ASSERT_EQ(thr.num, 2);
     }
     {
-        Thread* ptr = new ThreadDerive();
+        IThread* ptr = new ThreadHandle();
         ptr->start();
         ptr->join();
         delete ptr;

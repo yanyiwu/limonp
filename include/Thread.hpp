@@ -6,21 +6,23 @@
 
 namespace Limonp
 {
-    class Thread: NonCopyable
+    class IThread: NonCopyable
     {
         private:
             pthread_t thread_;
             bool isStarted;
             bool isJoined;
         public:
-            Thread(): isStarted(false), isJoined(false)
+            IThread(): isStarted(false), isJoined(false)
             {
             }
-            virtual ~Thread()
+            virtual ~IThread()
             {
                 if(isStarted && !isJoined)
                 {
-                    pthread_detach(thread_);
+                    // should be joinned;
+                    LIMONP_CHECK(pthread_detach(thread_));
+                    //LIMONP_CHECK(pthread_join(thread_, NULL));//TODO  why this line cause a core dump failure?
                 }
             };
         public:
@@ -40,7 +42,7 @@ namespace Limonp
         private:
             static void * worker_(void * data)
             {
-                Thread * ptr = (Thread* ) data;
+                IThread * ptr = (IThread* ) data;
                 ptr->run();
                 return NULL;
             }

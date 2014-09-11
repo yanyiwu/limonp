@@ -6,49 +6,48 @@
 
 namespace Limonp
 {
-    struct Task
+    class ITask
     {
         public:
-            typedef void (* CallBackFunct)(void*);
-        public:
-            Task():funct(NULL), param(NULL){}
-            Task(CallBackFunct f, void * p): funct(f), param(p){}
-        public:
-            CallBackFunct funct;
-            void * param;
-        public:
-            void run()
-            {
-                assert(funct);
-                funct(param);
-            }
+            virtual void run() = 0;
+            virtual ~ITask() {}
     };
 
-    class ThreadPool;
-    class Worker: public Thread
-    {
-        private:
-            ThreadPool * ptThreadPool_;
-        public:
-            Worker(ThreadPool* pool): ptThreadPool_(pool)
-            {
-                assert(ptThreadPool_);
-            }
-            virtual ~Worker()
-            {
-                
-            }
-        public:
-            virtual void run();
-    };
-
+    //class ThreadPool;
     class ThreadPool: NonCopyable
     {
         private:
+            class Worker: public IThread
+            {
+                private:
+                    ThreadPool * ptThreadPool_;
+                public:
+                    Worker(ThreadPool* pool): ptThreadPool_(pool)
+                    {
+                        assert(ptThreadPool_);
+                    }
+                    virtual ~Worker()
+                    {
+                    }
+                public:
+                    virtual void run()
+                    {
+                        while(true)
+                        {
+                            ITask * task = ptThreadPool_->queue_.pop();
+                            if(task == NULL) 
+                            {
+                                break;
+                            }
+                            task->run();
+                        }
+                    }
+            };
+        private:
             friend class Worker;
         private:
-            vector<Thread*> threads_;
-            BoundedBlockingQueue<Task> queue_;
+            vector<IThread*> threads_;
+            BoundedBlockingQueue<ITask*> queue_;
             //mutable MutexLock mutex_;
             //Condition isEmpty__;
         public:
@@ -65,6 +64,11 @@ namespace Limonp
             {
                 for(size_t i = 0; i < threads_.size(); i ++)
                 {
+                    queue_.push(NULL);
+                }
+                for(size_t i = 0; i < threads_.size(); i ++)
+                {
+                    threads_[i]->join();
                     delete threads_[i];
                 }
             }
@@ -77,34 +81,13 @@ namespace Limonp
                     threads_[i]->start();
                 }
             }
-            //TODO
-            void stop()
+
+            void add(ITask* task)
             {
-            }
-        public:
-            void post(const Task& task)
-            {
-                return queue_.push(task);
-            }
-        private:
-            Task take_()
-            {
-                return queue_.pop();
+                assert(task);
+                queue_.push(task);
             }
     };
-    
-    /*
-     * 1. seperate declaration and definition to avoid compiler's error about nested incomplete ThreadPool (forward declaration can not solve that)
-     * 2. inline is to avoid linking error: "multiple definition of 'typeinfo name for Limonp::Worker'"
-     */
-    inline void Worker::run() 
-    {
-        while(true)
-        {
-            Task task = ptThreadPool_->pop_();
-            task.run();
-        }
-    }
 }
 
 #endif

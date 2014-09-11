@@ -6,3 +6,4 @@ tags
 build
 t.cpp
 a.out
+*.swp

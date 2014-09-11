@@ -2,26 +2,52 @@
 #include "ThreadPool.hpp"
 using namespace Limonp;
 
-static void addOne(void * data)
+//static void addOne(void * data)
+//{
+//    size_t * i = (size_t *) data;
+//    (*i) ++;
+//}
+
+class Task: public ITask
 {
-    size_t * i = (size_t *) data;
-    (*i) ++;
-}
+    public:
+        Task(size_t& i): i_(i) 
+        {
+        }
+    public:
+        size_t& i_;
+    public:
+        virtual void run()
+        {
+            i_++;
+        }
+};
+
 
 TEST(ThreadPool, Test1)
 {
-    const size_t threadNum = 5;
-    const size_t queueMaxSize = 10;
-    ThreadPool threadPool(threadNum, queueMaxSize);
-    threadPool.start();
-    vector<size_t> numbers(30);
-    for(size_t i = 0; i < numbers.size(); i ++)
+    const size_t threadNum = 2;
+    const size_t queueMaxSize = 4;
+    vector<size_t> numbers(6);
+    vector<Task*> tasks(numbers.size());
+    for(size_t i = 0; i < tasks.size() ; i++)
     {
-        numbers[i] = i;
-        Task task(addOne, &numbers[i]);
-        threadPool.push(task);
+        tasks[i] = new Task(numbers[i]);
     }
-    threadPool.wait();
+    {
+        ThreadPool threadPool(threadNum, queueMaxSize);
+        threadPool.start();
+        for(size_t i = 0; i < numbers.size(); i ++)
+        {
+            numbers[i] = i;
+            threadPool.add(tasks[i]);
+        }
+    }
+    for(size_t i = 0 ; i < tasks.size(); i++)
+    {
+        delete tasks[i];
+    }
+    
     for(size_t i = 0; i < numbers.size(); i++)
     {
         ASSERT_EQ(i + 1, numbers[i]);
