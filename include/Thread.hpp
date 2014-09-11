@@ -20,9 +20,7 @@ namespace Limonp
             {
                 if(isStarted && !isJoined)
                 {
-                    // should be joinned;
-                    LIMONP_CHECK(pthread_detach(thread_));
-                    //LIMONP_CHECK(pthread_join(thread_, NULL));//TODO  why this line cause a core dump failure?
+                    LIMONP_CHECK(!pthread_detach(thread_));
                 }
             };
         public:
@@ -30,13 +28,13 @@ namespace Limonp
             void start()
             {
                 assert(!isStarted);
-                LIMONP_CHECK(pthread_create(&thread_, NULL, worker_, this));
+                LIMONP_CHECK(!pthread_create(&thread_, NULL, worker_, this));
                 isStarted = true;
             }
             void join()
             {
                 assert(!isJoined);
-                LIMONP_CHECK(pthread_join(thread_, NULL));
+                LIMONP_CHECK(!pthread_join(thread_, NULL));
                 isJoined = true;
             }
         private:

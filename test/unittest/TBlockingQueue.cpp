@@ -22,7 +22,7 @@ class CBlockingQueueTest1
         {
             for(size_t i = 0; i < pthreads_.size(); i++)
             {
-                LIMONP_CHECK(pthread_create(&pthreads_[i], NULL, workerLocked, arg));
+                LIMONP_CHECK(!pthread_create(&pthreads_[i], NULL, workerLocked, arg));
             }
         }
         ~CBlockingQueueTest1()
@@ -32,7 +32,7 @@ class CBlockingQueueTest1
         {
             for(size_t i = 0; i < pthreads_.size(); i++)
             {
-                LIMONP_CHECK(pthread_join(pthreads_[i], NULL));
+                LIMONP_CHECK(!pthread_join(pthreads_[i], NULL));
             }
         }
         

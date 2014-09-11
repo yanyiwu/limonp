@@ -13,7 +13,7 @@ namespace Limonp
             bool getInitFlag_()const{return isInited_;};
             bool setInitFlag_(bool flag){return isInited_ = flag;};
         public:
-            operator bool()const{return getInitFlag_();};
+            operator bool() const {return getInitFlag_();};
 
     };
 }

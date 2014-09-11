@@ -18,43 +18,6 @@ struct PthreadInfo
     MutexLock* ptMutexLock;
 };
 
-//static void* workerNoLocked(void * arg)
-//{
-//    for(size_t i = 0; i < FOR_SIZE; i ++)
-//    {
-//        //cout << ptInfo->id << ':' << i << endl;
-//        res.push_back(i);
-//        usleep(100 * i);
-//    }
-//    return NULL;
-//}
-
-
-//class ThreadsNoLocked
-//{
-//    private:
-//        MutexLock mutex_;
-//        vector<PthreadInfo> pthreadInfos_;
-//    public:
-//        ThreadsNoLocked(size_t threadSum): pthreadInfos_(threadSum)
-//        {
-//            for(size_t i = 0; i < pthreadInfos_.size(); i++)
-//            {
-//                pthreadInfos_[i].id = i;
-//                pthreadInfos_[i].ptMutexLock = &mutex_;
-//                LIMONP_CHECK(pthread_create(&pthreadInfos_[i].pthread_id, NULL, workerNoLocked, &pthreadInfos_[i]));
-//            }
-//        }
-//        ~ThreadsNoLocked(){}
-//    public:
-//        void start()
-//        {
-//            for(size_t i = 0; i < pthreadInfos_.size(); i++)
-//            {
-//                LIMONP_CHECK(pthread_join(pthreadInfos_[i].pthread_id, NULL));
-//            }
-//        }
-//};
 
 class ThreadsLocked
 {
@@ -86,11 +49,11 @@ class ThreadsLocked
             {
                 pthreadInfos_[i].id = i;
                 pthreadInfos_[i].ptMutexLock = &mutex_;
-                LIMONP_CHECK(pthread_create(&pthreadInfos_[i].pthread_id, NULL, workerLocked, &pthreadInfos_[i]));
+                LIMONP_CHECK(!pthread_create(&pthreadInfos_[i].pthread_id, NULL, workerLocked, &pthreadInfos_[i]));
             }
             for(size_t i = 0; i < pthreadInfos_.size(); i++)
             {
-                LIMONP_CHECK(pthread_join(pthreadInfos_[i].pthread_id, NULL));
+                LIMONP_CHECK(!pthread_join(pthreadInfos_[i].pthread_id, NULL));
             }
         }
 };
