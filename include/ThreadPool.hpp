@@ -18,6 +18,11 @@ namespace Limonp
         {
             return new TaskType(arg);
         }
+    template <class TaskType, class ArgType0, class ArgType1>
+        ITask* CreateTask(ArgType0 arg0, ArgType1 arg1) 
+        {
+            return new TaskType(arg0, arg1);
+        }
 
     //class ThreadPool;
     class ThreadPool: NonCopyable
