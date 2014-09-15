@@ -96,6 +96,13 @@ namespace Limonp
                 }
                 return NULL;
             }
+        public:
+            string getConfigInfo() const
+            {
+                string res;
+                res << *this;
+                return res;
+            }
         private:
             map<string, string> map_;
         private:
