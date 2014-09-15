@@ -74,6 +74,15 @@ namespace Limonp
                 }
                 return false;
             }
+            bool get(const string& key, int & value) const
+            {
+                string str;
+                if(!get(key, str)) {
+                    return false;
+                }
+                value = atoi(str.c_str());
+                return true;
+            }
             const char* operator [] (const char* key) const
             {
                 if(NULL == key)
