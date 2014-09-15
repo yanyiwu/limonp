@@ -13,6 +13,12 @@ namespace Limonp
             virtual ~ITask() {}
     };
 
+    template <class TaskType, class ArgType>
+        ITask* CreateTask(ArgType arg) 
+        {
+            return new TaskType(arg);
+        }
+
     //class ThreadPool;
     class ThreadPool: NonCopyable
     {
@@ -40,6 +46,7 @@ namespace Limonp
                                 break;
                             }
                             task->run();
+                            delete task;
                         }
                     }
             };

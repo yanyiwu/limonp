@@ -29,24 +29,24 @@ TEST(ThreadPool, Test1)
     const size_t threadNum = 2;
     const size_t queueMaxSize = 4;
     vector<size_t> numbers(6);
-    vector<Task*> tasks(numbers.size());
-    for(size_t i = 0; i < tasks.size() ; i++)
-    {
-        tasks[i] = new Task(numbers[i]);
-    }
+    //vector<Task*> tasks(numbers.size());
+    //for(size_t i = 0; i < tasks.size() ; i++)
+    //{
+    //    tasks[i] = new Task(numbers[i]);
+    //}
     {
         ThreadPool threadPool(threadNum, queueMaxSize);
         threadPool.start();
         for(size_t i = 0; i < numbers.size(); i ++)
         {
             numbers[i] = i;
-            threadPool.add(tasks[i]);
+            threadPool.add(CreateTask<Task, size_t& >(numbers[i]));
         }
     }
-    for(size_t i = 0 ; i < tasks.size(); i++)
-    {
-        delete tasks[i];
-    }
+    //for(size_t i = 0 ; i < tasks.size(); i++)
+    //{
+    //    delete tasks[i];
+    //}
     
     for(size_t i = 0; i < numbers.size(); i++)
     {
