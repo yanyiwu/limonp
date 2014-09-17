@@ -11,7 +11,7 @@ TEST(StrFunctsTest, Test1)
     s = " \t\n ni hao ad \r\n";
     ASSERT_EQ("ni hao ad", trim(s));
     ASSERT_EQ("select * from table1  limit 1;" ,string_format("select %s from %s  %s;", "*","table1","limit 1"));
-    string_format(s, "select %s from %s  %s;", "*","table1","limit 1");
+    s = string_format("select %s from %s  %s;", "*","table1","limit 1");
     ASSERT_EQ("select * from table1  limit 1;" ,s);
     vec.clear();
     vec.push_back("1");
