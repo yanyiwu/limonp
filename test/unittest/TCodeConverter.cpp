@@ -49,7 +49,7 @@ TEST(TCodeConverter, Utf8ToGb2312)
     string from;
     {
         ifstream ifs("../test/testdata/dict.utf8");
-        ASSERT_TRUE(ifs);
+        ASSERT_TRUE(!!ifs);
         from << ifs;
     }
 
@@ -58,7 +58,7 @@ TEST(TCodeConverter, Utf8ToGb2312)
     string ans;
     {
         ifstream ifs("../test/testdata/dict.gbk");
-        ASSERT_TRUE(ifs);
+        ASSERT_TRUE(!!ifs);
         ans << ifs;
     }
 
@@ -74,7 +74,7 @@ TEST(TCodeConverter, Gb2312ToUtf8)
     string from;
     {
         ifstream ifs("../test/testdata/dict.gbk");
-        ASSERT_TRUE(ifs);
+        ASSERT_TRUE(!!ifs);
         from << ifs;
     }
     
@@ -83,7 +83,7 @@ TEST(TCodeConverter, Gb2312ToUtf8)
     string ans;
     {
         ifstream ifs("../test/testdata/dict.utf8");
-        ASSERT_TRUE(ifs);
+        ASSERT_TRUE(!!ifs);
         ans << ifs;
     }
 
@@ -95,7 +95,7 @@ TEST(TCodeConverter, performance1)
     string from;
     {
         ifstream ifs("../test/testdata/dict.utf8");
-        ASSERT_TRUE(ifs);
+        ASSERT_TRUE(!!ifs);
         from << ifs;
     }
     string to;
@@ -110,7 +110,7 @@ TEST(TCodeConverter, performance2)
     string to;
     {
         ifstream ifs("../test/testdata/dict.utf8");
-        ASSERT_TRUE(ifs);
+        ASSERT_TRUE(!!ifs);
         from << ifs;
     }
     CodeConverter cc = CodeConverter("utf-8","gb2312"); 

@@ -24,5 +24,5 @@ ADD_EXECUTABLE(test.run
     TThreadPool.cpp 
     )
 TARGET_LINK_LIBRARIES(gtest pthread)
-TARGET_LINK_LIBRARIES(test.run gtest pthread)
+TARGET_LINK_LIBRARIES(test.run gtest pthread iconv)
 

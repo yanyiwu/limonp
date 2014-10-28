@@ -14,7 +14,7 @@ TEST(StdOutbound, Test1)
     ofstream ofs(outFileName);
     s = outFileName;
     ofs << s;
-    ASSERT_TRUE(ofs);
+    ASSERT_TRUE(!!ofs);
     ofs.close();
 
     ifstream ifs2(outFileName);

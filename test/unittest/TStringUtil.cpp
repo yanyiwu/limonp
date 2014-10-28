@@ -36,7 +36,7 @@ TEST(StrFunctsTest, Test2)
 {
     string s, gbks;
     ifstream ifs("../test/testdata/dict.gbk");
-    ASSERT_TRUE(ifs);
+    ASSERT_TRUE(!!ifs);
 
     vector<uint16_t> uni;
     while(getline(ifs, s))
@@ -51,7 +51,7 @@ TEST(StrFunctsTest, Test3)
 {
     string s, utf8;
     ifstream ifs("../test/testdata/dict.utf8");
-    ASSERT_TRUE(ifs);
+    ASSERT_TRUE(!!ifs); 
 
     vector<uint16_t> uni;
     while(getline(ifs, s))
