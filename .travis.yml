@@ -7,6 +7,9 @@ script:
   - cmake ..
   - make
   - ./test/test.run
+os:
+  - linux
+  - osx
 compiler:
   - clang
   - gcc

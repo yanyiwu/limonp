@@ -44,5 +44,6 @@ TEST(StdOutbound, Test2)
     unordered_map<int,int> mp2;
     mp2[1] = 2;
     mp2[2] = 3;
-    ASSERT_EQ(s << mp2, "{1:2, 2:3}");
+    s << mp2;
+    ASSERT_TRUE( s == "{1:2, 2:3}" || s == "{2:3, 1:2}");
 }
