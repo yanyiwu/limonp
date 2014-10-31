@@ -18,11 +18,10 @@ ADD_EXECUTABLE(test.run
     TMutexLock.cpp 
     TBlockingQueue.cpp 
     TBoundedQueue.cpp 
-    TCodeConverter.cpp 
     TLocalVector.cpp 
     TThread.cpp 
     TThreadPool.cpp 
     )
 TARGET_LINK_LIBRARIES(gtest pthread)
-TARGET_LINK_LIBRARIES(test.run gtest pthread iconv)
+TARGET_LINK_LIBRARIES(test.run gtest pthread)
 
