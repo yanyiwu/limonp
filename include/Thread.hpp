@@ -27,13 +27,13 @@ namespace Limonp
             virtual void run() = 0;
             void start()
             {
-                assert(!isStarted);
+                LIMONP_CHECK(!isStarted);
                 LIMONP_CHECK(!pthread_create(&thread_, NULL, worker_, this));
                 isStarted = true;
             }
             void join()
             {
-                assert(!isJoined);
+                LIMONP_CHECK(!isJoined);
                 LIMONP_CHECK(!pthread_join(thread_, NULL));
                 isJoined = true;
             }
