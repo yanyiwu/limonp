@@ -21,6 +21,7 @@ ADD_EXECUTABLE(test.run
     TLocalVector.cpp 
     TThread.cpp 
     TThreadPool.cpp 
+    TColorPrint.cpp
     )
 TARGET_LINK_LIBRARIES(gtest pthread)
 TARGET_LINK_LIBRARIES(test.run gtest pthread)
