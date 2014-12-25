@@ -1,20 +1,17 @@
 #include "InitOnOff.hpp"
 #include "gtest/gtest.h"
 using namespace Limonp;
-class Tmp : public InitOnOff
-{
-    public:
-        Tmp()
-        {}
-        Tmp(bool flag)
-        {
-            setInitFlag_(flag);
-        }
+class Tmp : public InitOnOff {
+ public:
+  Tmp() {
+  }
+  Tmp(bool flag) {
+    setInitFlag_(flag);
+  }
 };
-TEST(InitOnOffTest, Test1)
-{
-    Tmp t;
-    ASSERT_FALSE(t);
-    Tmp t2(true);
-    ASSERT_TRUE(t2);
+TEST(InitOnOffTest, Test1) {
+  Tmp t;
+  ASSERT_FALSE(t);
+  Tmp t2(true);
+  ASSERT_TRUE(t2);
 }

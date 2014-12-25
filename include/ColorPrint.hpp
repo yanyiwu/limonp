@@ -3,24 +3,21 @@
 
 #include <string>
 
-namespace Limonp
-{
-    using std::string;
+namespace Limonp {
+using std::string;
 
-    enum COLOR
-    {
-        BLACK = 30,
-        RED,
-        GREEN,
-        YELLOW,
-        BLUE,
-        PURPLE
-    };
-    
-    static void ColorPrint(const string& str, enum COLOR color = GREEN)
-    {
-        printf("\033[0;%dm%s\033[0m", color, str.c_str());
-    }
+enum COLOR {
+  BLACK = 30,
+  RED,
+  GREEN,
+  YELLOW,
+  BLUE,
+  PURPLE
+};
+
+static void ColorPrint(const string& str, enum COLOR color = GREEN) {
+  printf("\033[0;%dm%s\033[0m", color, str.c_str());
+}
 }
 
 
