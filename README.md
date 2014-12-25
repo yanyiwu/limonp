@@ -15,6 +15,8 @@ linking is a annoying thing, so I write these source code in headers file(`*.hpp
 
 But except for `MysqlClient.hpp`, if you `#include "MysqlClient.hpp"`, you need linking with `-lmysqlclient`.
 
+Complying with Google C++ Code Style .
+
 ## Example
 
 ### `#include "StringUtil.hpp"`
