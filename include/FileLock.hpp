@@ -7,6 +7,7 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <string>
+#include <string.h>
 #include <assert.h>
 
 
