@@ -283,5 +283,13 @@ inline void getTime(const string& format, string&  timeStr) {
   size_t len = strftime((char*)timeStr.c_str(), timeStr.size(), format.c_str(), localtime(&timeNow));
   timeStr.resize(len);
 }
+
+inline string pathJoin(const string& path1, const string& path2) {
+  if(endsWith(path1, "/")) {
+    return path1 + path2;
+  }
+  return path1 + "/" + path2;
+}
+
 }
 #endif

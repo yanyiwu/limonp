@@ -107,3 +107,14 @@ TEST(StrFunctsTest, getTime) {
   getTime("%Y-%m-%d %H:%M:%S", s);
   //print(s);
 }
+
+TEST(StrFunctsTest, pathJoin) {
+  const char * path1 = "/home/foo/dir";
+  const char * path2 = "file";
+  const char * path3 = "/home/foo/dir/";
+  const char * path4 = "file";
+  const char * answer = "/home/foo/dir/file";
+  
+  ASSERT_EQ(answer, pathJoin(path1, path2));
+  ASSERT_EQ(answer, pathJoin(path3, path4));
+}
