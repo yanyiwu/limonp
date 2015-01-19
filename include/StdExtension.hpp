@@ -17,24 +17,42 @@ using std::tr1::unordered_set;
 #endif
 
 #include <set>
+#include <string>
 #include <vector>
+#include <deque>
 #include <fstream>
 #include <sstream>
 
 
 namespace std {
+
 template<typename T>
-ostream& operator << (ostream& os, const vector<T>& vec) {
-  if(vec.empty()) {
+ostream& operator << (ostream& os, const vector<T>& v) {
+  if(v.empty()) {
     return os << "[]";
   }
-  os<<"[\""<<vec[0];
-  for(size_t i = 1; i < vec.size(); i++) {
-    os<<"\", \""<<vec[i];
+  os<<"[\""<<v[0];
+  for(size_t i = 1; i < v.size(); i++) {
+    os<<"\", \""<<v[i];
   }
   os<<"\"]";
   return os;
 }
+
+template<typename T>
+ostream& operator << (ostream& os, const deque<T>& dq) {
+  if(dq.empty()) {
+    return os << "[]";
+  }
+  os<<"[\""<<dq[0];
+  for(size_t i = 1; i < dq.size(); i++) {
+    os<<"\", \""<<dq[i];
+  }
+  os<<"\"]";
+  return os;
+}
+
+
 template<class T1, class T2>
 ostream& operator << (ostream& os, const pair<T1, T2>& pr) {
   os << pr.first << ":" << pr.second ;
@@ -115,6 +133,7 @@ ofstream & operator << (ofstream & ofs, const basic_string<T>& s) {
   copy(s.begin(), s.end(), itr);
   return ofs;
 }
-}
+
+} // namespace std
 
 #endif

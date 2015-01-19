@@ -2,6 +2,8 @@
 #include "StringUtil.hpp"
 #include "gtest/gtest.h"
 #include <iostream>
+#include <deque>
+
 using namespace Limonp;
 TEST(StdOutbound, Test1) {
   ifstream ifs("../test/testdata/StdExtension.data");
@@ -43,3 +45,21 @@ TEST(StdOutbound, Test2) {
   s << mp2;
   ASSERT_TRUE( s == "{1:2, 2:3}" || s == "{2:3, 1:2}");
 }
+
+TEST(StdOutbound, Test3) {
+  {
+    vector<string> v;
+    v.push_back("1");
+    v.push_back("2");
+    string s;
+    ASSERT_EQ(s << v, "[\"1\", \"2\"]");
+  }
+  {
+    deque<string> v;
+    v.push_back("1");
+    v.push_back("2");
+    string s;
+    ASSERT_EQ(s << v, "[\"1\", \"2\"]");
+  }
+}
+
