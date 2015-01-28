@@ -11,5 +11,6 @@ TEST(ColorPrint, Test1) {
   ColorPrint("hello colors\n", YELLOW);
   ColorPrint("hello colors\n", BLUE);
   ColorPrint("hello colors\n", PURPLE);
+  ColorPrint(RED, "hello %s\n", "world");
 }
 
