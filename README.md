@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/aszxqw/limonp.png?branch=master)](https://travis-ci.org/aszxqw/limonp)
+[![Build Status](https://travis-ci.org/yanyiwu/limonp.png?branch=master)](https://travis-ci.org/yanyiwu/limonp)
 - - - 
 
 # Limonp 
@@ -101,5 +101,5 @@ see details in the code.
 wuyanyi09@foxmail.com
 
 
-[CppJieba]:https://github.com/aszxqw/cppjieba.git
+[CppJieba]:https://github.com/yanyiwu/cppjieba.git
 [muduo]:https://github.com/chenshuo/muduo.git
