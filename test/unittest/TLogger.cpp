@@ -10,7 +10,7 @@ TEST(LoggerTest, Test1) {
   LogDebug("hehe");
   LogWarn("hehe");
   LogError("hehe");
-  LogFatal("hehe");
+  //LogFatal("hehe"); 
   LogInfo("str[%s] int[%d]", "str1",15);
 }
 
@@ -19,6 +19,6 @@ TEST(LoggerTest, Test2) {
   LogDebug("hehe");
   LogWarn("hehe");
   LogError("hehe");
-  LogFatal("hehe");
+  //LogFatal("hehe");
   LogInfo("str[%s] int[%d]", "str1",15);
 }
