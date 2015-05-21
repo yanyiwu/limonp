@@ -38,8 +38,8 @@ TEST(StrFunctsTest, Test2) {
 
   vector<uint16_t> uni;
   while(getline(ifs, s)) {
-    ASSERT_TRUE(gbkTrans(s, uni));
-    ASSERT_TRUE(gbkTrans(uni.begin(), uni.end(), gbks));
+    gbkTrans(s, uni);
+    gbkTrans(uni.begin(), uni.end(), gbks);
     ASSERT_EQ(s, gbks);
   }
 }
@@ -52,7 +52,7 @@ TEST(StrFunctsTest, Test3) {
   vector<uint16_t> uni;
   while(getline(ifs, s)) {
     ASSERT_TRUE(utf8ToUnicode(s, uni));
-    ASSERT_TRUE(unicodeToUtf8(uni.begin(), uni.end(), utf8));
+    unicodeToUtf8(uni.begin(), uni.end(), utf8);
     ASSERT_EQ(s, utf8);
   }
 }
@@ -114,7 +114,7 @@ TEST(StrFunctsTest, pathJoin) {
   const char * path3 = "/home/foo/dir/";
   const char * path4 = "file";
   const char * answer = "/home/foo/dir/file";
-  
+
   ASSERT_EQ(answer, pathJoin(path1, path2));
   ASSERT_EQ(answer, pathJoin(path3, path4));
 }
