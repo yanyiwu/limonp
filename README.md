@@ -15,8 +15,6 @@ linking is a annoying thing, so I write these source code in headers file(`*.hpp
 
 But except for `MysqlClient.hpp`, if you `#include "MysqlClient.hpp"`, you need linking with `-lmysqlclient`.
 
-Complying with Google C++ Code Style .
-
 ## Example
 
 ### `#include "StringUtil.hpp"`
@@ -35,7 +33,7 @@ print(mp); // {"hello": 1, "world": 2}
 
 string res;
 res << mp;
-print(res); // res: {"hello": 1, "world": 2}
+print(res); // {"hello": 1, "world": 2}
 ```
 
 Because of having overrided `<<` operator in file `src/std_outbound.hpp`, it not only suitable for map but also can be used for `vector, set, unordered_map`.
