@@ -93,7 +93,7 @@ TEST(StrFunctsTest, Test5) {
   ASSERT_EQ("[\"1\", \"2\"]", res << vec);
 
   split("1==2", vec, "==");
-  ASSERT_EQ("[\"1\", \"2\"]", res << vec);
+  ASSERT_EQ("[\"1\", \"\", \"2\"]", res << vec);
 
   split("1,", vec, ",");
   ASSERT_EQ("[\"1\"]", res << vec);
