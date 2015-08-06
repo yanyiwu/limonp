@@ -25,14 +25,13 @@ Complying with Google C++ Code Style .
 
 #### `print`
 
-
 ```
 string strname = "hello, world";
-print(strname); //strname: hello, world.
+print(strname); //hello, world.
 map<string, int> mp;
 mp["hello"] = 1;
 mp["world"] = 2;
-print(mp); // mp: {"hello": 1, "world": 2}
+print(mp); // {"hello": 1, "world": 2}
 
 string res;
 res << mp;
@@ -47,7 +46,7 @@ Because of having overrided `<<` operator in file `src/std_outbound.hpp`, it not
 string str;
 string_format(str, "%s, %s", "hello", "world"); 
 print(str);
-//str: hello, world.
+//hello, world.
 ```
 
 #### `join`
@@ -57,7 +56,7 @@ string str;
 char * a[] = {"hello", "world"}; 
 join(a, a + sizeof(a)/sizeof(a[0]), str, ",");
 print(str);
-//str: hello, world;
+//hello, world;
 ```
 
 #### `split`
@@ -67,7 +66,7 @@ string str = "hello, world";
 vector<string> buf;
 split(str, buf, ",");
 print(buf);
-//buf: ["hello", "world"];
+//["hello", "world"];
 ```
 
 ### `#include "Logger.hpp"`

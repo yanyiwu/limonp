@@ -10,7 +10,7 @@ TEST(IThread, Test1) {
    private:
    public:
     virtual void run() {
-      ASSERT_EQ(num, 1);
+      ASSERT_EQ(num, 1u);
       num = 2;
     }
    public:
@@ -20,7 +20,7 @@ TEST(IThread, Test1) {
     ThreadHandle thr;
     thr.start();
     thr.join();
-    ASSERT_EQ(thr.num, 2);
+    ASSERT_EQ(thr.num, 2u);
   }
   {
     IThread* ptr = new ThreadHandle();
