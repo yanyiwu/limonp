@@ -1,6 +1,6 @@
 #include "StringUtil.hpp"
 #include "gtest/gtest.h"
-using namespace Limonp;
+using namespace limonp;
 
 TEST(StrFunctsTest, Test1) {
   vector<string> vec;

@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/yanyiwu/limonp.png?branch=master)](https://travis-ci.org/yanyiwu/limonp)
 - - - 
 
-# Limonp 
+# limonp 
 
 ## Introduction
 
@@ -19,7 +19,7 @@ But except for `MysqlClient.hpp`, if you `#include "MysqlClient.hpp"`, you need 
 
 ### `#include "StringUtil.hpp"`
 
-`using namespace Limonp;`
+`using namespace limonp;`
 
 #### `print`
 

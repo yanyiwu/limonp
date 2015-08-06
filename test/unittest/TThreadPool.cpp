@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include "ThreadPool.hpp"
 #include <exception>
-using namespace Limonp;
+using namespace limonp;
 
 //static void addOne(void * data)
 //{

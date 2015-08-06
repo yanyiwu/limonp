@@ -8,7 +8,7 @@
 #include "Logger.hpp"
 #include "InitOnOff.hpp"
 
-namespace Limonp {
+namespace limonp {
 using namespace std;
 class MysqlClient: public InitOnOff {
  public:

@@ -12,7 +12,7 @@
 #include <assert.h>
 #include "StringUtil.hpp"
 
-namespace Limonp {
+namespace limonp {
 using namespace std;
 class Config {
  public:

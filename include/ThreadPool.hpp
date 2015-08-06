@@ -4,7 +4,7 @@
 #include "Thread.hpp"
 #include "BlockingQueue.hpp"
 
-namespace Limonp {
+namespace limonp {
 class ITask {
  public:
   virtual void run() = 0;

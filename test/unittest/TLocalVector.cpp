@@ -3,7 +3,7 @@
 #include <fstream>
 #include "gtest/gtest.h"
 
-using namespace Limonp;
+using namespace limonp;
 
 TEST(LocalVector, test1) {
   LocalVector<size_t> vec;

@@ -1,7 +1,7 @@
 #include "FileLock.hpp"
 #include "gtest/gtest.h"
 
-using namespace Limonp;
+using namespace limonp;
 
 static const char* test_file = "/tmp/limonp_test_filelock";
 

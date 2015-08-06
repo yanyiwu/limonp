@@ -2,7 +2,7 @@
 #include <vector>
 #include "BlockingQueue.hpp"
 
-using namespace Limonp;
+using namespace limonp;
 using namespace std;
 
 class CBlockingQueueTest1 {

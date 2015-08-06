@@ -11,7 +11,7 @@
 #include <assert.h>
 
 
-namespace Limonp {
+namespace limonp {
 
 using std::string;
 
@@ -70,6 +70,6 @@ class FileLock {
   string err_;
 };
 
-}// namespace Limonp
+}// namespace limonp
 
 #endif

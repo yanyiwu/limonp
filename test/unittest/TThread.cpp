@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include "Thread.hpp"
-using namespace Limonp;
+using namespace limonp;
 
 TEST(IThread, Test1) {
   class ThreadHandle: public IThread {

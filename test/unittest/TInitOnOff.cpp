@@ -1,6 +1,6 @@
 #include "InitOnOff.hpp"
 #include "gtest/gtest.h"
-using namespace Limonp;
+using namespace limonp;
 class Tmp : public InitOnOff {
  public:
   Tmp() {

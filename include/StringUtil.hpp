@@ -23,7 +23,7 @@
 #include <algorithm>
 #include "StdExtension.hpp"
 
-namespace Limonp {
+namespace limonp {
 using namespace std;
 inline string string_format(const char* fmt, ...) {
   int size = 256;

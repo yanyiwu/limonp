@@ -3,7 +3,7 @@
 #include "MutexLock.hpp"
 #include <vector>
 
-using namespace Limonp;
+using namespace limonp;
 using namespace std;
 
 static const size_t THREAD_SUM = 3;

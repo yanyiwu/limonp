@@ -2,7 +2,7 @@
 #include "Colors.hpp"
 #include "Logger.hpp"
 
-using namespace Limonp;
+using namespace limonp;
 
 TEST(ColorPrint, Test1) {
   ColorPrintln(RED, "hello %s", "world");

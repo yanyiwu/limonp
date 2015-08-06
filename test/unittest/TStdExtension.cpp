@@ -4,7 +4,7 @@
 #include <iostream>
 #include <deque>
 
-using namespace Limonp;
+using namespace limonp;
 TEST(StdOutbound, Test1) {
   ifstream ifs("../test/testdata/StdExtension.data");
   string s;

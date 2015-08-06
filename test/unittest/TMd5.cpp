@@ -2,7 +2,7 @@
 #include "gtest/gtest.h"
 #include <string>
 using namespace std;
-using namespace Limonp;
+using namespace limonp;
 
 const char* const DICT_FILE[] = {
   "../test/testdata/jieba.dict.0.utf8",

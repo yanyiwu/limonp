@@ -1,7 +1,7 @@
 #include "BoundedQueue.hpp"
 #include "gtest/gtest.h"
 
-using namespace Limonp;
+using namespace limonp;
 
 TEST(BoundedQueue, Test1) {
   const size_t size = 3;

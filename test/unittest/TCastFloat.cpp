@@ -3,7 +3,7 @@
 #include <cmath>
 
 using namespace std;
-using namespace Limonp;
+using namespace limonp;
 using namespace CastFloat;
 
 TEST(CastFunctTest, Test1) {

@@ -1,7 +1,7 @@
 #include "Config.hpp"
 #include "gtest/gtest.h"
 
-using namespace Limonp;
+using namespace limonp;
 TEST(COnfigTest, Test1) {
   Config conf("../test/testdata/1.conf");
   string res;
