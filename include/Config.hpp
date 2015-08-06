@@ -37,7 +37,8 @@ class Config {
         continue;
       }
       vecBuf.clear();
-      if(!split(line, vecBuf, "=") || 2 != vecBuf.size()) {
+      split(line, vecBuf, "=");
+      if(2 != vecBuf.size()) {
         fprintf(stderr, "line[%s] illegal.\n", line.c_str());
         assert(false);
         continue;

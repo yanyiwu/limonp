@@ -77,20 +77,32 @@ TEST(StrFunctsTest, Test5) {
   ASSERT_EQ("[\"1\", \"2\", \"3\", \"4\"]", res << vec);
   split("1,2,3,4,", vec, ",");
   ASSERT_EQ("[\"1\", \"2\", \"3\", \"4\"]", res << vec);
-  split(str, vec, ",", 0, 4);
+  split(str, vec, ",", 3);
   ASSERT_EQ("[\"1\", \"2\", \"3\", \"4\"]", res << vec);
 
   split("1", vec, ",");
   ASSERT_EQ("[\"1\"]", res << vec);
 
-  split(str, vec, ",", 1, 2);
-  ASSERT_EQ("[\"2\", \"3\"]", res << vec);
-  //print(vec);
-  split(str, vec, ",", 4, 5);
+  split(str, vec, ",", 1);
+  ASSERT_EQ("[\"1\", \"2,3,4\"]", res << vec);
+
+  split("", vec, ",");
   ASSERT_EQ("[]", res << vec);
-  //print(vec);
-  //exit(0);
-  //ASSERT_EQ(s << vec, "[\"\", \"1\", \"3\", \"4\", \"\"]");
+  
+  split("1, 2", vec, ",");
+  ASSERT_EQ("[\"1\", \"2\"]", res << vec);
+
+  split("1==2", vec, "==");
+  ASSERT_EQ("[\"1\", \"2\"]", res << vec);
+
+  split("1,", vec, ",");
+  ASSERT_EQ("[\"1\"]", res << vec);
+
+  split(",1,", vec, ",");
+  ASSERT_EQ("[\"\", \"1\"]", res << vec);
+
+  split("1, ", vec, ",");
+  ASSERT_EQ("[\"1\", \"\"]", res << vec);
 }
 
 TEST(StrFunctsTest, trim) {
