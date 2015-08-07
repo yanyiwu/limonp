@@ -7,6 +7,7 @@
 #include <string>
 #include "Logger.hpp"
 #include "InitOnOff.hpp"
+#include "StringUtil.hpp"
 
 namespace limonp {
 using namespace std;
