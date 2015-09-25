@@ -1,6 +1,7 @@
 language: cpp
 before_install:
-  - sudo apt-get install cmake
+  - if [ $TRAVIS_OS_NAME == linux ]; then sudo apt-get install cmake; fi
+  - if [ $TRAVIS_OS_NAME == osx ]; then brew install cmake; fi
 script: 
   - mkdir build
   - cd build
@@ -15,7 +16,7 @@ compiler:
   - gcc
 notifications:
   recipients:
-    - wuyanyi09@foxmail.com
+    - i@yanyiwu.com
   email:
     on_success: change
     on_failure: always
