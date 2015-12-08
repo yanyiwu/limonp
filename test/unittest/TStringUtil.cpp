@@ -103,6 +103,9 @@ TEST(StrFunctsTest, Test5) {
 
   split("1, ", vec, ",");
   ASSERT_EQ("[\"1\", \"\"]", res << vec);
+
+  res << split("1|2,3", "|,");
+  ASSERT_EQ("[\"1\", \"2\", \"3\"]", res);
 }
 
 TEST(StrFunctsTest, trim) {
