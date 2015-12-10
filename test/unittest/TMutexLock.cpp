@@ -42,10 +42,10 @@ class ThreadsLocked {
     for(size_t i = 0; i < pthreadInfos_.size(); i++) {
       pthreadInfos_[i].id = i;
       pthreadInfos_[i].ptMutexLock = &mutex_;
-      LIMONP_CHECK(!pthread_create(&pthreadInfos_[i].pthread_id, NULL, workerLocked, &pthreadInfos_[i]));
+      assert(!pthread_create(&pthreadInfos_[i].pthread_id, NULL, workerLocked, &pthreadInfos_[i]));
     }
     for(size_t i = 0; i < pthreadInfos_.size(); i++) {
-      LIMONP_CHECK(!pthread_join(pthreadInfos_[i].pthread_id, NULL));
+      assert(!pthread_join(pthreadInfos_[i].pthread_id, NULL));
     }
   }
 };

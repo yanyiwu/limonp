@@ -2,6 +2,7 @@
 #include <vector>
 #include "BlockingQueue.hpp"
 #include "BoundedBlockingQueue.hpp"
+#include "Logger.hpp"
 
 using namespace limonp;
 using namespace std;
@@ -25,7 +26,7 @@ class CBlockingQueueTest1 {
   ~CBlockingQueueTest1() {
   }
  public:
-  void wait() {
+  void Wait() {
     for(size_t i = 0; i < pthreads_.size(); i++) {
       LIMONP_CHECK(!pthread_join(pthreads_[i], NULL));
     }
@@ -76,7 +77,7 @@ TEST(BlockingQueue, Test1) {
   CBlockingQueueTest1 obj(threadnum, &res);
   //sleep(1);
   res.Push(1);
-  obj.wait();
+  obj.Wait();
   ASSERT_EQ(1u, res.Size());
   ASSERT_EQ(1u, res.Pop());
 

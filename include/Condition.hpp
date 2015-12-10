@@ -1,13 +1,10 @@
-/*
- * https://github.com/chenshuo/muduo/blob/master/muduo/base/Condition.h
- */
-
 #ifndef LIMONP_CONDITION_HPP
 #define LIMONP_CONDITION_HPP
 
 #include "MutexLock.hpp"
 
 namespace limonp {
+
 class Condition : NonCopyable {
  public:
   explicit Condition(MutexLock& mutex)
@@ -19,23 +16,23 @@ class Condition : NonCopyable {
     LIMONP_CHECK(!pthread_cond_destroy(&pcond_));
   }
 
-  void wait() {
+  void Wait() {
     LIMONP_CHECK(!pthread_cond_wait(&pcond_, mutex_.getPthreadMutex()));
   }
 
-  void notify() {
+  void Notify() {
     LIMONP_CHECK(!pthread_cond_signal(&pcond_));
   }
 
-  void notifyAll() {
+  void NotifyAll() {
     LIMONP_CHECK(!pthread_cond_broadcast(&pcond_));
   }
 
  private:
   MutexLock& mutex_;
   pthread_cond_t pcond_;
-};
+}; // class Condition
 
-}
+} // namespace limonp
 
-#endif
+#endif // LIMONP_CONDITION_HPP

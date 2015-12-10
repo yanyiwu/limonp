@@ -15,14 +15,14 @@ class BlockingQueue: NonCopyable {
   void Push(const T& x) {
     MutexLockGuard lock(mutex_);
     queue_.push(x);
-    notEmpty_.notify(); // wait morphing saves us
+    notEmpty_.Notify(); // Wait morphing saves us
   }
 
   T Pop() {
     MutexLockGuard lock(mutex_);
     // always use a while-loop, due to spurious wakeup
     while (queue_.empty()) {
-      notEmpty_.wait();
+      notEmpty_.Wait();
     }
     assert(!queue_.empty());
     T front(queue_.front());

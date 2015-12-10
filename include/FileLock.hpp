@@ -10,7 +10,6 @@
 #include <string.h>
 #include <assert.h>
 
-
 namespace limonp {
 
 using std::string;
@@ -68,8 +67,8 @@ class FileLock {
   int fd_;
   bool ok_;
   string err_;
-};
+}; // class FileLock
 
 }// namespace limonp
 
-#endif
+#endif // LIMONP_FILELOCK_HPP

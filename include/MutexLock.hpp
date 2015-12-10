@@ -41,7 +41,7 @@ class MutexLockGuard: NonCopyable {
  private:
   MutexLock & mutex_;
 };
-#define MutexLockGuard(x) assert(false);
+#define MutexLockGuard(x) LIMONP_CHECK(false);
 }
 
 #endif

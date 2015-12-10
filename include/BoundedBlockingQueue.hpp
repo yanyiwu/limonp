@@ -18,21 +18,21 @@ class BoundedBlockingQueue : NonCopyable {
   void Push(const T& x) {
     MutexLockGuard lock(mutex_);
     while (queue_.Full()) {
-      notFull_.wait();
+      notFull_.Wait();
     }
     assert(!queue_.Full());
     queue_.Push(x);
-    notEmpty_.notify();
+    notEmpty_.Notify();
   }
 
   T Pop() {
     MutexLockGuard lock(mutex_);
     while (queue_.Empty()) {
-      notEmpty_.wait();
+      notEmpty_.Wait();
     }
     assert(!queue_.Empty());
     T res = queue_.Pop();
-    notFull_.notify();
+    notFull_.Notify();
     return res;
   }
 

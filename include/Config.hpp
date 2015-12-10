@@ -5,7 +5,6 @@
 #ifndef LIMONP_CONFIG_H
 #define LIMONP_CONFIG_H
 
-
 #include <map>
 #include <fstream>
 #include <iostream>
@@ -13,18 +12,52 @@
 #include "StringUtil.hpp"
 
 namespace limonp {
+
 using namespace std;
+
 class Config {
  public:
   explicit Config(const string& filePath) {
-    loadFile_(filePath);
+    LoadFile(filePath);
   }
- public:
+
   operator bool () {
     return !map_.empty();
   }
+
+  string Get(const string& key, const string& defaultvalue) const {
+    map<string, string>::const_iterator it = map_.find(key);
+    if(map_.end() != it) {
+      return it->second;
+    }
+    return defaultvalue;
+  }
+  int Get(const string& key, int defaultvalue) const {
+    string str = Get(key, "");
+    if("" == str) {
+      return defaultvalue;
+    }
+    return atoi(str.c_str());
+  }
+  const char* operator [] (const char* key) const {
+    if(NULL == key) {
+      return NULL;
+    }
+    map<string, string>::const_iterator it = map_.find(key);
+    if(map_.end() != it) {
+      return it->second.c_str();
+    }
+    return NULL;
+  }
+
+  string GetConfigInfo() const {
+    string res;
+    res << *this;
+    return res;
+  }
+
  private:
-  void loadFile_(const string& filePath) {
+  void LoadFile(const string& filePath) {
     ifstream ifs(filePath.c_str());
     assert(ifs);
     string line;
@@ -55,46 +88,16 @@ class Config {
     }
     ifs.close();
   }
- public:
-  string get(const string& key, const string& defaultvalue) const {
-    map<string, string>::const_iterator it = map_.find(key);
-    if(map_.end() != it) {
-      return it->second;
-    }
-    return defaultvalue;
-  }
-  int get(const string& key, int defaultvalue) const {
-    string str = get(key, "");
-    if("" == str) {
-      return defaultvalue;
-    }
-    return atoi(str.c_str());
-  }
-  const char* operator [] (const char* key) const {
-    if(NULL == key) {
-      return NULL;
-    }
-    map<string, string>::const_iterator it = map_.find(key);
-    if(map_.end() != it) {
-      return it->second.c_str();
-    }
-    return NULL;
-  }
- public:
-  string getConfigInfo() const {
-    string res;
-    res << *this;
-    return res;
-  }
- private:
-  map<string, string> map_;
- private:
+
   friend ostream& operator << (ostream& os, const Config& config);
-};
+
+  map<string, string> map_;
+}; // class Config
 
 inline ostream& operator << (ostream& os, const Config& config) {
   return os << config.map_;
 }
-}
 
-#endif
+} // namespace limonp
+
+#endif // LIMONP_CONFIG_H
