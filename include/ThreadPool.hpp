@@ -3,8 +3,12 @@
 
 #include "Thread.hpp"
 #include "BlockingQueue.hpp"
+#include "BoundedBlockingQueue.hpp"
 
 namespace limonp {
+
+using namespace std;
+
 class ITask {
  public:
   virtual void run() = 0;
@@ -43,7 +47,7 @@ class ThreadPool: NonCopyable {
    public:
     virtual void run() {
       while(true) {
-        ITask * task = ptThreadPool_->queue_.pop();
+        ITask * task = ptThreadPool_->queue_.Pop();
         if(task == NULL) {
           break;
         }
@@ -79,7 +83,7 @@ class ThreadPool: NonCopyable {
   }
   ~ThreadPool() {
     for(size_t i = 0; i < threads_.size(); i ++) {
-      queue_.push(NULL);
+      queue_.Push(NULL);
     }
     for(size_t i = 0; i < threads_.size(); i ++) {
       threads_[i]->Join();
@@ -96,7 +100,7 @@ class ThreadPool: NonCopyable {
 
   void add(ITask* task) {
     assert(task);
-    queue_.push(task);
+    queue_.Push(task);
   }
 };
 }

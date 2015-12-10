@@ -6,26 +6,26 @@ using namespace limonp;
 TEST(BoundedQueue, Test1) {
   const size_t size = 3;
   BoundedQueue<size_t> que(size);
-  ASSERT_EQ(que.capacity(), size);
-  for(size_t i = 0; i < que.capacity(); i++) {
-    que.push(i);
-    ASSERT_EQ(que.size(), i + 1);
+  ASSERT_EQ(que.Capacity(), size);
+  for(size_t i = 0; i < que.Capacity(); i++) {
+    que.Push(i);
+    ASSERT_EQ(que.Size(), i + 1);
   }
-  ASSERT_TRUE(que.full());
-  for(size_t i = 0; que.size(); i++) {
-    ASSERT_EQ(que.pop(), i);
+  ASSERT_TRUE(que.Full());
+  for(size_t i = 0; que.Size(); i++) {
+    ASSERT_EQ(que.Pop(), i);
   }
-  ASSERT_TRUE(que.empty());
+  ASSERT_TRUE(que.Empty());
 
   //second time
-  for(size_t i = 0; i < que.capacity(); i++) {
-    que.push(i);
-    ASSERT_EQ(que.size(), i + 1);
+  for(size_t i = 0; i < que.Capacity(); i++) {
+    que.Push(i);
+    ASSERT_EQ(que.Size(), i + 1);
   }
-  ASSERT_TRUE(que.full());
-  for(size_t i = 0; que.size(); i++) {
-    ASSERT_EQ(que.pop(), i);
+  ASSERT_TRUE(que.Full());
+  for(size_t i = 0; que.Size(); i++) {
+    ASSERT_EQ(que.Pop(), i);
   }
-  ASSERT_TRUE(que.empty());
+  ASSERT_TRUE(que.Empty());
 }
 

@@ -11,6 +11,6 @@ TEST(ArgvContextTest, Test1) {
   ASSERT_EQ(s, "[\"./exe1\", \"key2\"]{--hehe:11, -k:val}{}");
   ASSERT_EQ("key2", arg[1]);
   ASSERT_EQ("11", arg["--hehe"]);
-  ASSERT_FALSE(arg.hasKey("-help"));
+  ASSERT_FALSE(arg.HasKey("-help"));
 }
 
