@@ -69,7 +69,7 @@ class MysqlClient: public InitOnOff {
   size_t insert(const string& tableName, const string& keys, const vector<string>& vals) {
     size_t retn = 0;
     for(size_t i = 0; i < vals.size(); i ++) {
-      string sql = string_format("insert into %s (%s) values %s", tableName.c_str(), keys.c_str(), vals[i].c_str());
+      string sql = StringFormat("insert into %s (%s) values %s", tableName.c_str(), keys.c_str(), vals[i].c_str());
       retn += executeSql(sql.c_str());
     }
     return retn;

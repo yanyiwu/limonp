@@ -82,7 +82,7 @@ class ThreadPool: NonCopyable {
       queue_.push(NULL);
     }
     for(size_t i = 0; i < threads_.size(); i ++) {
-      threads_[i]->join();
+      threads_[i]->Join();
       delete threads_[i];
     }
   }

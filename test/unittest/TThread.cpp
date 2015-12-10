@@ -19,13 +19,13 @@ TEST(IThread, Test1) {
   {
     ThreadHandle thr;
     thr.start();
-    thr.join();
+    thr.Join();
     ASSERT_EQ(thr.num, 2u);
   }
   {
     IThread* ptr = new ThreadHandle();
     ptr->start();
-    ptr->join();
+    ptr->Join();
     delete ptr;
   }
 }

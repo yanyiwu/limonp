@@ -32,12 +32,12 @@ class Config {
     size_t lineno = 0;
     while(getline(ifs, line)) {
       lineno ++;
-      trim(line);
-      if(line.empty() || startsWith(line, "#")) {
+      Trim(line);
+      if(line.empty() || StartsWith(line, "#")) {
         continue;
       }
       vecBuf.clear();
-      split(line, vecBuf, "=");
+      Split(line, vecBuf, "=");
       if(2 != vecBuf.size()) {
         fprintf(stderr, "line[%s] illegal.\n", line.c_str());
         assert(false);
@@ -45,8 +45,8 @@ class Config {
       }
       string& key = vecBuf[0];
       string& value = vecBuf[1];
-      trim(key);
-      trim(value);
+      Trim(key);
+      Trim(value);
       if(!map_.insert(make_pair(key, value)).second) {
         fprintf(stderr, "key[%s] already exits.\n", key.c_str());
         assert(false);

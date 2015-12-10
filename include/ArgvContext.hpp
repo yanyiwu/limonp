@@ -17,8 +17,8 @@ class ArgvContext {
   ArgvContext(int argc, const char* const * argv) {
 
     for(int i = 0; i < argc; i++) {
-      if(startsWith(argv[i], "-")) {
-        if(i + 1 < argc && !startsWith(argv[i + 1], "-")) {
+      if(StartsWith(argv[i], "-")) {
+        if(i + 1 < argc && !StartsWith(argv[i + 1], "-")) {
           mpss_[argv[i]] = argv[i+1];
           i++;
         } else {

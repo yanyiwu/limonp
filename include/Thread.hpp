@@ -25,7 +25,7 @@ class IThread: NonCopyable {
     LIMONP_CHECK(!pthread_create(&thread_, NULL, worker_, this));
     isStarted = true;
   }
-  void join() {
+  void Join() {
     LIMONP_CHECK(!isJoined);
     LIMONP_CHECK(!pthread_join(thread_, NULL));
     isJoined = true;

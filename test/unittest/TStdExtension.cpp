@@ -29,8 +29,8 @@ TEST(StdOutbound, Funct_IsIn) {
     mp[i] = i+1;
   }
 
-  ASSERT_TRUE(isIn(mp, 1));
-  ASSERT_FALSE(isIn(mp, 0));
+  ASSERT_TRUE(IsIn(mp, 1));
+  ASSERT_FALSE(IsIn(mp, 0));
 }
 
 TEST(StdOutbound, Test2) {
