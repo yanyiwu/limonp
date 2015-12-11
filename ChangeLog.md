@@ -1,5 +1,10 @@
 # limonp ChangeLog
 
+## next version
+
++ add test/demo.cc as example.
++ move `print` macro to StdExtension.hpp
+
 ## v0.3.0
 
 + remove 'MysqlClient.hpp', 'InitOnOff.hpp', 'CastFloat.hpp'
