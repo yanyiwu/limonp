@@ -3,6 +3,7 @@
 ## next version
 
 + remove 'MysqlClient.hpp', 'InitOnOff.hpp', 'CastFloat.hpp'
++ add 'Closure.hpp'
 + uniform code style
 
 ## v0.2.0

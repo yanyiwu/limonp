@@ -38,7 +38,7 @@ class ThreadsLocked {
     return NULL;
   }
  public:
-  void start() {
+  void Start() {
     for(size_t i = 0; i < pthreadInfos_.size(); i++) {
       pthreadInfos_[i].id = i;
       pthreadInfos_[i].ptMutexLock = &mutex_;
@@ -54,11 +54,11 @@ TEST(MutexLock, Test1) {
   string str;
   //ThreadsNoLocked noLock(THREAD_SUM);
   //res.clear();
-  //noLock.start();
+  //noLock.Start();
   //ASSERT_EQ(str << res, "[\"0\", \"0\", \"0\", \"1\", \"1\", \"1\", \"2\", \"2\", \"2\"]");
   ThreadsLocked locked(THREAD_SUM);
   res.clear();
-  locked.start();
+  locked.Start();
   ASSERT_EQ(str << res,  "[\"0\", \"1\", \"2\", \"0\", \"1\", \"2\", \"0\", \"1\", \"2\"]");
 }
 

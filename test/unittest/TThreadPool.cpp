@@ -16,7 +16,7 @@ class Task: public ITask {
  public:
   size_t& i_;
  public:
-  virtual void run() {
+  virtual void Run() {
     i_++;
   }
 };
@@ -39,7 +39,7 @@ class TaskWithException: public ITask {
  public:
   TaskWithException() {
   }
-  virtual void run() {
+  virtual void Run() {
     throw Exception("hello exception!!!");
   }
 };
@@ -50,10 +50,10 @@ TEST(ThreadPool, Test1) {
   vector<size_t> numbers(6);
   {
     ThreadPool threadPool(threadNum, queueMaxSize);
-    threadPool.start();
+    threadPool.Start();
     for(size_t i = 0; i < numbers.size(); i ++) {
       numbers[i] = i;
-      threadPool.add(CreateTask<Task, size_t& >(numbers[i]));
+      threadPool.Add(CreateTask<Task, size_t& >(numbers[i]));
     }
   }
   for(size_t i = 0; i < numbers.size(); i++) {
@@ -65,7 +65,7 @@ TEST(ThreadPool, Exception) {
   const size_t threadNum = 2;
   const size_t taskLimit = 4;
   ThreadPool threadPool(threadNum, taskLimit);
-  threadPool.start();
+  threadPool.Start();
   
-  threadPool.add(CreateTask<TaskWithException>());
+  threadPool.Add(CreateTask<TaskWithException>());
 }

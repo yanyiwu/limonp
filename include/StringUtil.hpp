@@ -108,21 +108,21 @@ inline std::string& Trim(std::string &s, char x) {
 
 inline void Split(const string& src, vector<string>& res, const string& pattern, size_t maxsplit = string::npos) {
   res.clear();
-  size_t start = 0;
+  size_t Start = 0;
   size_t end = 0;
   string sub;
-  while(start < src.size()) {
-    end = src.find_first_of(pattern, start);
+  while(Start < src.size()) {
+    end = src.find_first_of(pattern, Start);
     if(string::npos == end || res.size() >= maxsplit) {
-      sub = src.substr(start);
+      sub = src.substr(Start);
       Trim(sub);
       res.push_back(sub);
       return;
     }
-    sub = src.substr(start, end - start);
+    sub = src.substr(Start, end - Start);
     Trim(sub);
     res.push_back(sub);
-    start = end + 1;
+    Start = end + 1;
   }
   return;
 }
