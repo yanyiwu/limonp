@@ -7,6 +7,4 @@
 #define LIMONP_CHECK(exp) \
     if(!(exp)){fprintf(stderr, "File:%s, Line:%d Exp:[" #exp "] is true, abort.\n", __FILE__, __LINE__); abort();}
 
-#define print(x) cout << x << endl
-
 #endif
