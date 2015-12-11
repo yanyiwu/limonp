@@ -1,6 +1,6 @@
 # limonp ChangeLog
 
-## next version
+## v0.3.0
 
 + remove 'MysqlClient.hpp', 'InitOnOff.hpp', 'CastFloat.hpp'
 + add 'Closure.hpp'
