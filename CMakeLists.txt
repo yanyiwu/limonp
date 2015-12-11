@@ -9,4 +9,5 @@ endif()
 ADD_SUBDIRECTORY(test)
 
 ENABLE_TESTING()
-ADD_TEST(NAME testrun COMMAND test.run)
+ADD_TEST(NAME ./test/test.run COMMAND ./test/test.run)
+ADD_TEST(NAME ./test/demo COMMAND ./test/demo)
