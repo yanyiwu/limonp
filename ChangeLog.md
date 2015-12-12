@@ -1,6 +1,6 @@
 # limonp ChangeLog
 
-## next version
+## v0.4.0
 
 + add test/demo.cc as example.
 + move `print` macro to StdExtension.hpp
