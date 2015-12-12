@@ -4,6 +4,8 @@
 
 + add test/demo.cc as example.
 + move `print` macro to StdExtension.hpp
++ BigChange: rewrite `log` module, use `LOG(INFO) << "xxx" ` instead `LogInfo` .
++ remove HandyMacro.hpp, add CHECK in Logging.hpp instead.
 
 ## v0.3.0
 

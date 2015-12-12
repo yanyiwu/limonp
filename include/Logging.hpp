@@ -9,8 +9,12 @@
 #ifdef LOG
 #error "LOG has been defined already"
 #endif // LOG
+#ifdef CHECK
+#error "CHECK has been defined already"
+#endif // CHECK
 
 #define LOG(level) limonp::Logger(limonp::level, __FILE__, __LINE__).Stream() 
+#define CHECK(exp) {if(!(exp)) LOG(FATAL) << #exp << " is false, abort."; }
 
 namespace limonp {
 

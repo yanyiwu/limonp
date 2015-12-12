@@ -3,17 +3,17 @@
 
 #include <pthread.h>
 #include "NonCopyable.hpp"
-#include "HandyMacro.hpp"
+#include "Logging.hpp"
 
 namespace limonp {
 
 class MutexLock: NonCopyable {
  public:
   MutexLock() {
-    LIMONP_CHECK(!pthread_mutex_init(&mutex_, NULL));
+    CHECK(!pthread_mutex_init(&mutex_, NULL));
   }
   ~MutexLock() {
-    LIMONP_CHECK(!pthread_mutex_destroy(&mutex_));
+    CHECK(!pthread_mutex_destroy(&mutex_));
   }
   pthread_mutex_t* GetPthreadMutex() {
     return &mutex_;
@@ -21,10 +21,10 @@ class MutexLock: NonCopyable {
 
  private:
   void Lock() {
-    LIMONP_CHECK(!pthread_mutex_lock(&mutex_));
+    CHECK(!pthread_mutex_lock(&mutex_));
   }
   void Unlock() {
-    LIMONP_CHECK(!pthread_mutex_unlock(&mutex_));
+    CHECK(!pthread_mutex_unlock(&mutex_));
   }
   friend class MutexLockGuard;
 
@@ -44,7 +44,7 @@ class MutexLockGuard: NonCopyable {
   MutexLock & mutex_;
 }; // class MutexLockGuard
 
-#define MutexLockGuard(x) LIMONP_CHECK(false);
+#define MutexLockGuard(x) CHECK(false);
 
 } // namespace limonp
 
