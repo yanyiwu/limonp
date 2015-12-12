@@ -3,9 +3,6 @@
 #ifndef LIMONP_NONCOPYABLE_H
 #define LIMONP_NONCOPYABLE_H
 
-#include <iostream>
-#include <string>
-
 namespace limonp {
 
 class NonCopyable {

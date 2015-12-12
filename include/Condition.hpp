@@ -17,7 +17,7 @@ class Condition : NonCopyable {
   }
 
   void Wait() {
-    LIMONP_CHECK(!pthread_cond_wait(&pcond_, mutex_.getPthreadMutex()));
+    LIMONP_CHECK(!pthread_cond_wait(&pcond_, mutex_.GetPthreadMutex()));
   }
 
   void Notify() {

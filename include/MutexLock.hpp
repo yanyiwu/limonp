@@ -6,13 +6,8 @@
 #include "HandyMacro.hpp"
 
 namespace limonp {
+
 class MutexLock: NonCopyable {
- private:
-  pthread_mutex_t mutex_;
- public:
-  pthread_mutex_t* getPthreadMutex() {
-    return &mutex_;
-  }
  public:
   MutexLock() {
     LIMONP_CHECK(!pthread_mutex_init(&mutex_, NULL));
@@ -20,28 +15,37 @@ class MutexLock: NonCopyable {
   ~MutexLock() {
     LIMONP_CHECK(!pthread_mutex_destroy(&mutex_));
   }
+  pthread_mutex_t* GetPthreadMutex() {
+    return &mutex_;
+  }
+
  private:
-  void lock() {
+  void Lock() {
     LIMONP_CHECK(!pthread_mutex_lock(&mutex_));
   }
-  void unlock() {
+  void Unlock() {
     LIMONP_CHECK(!pthread_mutex_unlock(&mutex_));
   }
   friend class MutexLockGuard;
-};
+
+  pthread_mutex_t mutex_;
+}; // class MutexLock
+
 class MutexLockGuard: NonCopyable {
  public:
   explicit MutexLockGuard(MutexLock & mutex)
     : mutex_(mutex) {
-    mutex_.lock();
+    mutex_.Lock();
   }
   ~MutexLockGuard() {
-    mutex_.unlock();
+    mutex_.Unlock();
   }
  private:
   MutexLock & mutex_;
-};
-#define MutexLockGuard(x) LIMONP_CHECK(false);
-}
+}; // class MutexLockGuard
 
-#endif
+#define MutexLockGuard(x) LIMONP_CHECK(false);
+
+} // namespace limonp
+
+#endif // LIMONP_MUTEX_LOCK_HPP

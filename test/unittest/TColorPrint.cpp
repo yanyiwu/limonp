@@ -1,16 +1,16 @@
 #include "gtest/gtest.h"
 #include "Colors.hpp"
-#include "Logger.hpp"
+#include "Logging.hpp"
 
 using namespace limonp;
 
 TEST(ColorPrint, Test1) {
   ColorPrintln(RED, "hello %s", "world");
   ColorPrintln(RED, "hello %s", "world");
-  LogInfo("hello world");
+  LOG(INFO) << "hello world";
   ColorPrintln(RED, "hello %s", "world");
   ColorPrintln(GREEN, "hello %s", "world");
-  LogInfo("hello world");
+  LOG(INFO) << "hello world";
   ColorPrintln(BLACK, "hello %s", "world");
   ColorPrintln(YELLOW, "hello %s", "world");
   ColorPrintln(BLUE, "hello %s", "world");

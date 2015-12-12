@@ -1,8 +1,6 @@
 #include "gtest/gtest.h"
-#include <vector>
 #include "BlockingQueue.hpp"
 #include "BoundedBlockingQueue.hpp"
-#include "Logger.hpp"
 
 using namespace limonp;
 using namespace std;

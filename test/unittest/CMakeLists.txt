@@ -7,7 +7,8 @@ INCLUDE_DIRECTORIES(${GTEST_ROOT_DIR} ${GTEST_ROOT_DIR}/include ${PROJECT_SOURCE
 ADD_LIBRARY(gtest STATIC ${GTEST_ROOT_DIR}/src/gtest-all.cc)
 ADD_EXECUTABLE(test.run 
     gtest_main.cpp 
-    TLogger.cpp  
+    #TLogger.cpp  
+    TLogging.cpp  
     TArgvContext.cpp  
     TConfig.cpp
     TMd5.cpp
