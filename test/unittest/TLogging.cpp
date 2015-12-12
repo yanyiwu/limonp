@@ -7,5 +7,6 @@ TEST(Logging, Test1) {
   LOG(INFO) << "hello";
   LOG(WARNING) << "hello";
   LOG(ERROR) << "hello";
+  //CHECK(false) << "hello, " << "world";
   //LOG(FATAL) << "hello";
 }

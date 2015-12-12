@@ -1,5 +1,9 @@
 # limonp ChangeLog
 
+## v0.4.1
+
++ `CHECK(exp) << "log message"` supported;
+
 ## v0.4.0
 
 + add test/demo.cc as example.
