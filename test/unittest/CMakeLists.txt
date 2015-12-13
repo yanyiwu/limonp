@@ -13,6 +13,7 @@ ADD_EXECUTABLE(test.run
     TBlockingQueue.cpp 
     TBoundedQueue.cpp 
     TLocalVector.cpp 
+    TClosure.cpp 
     TThread.cpp 
     TThreadPool.cpp 
     TColorPrint.cpp
