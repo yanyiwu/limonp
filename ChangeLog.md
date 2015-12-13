@@ -1,5 +1,9 @@
 # limonp ChangeLog
 
+## next version
+
++ Reorganized directories: include/ -> include/limonp/ ... and so on.
+
 ## v0.4.1
 
 + `CHECK(exp) << "log message"` supported;
