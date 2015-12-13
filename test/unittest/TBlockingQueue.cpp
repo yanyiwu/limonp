@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
-#include "BlockingQueue.hpp"
-#include "BoundedBlockingQueue.hpp"
+#include "limonp/BlockingQueue.hpp"
+#include "limonp/BoundedBlockingQueue.hpp"
 
 using namespace limonp;
 using namespace std;

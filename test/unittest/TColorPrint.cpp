@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
-#include "Colors.hpp"
-#include "Logging.hpp"
+#include "limonp/Colors.hpp"
+#include "limonp/Logging.hpp"
 
 using namespace limonp;
 

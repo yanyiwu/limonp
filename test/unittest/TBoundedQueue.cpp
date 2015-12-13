@@ -1,4 +1,4 @@
-#include "BoundedQueue.hpp"
+#include "limonp/BoundedQueue.hpp"
 #include "gtest/gtest.h"
 
 using namespace limonp;

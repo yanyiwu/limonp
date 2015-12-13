@@ -1,4 +1,4 @@
-#include "Config.hpp"
+#include "limonp/Config.hpp"
 #include "gtest/gtest.h"
 
 using namespace limonp;

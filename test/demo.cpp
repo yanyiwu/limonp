@@ -1,5 +1,5 @@
-#include "../include/StringUtil.hpp"
-#include "../include/Logging.hpp"
+#include "limonp/StringUtil.hpp"
+#include "limonp/Logging.hpp"
 
 using namespace std;
 

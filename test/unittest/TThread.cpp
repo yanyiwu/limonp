@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "Thread.hpp"
+#include "limonp/Thread.hpp"
 using namespace limonp;
 
 TEST(IThread, Test1) {

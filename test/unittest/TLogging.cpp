@@ -1,5 +1,5 @@
 #define LOGGING_LEVEL WARNING
-#include "Logging.hpp"
+#include "limonp/Logging.hpp"
 #include "gtest/gtest.h"
 
 TEST(Logging, Test1) {
