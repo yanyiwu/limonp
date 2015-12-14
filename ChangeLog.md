@@ -3,7 +3,7 @@
 ## next version
 
 + Reorganized directories: include/ -> include/limonp/ ... and so on.
-+ Add `NewClosure` in Closure.hpp, 0~4 arguments have been supported.
++ Add `NewClosure` in Closure.hpp, 0~3 arguments have been supported.
 
 ## v0.4.1
 

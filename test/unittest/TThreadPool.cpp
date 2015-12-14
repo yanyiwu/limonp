@@ -46,10 +46,9 @@ class TaskWithException: public ITask {
 
 TEST(ThreadPool, Test1) {
   const size_t threadNum = 2;
-  const size_t queueMaxSize = 4;
   vector<size_t> numbers(6);
   {
-    ThreadPool threadPool(threadNum, queueMaxSize);
+    ThreadPool threadPool(threadNum);
     threadPool.Start();
     for(size_t i = 0; i < numbers.size(); i ++) {
       numbers[i] = i;
@@ -63,8 +62,7 @@ TEST(ThreadPool, Test1) {
 
 TEST(ThreadPool, Exception) {
   const size_t threadNum = 2;
-  const size_t taskLimit = 4;
-  ThreadPool threadPool(threadNum, taskLimit);
+  ThreadPool threadPool(threadNum);
   threadPool.Start();
   
   threadPool.Add(CreateTask<TaskWithException>());

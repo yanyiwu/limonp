@@ -45,11 +45,10 @@ class ThreadPool: NonCopyable {
     ThreadPool * ptThreadPool_;
   }; // class Worker
 
-  ThreadPool(size_t threadNum, size_t queueMaxSize)
-    : threads_(threadNum), 
-      queue_(queueMaxSize) {
-    assert(threadNum);
-    assert(queueMaxSize);
+  ThreadPool(size_t thread_num)
+    : threads_(thread_num), 
+      queue_(thread_num) {
+    assert(thread_num);
     for(size_t i = 0; i < threads_.size(); i ++) {
       threads_[i] = new Worker(this);
     }
