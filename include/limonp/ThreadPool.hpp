@@ -22,23 +22,19 @@ class ThreadPool: NonCopyable {
     }
 
     virtual void Run() {
-      while(true) {
-        ITask * task = ptThreadPool_->queue_.Pop();
-        if(task == NULL) {
+      while (true) {
+        ClosureInterface* closure = ptThreadPool_->queue_.Pop();
+        if (closure == NULL) {
           break;
         }
         try {
-          task->Run();
+          closure->Run();
         } catch(std::exception& e) {
-          cerr << "file:" << __FILE__ 
-               << ", line:" << __LINE__ 
-               << ", " << e.what() << endl;
+          LOG(ERROR) << e.what();
         } catch(...) {
-          cerr << "file:" << __FILE__ 
-               << ", line:" << __LINE__ 
-               << ", unknown exception." << endl;
+          LOG(ERROR) << " unknown exception.";
         }
-        delete task;
+        delete closure;
       }
     }
    private:
@@ -69,7 +65,7 @@ class ThreadPool: NonCopyable {
     }
   }
 
-  void Add(ITask* task) {
+  void Add(ClosureInterface* task) {
     assert(task);
     queue_.Push(task);
   }
@@ -78,7 +74,7 @@ class ThreadPool: NonCopyable {
   friend class Worker;
 
   vector<IThread*> threads_;
-  BoundedBlockingQueue<ITask*> queue_;
+  BoundedBlockingQueue<ClosureInterface*> queue_;
 }; // class ThreadPool
 
 } // namespace limonp

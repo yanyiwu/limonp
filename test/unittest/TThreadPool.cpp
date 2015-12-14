@@ -9,17 +9,9 @@ using namespace limonp;
 //    (*i) ++;
 //}
 
-class Task: public ITask {
- public:
-  Task(size_t& i): i_(i) {
-  }
- public:
-  size_t& i_;
- public:
-  virtual void Run() {
-    i_++;
-  }
-};
+void Incr(size_t* x) {
+  (*x)++;
+}
 
 class Exception: public exception {
  public:
@@ -35,24 +27,19 @@ class Exception: public exception {
   string error_;
 };
 
-class TaskWithException: public ITask {
- public:
-  TaskWithException() {
-  }
-  virtual void Run() {
-    throw Exception("hello exception!!!");
-  }
-};
+void IncrWithThrow(int* x) {
+  throw Exception("hello exception!!!");
+}
 
 TEST(ThreadPool, Test1) {
   const size_t threadNum = 2;
-  vector<size_t> numbers(6);
+  vector<size_t> numbers(threadNum);
   {
     ThreadPool threadPool(threadNum);
     threadPool.Start();
     for(size_t i = 0; i < numbers.size(); i ++) {
       numbers[i] = i;
-      threadPool.Add(CreateTask<Task, size_t& >(numbers[i]));
+      threadPool.Add(NewClosure(&Incr, &numbers[i]));
     }
   }
   for(size_t i = 0; i < numbers.size(); i++) {
@@ -65,5 +52,6 @@ TEST(ThreadPool, Exception) {
   ThreadPool threadPool(threadNum);
   threadPool.Start();
   
-  threadPool.Add(CreateTask<TaskWithException>());
+  int x;
+  threadPool.Add(NewClosure(&IncrWithThrow, &x));
 }
