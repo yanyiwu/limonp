@@ -4,6 +4,7 @@
 
 + Reorganized directories: include/ -> include/limonp/ ... and so on.
 + Add `NewClosure` in Closure.hpp, 0~3 arguments have been supported.
++ Update ThreadPool, use `NewClosure` instead of `CreateTask`
 
 ## v0.4.1
 
