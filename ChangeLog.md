@@ -1,6 +1,6 @@
 # limonp ChangeLog
 
-## next version
+## v0.5.0
 
 + Reorganized directories: include/ -> include/limonp/ ... and so on.
 + Add `NewClosure` in Closure.hpp, 0~3 arguments have been supported.
