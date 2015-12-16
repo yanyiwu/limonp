@@ -1,5 +1,10 @@
 # limonp ChangeLog
 
+## v0.5.1
+
++ add `ThreadPool::Stop()` to wait util all the threads finished. 
+If Stop() has not been called, it will be called when the ThreadPool destructing.
+
 ## v0.5.0
 
 + Reorganized directories: include/ -> include/limonp/ ... and so on.
