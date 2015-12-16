@@ -50,6 +50,15 @@ class ThreadPool: NonCopyable {
     }
   }
   ~ThreadPool() {
+    Stop();
+  }
+
+  void Start() {
+    for(size_t i = 0; i < threads_.size(); i++) {
+      threads_[i]->Start();
+    }
+  }
+  void Stop() {
     for(size_t i = 0; i < threads_.size(); i ++) {
       queue_.Push(NULL);
     }
@@ -57,12 +66,7 @@ class ThreadPool: NonCopyable {
       threads_[i]->Join();
       delete threads_[i];
     }
-  }
-
-  void Start() {
-    for(size_t i = 0; i < threads_.size(); i++) {
-      threads_[i]->Start();
-    }
+    threads_.clear();
   }
 
   void Add(ClosureInterface* task) {

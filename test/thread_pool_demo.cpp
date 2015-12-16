@@ -37,13 +37,12 @@ class Numbers {
 void DemoClassFunction() {
   Numbers numbers(4);
   cout << numbers.numbers_ << endl;
-  {
-    limonp::ThreadPool thread_pool(THREAD_NUM);
-    thread_pool.Start();
-    for (size_t i = 0; i < numbers.numbers_.size(); i++) {
-      thread_pool.Add(limonp::NewClosure(&numbers, &Numbers::Increase, i));
-    }
+  limonp::ThreadPool thread_pool(THREAD_NUM);
+  thread_pool.Start();
+  for (size_t i = 0; i < numbers.numbers_.size(); i++) {
+    thread_pool.Add(limonp::NewClosure(&numbers, &Numbers::Increase, i));
   }
+  thread_pool.Stop();
   cout << numbers.numbers_ << endl;
 }
 
