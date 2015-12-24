@@ -1,7 +1,8 @@
-[![Build Status](https://travis-ci.org/yanyiwu/limonp.png?branch=master)](https://travis-ci.org/yanyiwu/limonp)
-- - - 
-
 # limonp 
+
+[![Build Status](https://travis-ci.org/yanyiwu/limonp.png?branch=master)](https://travis-ci.org/yanyiwu/limonp)
+[![Author](https://img.shields.io/badge/author-@yanyiwu-blue.svg?style=flat)](http://yanyiwu.com/) 
+[![License](https://img.shields.io/badge/license-MIT-yellow.svg?style=flat)](http://yanyiwu.mit-license.org)
 
 ## Introduction
 
