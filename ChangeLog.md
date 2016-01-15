@@ -1,6 +1,6 @@
 # limonp ChangeLog
 
-## next version
+## v0.5.2
 
 + Fix incompatibility problem about `enum {INFO ...}` name conflicts in Windows .
 + So from this version begin: the compile flags: `-DLOGGING_LEVEL=WARNING` must be changed to `-DLOGGING_LEVEL=LL_WARNING`
