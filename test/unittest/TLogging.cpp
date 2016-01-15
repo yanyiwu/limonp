@@ -1,4 +1,4 @@
-#define LOGGING_LEVEL WARNING
+#define LOGGING_LEVEL LL_WARNING
 #include "limonp/Logging.hpp"
 #include "gtest/gtest.h"
 

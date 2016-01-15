@@ -1,5 +1,10 @@
 # limonp ChangeLog
 
+## next version
+
++ Fix incompatibility problem about `enum {INFO ...}` name conflicts in Windows .
++ So from this version begin: the compile flags: `-DLOGGING_LEVEL=WARNING` must be changed to `-DLOGGING_LEVEL=LL_WARNING`
+
 ## v0.5.1
 
 + add `ThreadPool::Stop()` to wait util all the threads finished. 
