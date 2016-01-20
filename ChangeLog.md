@@ -1,5 +1,9 @@
 # limonp ChangeLog
 
+## next version
+
++ Fix incompatibility problem about 'time.h' in Windows.
+
 ## v0.5.2
 
 + Fix incompatibility problem about `enum {INFO ...}` name conflicts in Windows .
