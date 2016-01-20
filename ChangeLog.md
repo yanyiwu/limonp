@@ -1,6 +1,6 @@
 # limonp ChangeLog
 
-## next version
+## v0.5.3
 
 + Fix incompatibility problem about 'time.h' in Windows.
 
