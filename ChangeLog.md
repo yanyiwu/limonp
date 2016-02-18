@@ -2,7 +2,8 @@
 
 ## next version
 
-+ Add Utf8ToUnicode32 and Unicode32ToUtf8.
++ add ForcePublic.hpp
++ Add Utf8ToUnicode32 and Unicode32ToUtf8 in StringUtil.hpp
 
 ## v0.5.3
 
