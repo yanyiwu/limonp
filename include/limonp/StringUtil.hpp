@@ -202,7 +202,7 @@ bool Utf8ToUnicode32(const string& str, Uint32Container& vec) {
       i++;
     } else if ((uint8_t)str[i] <= 0xdf && i + 1 < str.size()) { // 110xxxxxx
       // 5bit, total 5bit
-      tmp = (uint8_t)(str[i]) & 0x07;
+      tmp = (uint8_t)(str[i]) & 0x1f;
 
       // 6bit, total 11bit
       tmp <<= 6;
@@ -210,7 +210,7 @@ bool Utf8ToUnicode32(const string& str, Uint32Container& vec) {
       i += 2;
     } else if((uint8_t)str[i] <= 0xef && i + 2 < str.size()) { // 1110xxxxxx
       // 4bit, total 4bit
-      tmp = (uint8_t)(str[i]) & 0x07;
+      tmp = (uint8_t)(str[i]) & 0x0f;
 
       // 6bit, total 10bit
       tmp <<= 6;

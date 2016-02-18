@@ -161,3 +161,14 @@ TEST(StringUtilTest, RareChineseUnicode32) {
   Unicode32ToUtf8(unicode.begin(), unicode.end(), s2);
   ASSERT_EQ(s2, s);
 }
+
+TEST(StringUtilTest, Unicode32) {
+  const char* s = "1+1=2你好世界，。";
+  vector<uint32_t> unicode;
+  ASSERT_TRUE(Utf8ToUnicode32(s, unicode));
+  ASSERT_EQ(unicode.size(), 11u);
+
+  string s2;
+  Unicode32ToUtf8(unicode.begin(), unicode.end(), s2);
+  ASSERT_EQ(s2, s);
+}
