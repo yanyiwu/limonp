@@ -1,6 +1,6 @@
 # limonp ChangeLog
 
-## next version
+## v0.5.4
 
 + add ForcePublic.hpp
 + Add Utf8ToUnicode32 and Unicode32ToUtf8 in StringUtil.hpp
