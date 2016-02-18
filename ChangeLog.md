@@ -1,5 +1,9 @@
 # limonp ChangeLog
 
+## next version
+
++ Add Utf8ToUnicode32 and Unicode32ToUtf8.
+
 ## v0.5.3
 
 + Fix incompatibility problem about 'time.h' in Windows.

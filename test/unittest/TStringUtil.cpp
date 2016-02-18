@@ -2,7 +2,7 @@
 #include "gtest/gtest.h"
 using namespace limonp;
 
-TEST(StrFunctsTest, Test1) {
+TEST(StringUtilTest, Test1) {
   vector<string> vec;
   string s;
   Split("\t1\t3\t4\t", vec, "\t");
@@ -31,7 +31,7 @@ TEST(StrFunctsTest, Test1) {
   ASSERT_EQ("{1:2}", s <<  hmp);
 }
 
-TEST(StrFunctsTest, Test2) {
+TEST(StringUtilTest, Test2) {
   string s, gbks;
   ifstream ifs("../test/testdata/dict.gbk");
   ASSERT_TRUE(!!ifs);
@@ -44,7 +44,7 @@ TEST(StrFunctsTest, Test2) {
   }
 }
 
-TEST(StrFunctsTest, Test3) {
+TEST(StringUtilTest, Test3) {
   string s, utf8;
   ifstream ifs("../test/testdata/dict.utf8");
   ASSERT_TRUE(!!ifs);
@@ -57,7 +57,7 @@ TEST(StrFunctsTest, Test3) {
   }
 }
 
-TEST(StrFunctsTest, Test4) {
+TEST(StringUtilTest, Test4) {
   //ASSERT_TRUE(StartsWith("--help",NULL));
   ASSERT_TRUE(StartsWith("--help","--"));
   ASSERT_TRUE(StartsWith("--help","-"));
@@ -69,7 +69,7 @@ TEST(StrFunctsTest, Test4) {
   ASSERT_TRUE(EndsWith("hel","el"));
 }
 
-TEST(StrFunctsTest, Test5) {
+TEST(StringUtilTest, Test5) {
   const char* str = "1,2,3,4";
   vector<string> vec;
   string res;
@@ -108,7 +108,7 @@ TEST(StrFunctsTest, Test5) {
   ASSERT_EQ("[\"1\", \"2\", \"3\"]", res);
 }
 
-TEST(StrFunctsTest, Trim) {
+TEST(StringUtilTest, Trim) {
   string s;
   s = "xxxyyyxx";
   ASSERT_EQ(RTrim(s, 'x'), "xxxyyy");
@@ -117,13 +117,13 @@ TEST(StrFunctsTest, Trim) {
   ASSERT_EQ(Trim(s, 'x'), "yyy");
 }
 
-TEST(StrFunctsTest, GetTime) {
+TEST(StringUtilTest, GetTime) {
   string s;
   GetTime("%Y-%m-%d %H:%M:%S", s);
   //print(s);
 }
 
-TEST(StrFunctsTest, PathJoin) {
+TEST(StringUtilTest, PathJoin) {
   const char * path1 = "/home/foo/dir";
   const char * path2 = "file";
   const char * path3 = "/home/foo/dir/";
@@ -132,4 +132,32 @@ TEST(StrFunctsTest, PathJoin) {
 
   ASSERT_EQ(answer, PathJoin(path1, path2));
   ASSERT_EQ(answer, PathJoin(path3, path4));
+}
+
+TEST(StringUtilTest, JapaneseUnicode) {
+  // Japanese
+  const char* s = "がんば";
+  vector<uint16_t> unicode;
+  ASSERT_TRUE(Utf8ToUnicode(s, unicode));
+  ASSERT_EQ(3u, unicode.size());
+}
+
+TEST(StringUtilTest, RareChinese) {
+  //U+10000 – U+10FFFF
+  const char* s = "𪚥";
+  vector<uint16_t> unicode;
+  ASSERT_FALSE(Utf8ToUnicode(s, unicode));
+  ASSERT_EQ(0u, unicode.size());
+}
+
+TEST(StringUtilTest, RareChineseUnicode32) {
+  //U+10000 – U+10FFFF
+  const char* s = "𪚥";
+  vector<uint32_t> unicode;
+  ASSERT_TRUE(Utf8ToUnicode32(s, unicode));
+  ASSERT_EQ(1u, unicode.size());
+
+  string s2;
+  Unicode32ToUtf8(unicode.begin(), unicode.end(), s2);
+  ASSERT_EQ(s2, s);
 }
