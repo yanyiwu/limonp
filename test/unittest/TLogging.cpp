@@ -3,10 +3,10 @@
 #include "gtest/gtest.h"
 
 TEST(Logging, Test1) {
-  LOG(DEBUG) << "xxx" << " yyy";
-  LOG(INFO) << "hello";
-  LOG(WARNING) << "hello";
-  LOG(ERROR) << "hello";
-  //CHECK(false) << "hello, " << "world";
-  //LOG(FATAL) << "hello";
+  XLOG(DEBUG) << "xxx" << " yyy";
+  XLOG(INFO) << "hello";
+  XLOG(WARNING) << "hello";
+  XLOG(ERROR) << "hello";
+  //XCHECK(false) << "hello, " << "world";
+  //XLOG(FATAL) << "hello";
 }

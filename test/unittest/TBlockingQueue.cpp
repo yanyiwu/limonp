@@ -18,7 +18,7 @@ class CBlockingQueueTest1 {
  public:
   CBlockingQueueTest1(const size_t threadSum, void* arg): pthreads_(threadSum) {
     for(size_t i = 0; i < pthreads_.size(); i++) {
-      CHECK(!pthread_create(&pthreads_[i], NULL, workerLocked, arg));
+      XCHECK(!pthread_create(&pthreads_[i], NULL, workerLocked, arg));
     }
   }
   ~CBlockingQueueTest1() {
@@ -26,7 +26,7 @@ class CBlockingQueueTest1 {
  public:
   void Wait() {
     for(size_t i = 0; i < pthreads_.size(); i++) {
-      CHECK(!pthread_join(pthreads_[i], NULL));
+      XCHECK(!pthread_join(pthreads_[i], NULL));
     }
   }
 

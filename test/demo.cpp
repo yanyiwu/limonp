@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
   limonp::Split(str, buf, ",");
   print(buf); //["hello", "world"];
 
-  LOG(INFO) << "hello, world"; //2014-04-05 20:52:37 demo.cpp:20 INFO hello, world
+  XLOG(INFO) << "hello, world"; //2014-04-05 20:52:37 demo.cpp:20 INFO hello, world
   //In the same way, `LOG(DEBUG),LOG(WARNING),LOG(ERROR),LOG(FATAL)`.
   return EXIT_SUCCESS;
 }

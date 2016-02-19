@@ -7,10 +7,10 @@ using namespace limonp;
 TEST(ColorPrint, Test1) {
   ColorPrintln(RED, "hello %s", "world");
   ColorPrintln(RED, "hello %s", "world");
-  LOG(INFO) << "hello world";
+  XLOG(INFO) << "hello world";
   ColorPrintln(RED, "hello %s", "world");
   ColorPrintln(GREEN, "hello %s", "world");
-  LOG(INFO) << "hello world";
+  XLOG(INFO) << "hello world";
   ColorPrintln(BLACK, "hello %s", "world");
   ColorPrintln(YELLOW, "hello %s", "world");
   ColorPrintln(BLUE, "hello %s", "world");
