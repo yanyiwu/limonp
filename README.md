@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/yanyiwu/limonp.png?branch=master)](https://travis-ci.org/yanyiwu/limonp)
 [![Author](https://img.shields.io/badge/author-@yanyiwu-blue.svg?style=flat)](http://yanyiwu.com/) 
+[![Platform](https://img.shields.io/badge/platform-Linux,%20OS%20X,%20Windows-green.svg?style=flat)](https://github.com/yanyiwu/limonp)
 [![License](https://img.shields.io/badge/license-MIT-yellow.svg?style=flat)](http://yanyiwu.mit-license.org)
 
 ## Introduction
