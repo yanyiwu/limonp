@@ -1,6 +1,6 @@
 # limonp ChangeLog
 
-## next version
+## v0.5.6
 
 + fix hidden trouble.
 
