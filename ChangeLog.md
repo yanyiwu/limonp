@@ -1,5 +1,9 @@
 # limonp ChangeLog
 
+## next version
+
++ fix hidden trouble.
+
 ## v0.5.5
 
 + macro name LOG and CHECK in Logging.hpp is so easy to confict with other lib, so I have to rename them to XLOG and XCHECK for avoiding those macro name conflicts.

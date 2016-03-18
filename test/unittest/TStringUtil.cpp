@@ -115,6 +115,15 @@ TEST(StringUtilTest, Trim) {
   ASSERT_EQ(LTrim(s, 'x'), "yyy");
   s = "xxxyyyxx";
   ASSERT_EQ(Trim(s, 'x'), "yyy");
+
+  s = " x y ";
+  ASSERT_EQ(Trim(s), "x y");
+
+  // check if it core dump when using isalpha
+  wchar_t w = 1000024;
+  ASSERT_FALSE(IsSpace(w));
+  w = 0x20;
+  ASSERT_TRUE(IsSpace(w));
 }
 
 TEST(StringUtilTest, GetTime) {
