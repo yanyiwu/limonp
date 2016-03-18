@@ -1,6 +1,6 @@
 # limonp ChangeLog
 
-## next version
+## v0.6.0
 
 + remove Trim out of Split.
 
