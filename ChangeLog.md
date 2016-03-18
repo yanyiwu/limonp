@@ -1,5 +1,9 @@
 # limonp ChangeLog
 
+## next version
+
++ remove Trim out of Split.
+
 ## v0.5.6
 
 + fix hidden trouble.

@@ -90,7 +90,7 @@ TEST(StringUtilTest, Test5) {
   ASSERT_EQ("[]", res << vec);
   
   Split("1, 2", vec, ",");
-  ASSERT_EQ("[\"1\", \"2\"]", res << vec);
+  ASSERT_EQ("[\"1\", \" 2\"]", res << vec);
 
   Split("1==2", vec, "==");
   ASSERT_EQ("[\"1\", \"\", \"2\"]", res << vec);
@@ -102,7 +102,7 @@ TEST(StringUtilTest, Test5) {
   ASSERT_EQ("[\"\", \"1\"]", res << vec);
 
   Split("1, ", vec, ",");
-  ASSERT_EQ("[\"1\", \"\"]", res << vec);
+  ASSERT_EQ("[\"1\", \" \"]", res << vec);
 
   res << Split("1|2,3", "|,");
   ASSERT_EQ("[\"1\", \"2\", \"3\"]", res);
