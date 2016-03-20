@@ -3,7 +3,7 @@
 
 using namespace std;
 
-int main() {
+int main(int argc, char** argv) {
   string strname = "hello, world";
   print(strname); //hello, world
   map<string, int> mp;
