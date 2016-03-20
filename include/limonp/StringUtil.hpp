@@ -25,7 +25,7 @@
 
 namespace limonp {
 using namespace std;
-inline string StringFormat(const char* fmt, ...) {
+string StringFormat(const char* fmt, ...) {
   int size = 256;
   std::string str;
   va_list ap;
