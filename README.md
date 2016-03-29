@@ -34,3 +34,7 @@ See Details in `test/demo.cpp`
 
 [CppJieba]:https://github.com/yanyiwu/cppjieba.git
 [muduo]:https://github.com/chenshuo/muduo.git
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/yanyiwu/limonp/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
