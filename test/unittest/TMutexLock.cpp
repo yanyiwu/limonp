@@ -59,7 +59,7 @@ TEST(MutexLock, Test1) {
   ThreadsLocked locked(THREAD_SUM);
   res.clear();
   locked.Start();
-  ASSERT_EQ(str << res,  "[\"0\", \"1\", \"2\", \"0\", \"1\", \"2\", \"0\", \"1\", \"2\"]");
+  ASSERT_EQ(str << res,  "[0, 1, 2, 0, 1, 2, 0, 1, 2]");
 }
 
 
