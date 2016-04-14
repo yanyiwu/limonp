@@ -47,7 +47,7 @@ ostream& operator << (ostream& os, const vector<T>& v) {
 }
 
 template<>
-ostream& operator << (ostream& os, const vector<string>& v) {
+inline ostream& operator << (ostream& os, const vector<string>& v) {
   if(v.empty()) {
     return os << "[]";
   }
