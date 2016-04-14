@@ -28,7 +28,11 @@ int main(int argc, char** argv) {
   limonp::Split(str, buf, ",");
   print(buf); //["hello", " world"]
 
-  XLOG(INFO) << "hello, world"; //2014-04-05 20:52:37 demo.cpp:31 INFO hello, world
+  int arr[] = {1,10,100,1000};
+  vector<int> vec_i(arr, arr + sizeof(arr)/sizeof(arr[0]));
+  print(vec_i); //[1, 10, 100, 1000]
+
+  XLOG(INFO) << "hello, world"; //2014-04-05 20:52:37 demo.cpp:35 INFO hello, world
   //In the same way, `LOG(DEBUG),LOG(WARNING),LOG(ERROR),LOG(FATAL)`.
   return EXIT_SUCCESS;
 }
