@@ -63,3 +63,33 @@ TEST(StdOutbound, Test3) {
   }
 }
 
+struct TestWord {
+  string word;
+  size_t offset;
+}; // struct TestWord
+
+ostream& operator << (ostream& os, const TestWord& w) {
+  return os << "{\"word\": \"" << w.word << "\", \"offset\": " << w.offset << "}";
+}
+
+TEST(StdOutbound, TestWord) {
+  {
+    vector<string> v;
+    v.push_back("1");
+    v.push_back("2");
+    string s;
+    ASSERT_EQ(s << v, "[\"1\", \"2\"]");
+  }
+  {
+    vector<TestWord> v;
+    TestWord w;
+    w.word = "hello";
+    w.offset = 0;
+    v.push_back(w);
+    w.word = "world";
+    w.offset = 5;
+    v.push_back(w);
+    string s;
+    ASSERT_EQ(s << v, "[{\"word\": \"hello\", \"offset\": 0}, {\"word\": \"world\", \"offset\": 5}]");
+  }
+}
