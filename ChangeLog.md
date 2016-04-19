@@ -1,5 +1,12 @@
 # limonp ChangeLog
 
+## v0.6.1
+
+add Specialized template for vector<string>
+
+when it is `vector<string>`, print like this: ["hello", "world"]; (special case)
+when it is `vector<int>`, print like this: [1, 10, 1000]; (common cases)
+
 ## v0.6.0
 
 + remove Trim out of Split.
