@@ -34,6 +34,10 @@ class Numbers {
   vector<int> numbers_;
 };
 
+void funct(int a, int b, int c, int d, int e) {
+    std::cout << ":" << a+b+c+d+e << std::endl;
+}
+
 void DemoClassFunction() {
   Numbers numbers(4);
   cout << numbers.numbers_ << endl;
@@ -41,6 +45,10 @@ void DemoClassFunction() {
   thread_pool.Start();
   for (size_t i = 0; i < numbers.numbers_.size(); i++) {
     thread_pool.Add(limonp::NewClosure(&numbers, &Numbers::Increase, i));
+#if __cplusplus >= 201103L
+    thread_pool.Add(limonp::NewClosureObj(&numbers, &Numbers::Increase, i));
+    thread_pool.Add(limonp::NewClosureFuc(funct, 1,2,3,4,5));
+#endif
   }
   thread_pool.Stop();
   cout << numbers.numbers_ << endl;

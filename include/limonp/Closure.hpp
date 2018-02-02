@@ -1,6 +1,13 @@
 #ifndef LIMONP_CLOSURE_HPP
 #define LIMONP_CLOSURE_HPP
 
+#include <iostream>
+#include <utility>
+
+#if __cplusplus >= 201103L
+#include <tuple>
+#endif
+
 namespace limonp {
 
 class ClosureInterface {
@@ -9,6 +16,77 @@ class ClosureInterface {
   }
   virtual void Run() = 0;
 };
+
+#if __cplusplus >= 201103L
+
+/// TODO:参考std::thread, 1. 这两个类应该可以合成一个类
+///                       2. 暂时不能传引用，应该可以传引用的
+
+template<class Funct, class ...Args>
+class ClosureGeneral: public ClosureInterface {
+  public:
+    ClosureGeneral(Funct fun, Args... args) {
+      func_ = std::forward<Funct>(fun);
+      args_ = std::make_tuple(std::forward<Args>(args)...);
+    }
+    virtual ~ClosureGeneral() {
+    }
+
+    template<int ...> struct seq {};
+    template<int N, int ...S> struct gens : gens<N-1, N-1, S...> {};
+    template<int ...S> struct gens<0, S...> { typedef seq<S...> type; };
+    
+    template<int ...S>
+    void callFunc(seq<S...>) {
+      func_(std::get<S>(args_)...);
+    }
+
+    virtual void Run() {
+      callFunc(typename gens<sizeof...(Args)>::type());
+    }
+  private:
+    Funct func_;
+    std::tuple<Args...> args_;
+};
+
+template<class Obj, class Funct, class ...Args>
+class ClosureGeneralObj: public ClosureInterface {
+  public:
+    ClosureGeneralObj(Obj *obj, Funct fun, Args... args) {
+      obj_ = obj; 
+      func_ = std::forward<Funct>(fun);
+      args_ = std::make_tuple(std::forward<Args>(args)...);
+    }
+    virtual ~ClosureGeneralObj() {
+    }
+
+    template<int ...> struct seq {};
+    template<int N, int ...S> struct gens : gens<N-1, N-1, S...> {};
+    template<int ...S> struct gens<0, S...> { typedef seq<S...> type; };
+    
+    template<int ...S>
+    void callFunc(seq<S...>) {
+      (obj_->*func_)(std::get<S>(args_)...);
+    }
+    virtual void Run() {
+      callFunc(typename gens<sizeof...(Args)>::type());
+    }
+  private:
+    Obj *obj_;
+    Funct func_;
+    std::tuple<Args...> args_;
+};
+
+template<class R, class ...Args>
+ClosureInterface* NewClosureFuc(R (*fun)(Args...), Args ...args) {
+  return new ClosureGeneral<R (*)(Args...), Args...>(fun, args...);
+}
+template<class Obj, class R, class ...Args>
+ClosureInterface* NewClosureObj(Obj *obj, R (Obj::* fun)(Args...), Args ...args) {
+  return new ClosureGeneralObj<Obj, R (Obj::*)(Args...), Args...>(obj, fun, args...);
+}
+
+#endif
 
 template <class Funct>
 class Closure0: public ClosureInterface {
