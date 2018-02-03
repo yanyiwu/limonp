@@ -19,9 +19,9 @@ class ClosureInterface {
 
 #if __cplusplus >= 201103L
 
-/// TODO:参考std::thread, 1. 这两个类应该可以合成一个类
-///                       2. 暂时不能传引用，应该可以传引用的
-
+/// TODO:refer to std::thread:
+//          1. the class ClosureGeneral and ClosureGeneralObj could be merged
+//          2. task functin's arguments can not pass by reference, but std::thread support
 template<class Funct, class ...Args>
 class ClosureGeneral: public ClosureInterface {
   public:
