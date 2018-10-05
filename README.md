@@ -5,7 +5,7 @@
 [![Platform](https://img.shields.io/badge/platform-Linux,%20OS%20X,%20Windows-green.svg?style=flat)](https://github.com/yanyiwu/limonp)
 [![License](https://img.shields.io/badge/license-MIT-yellow.svg?style=flat)](http://yanyiwu.mit-license.org)
 
-[![logo](http://7viirv.com1.z0.glb.clouddn.com/LimonpLogo-v1.png)](https://github.com/yanyiwu/limonp)
+[![logo](http://images.yanyiwu.com/LimonpLogo-v1.png)](https://github.com/yanyiwu/limonp)
 
 ## Introduction
 
@@ -36,7 +36,4 @@ See Details in `test/demo.cpp`
 
 [CppJieba]:https://github.com/yanyiwu/cppjieba.git
 [muduo]:https://github.com/chenshuo/muduo.git
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/yanyiwu/limonp/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
