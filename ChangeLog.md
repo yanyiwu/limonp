@@ -1,5 +1,9 @@
 # limonp ChangeLog
 
+## v0.6.2
+
++ merge [pr-18](https://github.com/yanyiwu/limonp/pull/18/files)
+
 ## v0.6.1
 
 add Specialized template for vector<string>
