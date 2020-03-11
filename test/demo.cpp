@@ -3,6 +3,8 @@
 
 using namespace std;
 
+#define print(x) std::cout << x << std::endl
+
 int main(int argc, char** argv) {
   string strname = "hello, world";
   print(strname); //hello, world
