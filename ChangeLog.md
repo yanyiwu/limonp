@@ -1,5 +1,9 @@
 # limonp ChangeLog
 
+## v0.6.3
+
++ remove compiler conplained macro
+
 ## v0.6.2
 
 + merge [pr-18](https://github.com/yanyiwu/limonp/pull/18/files)
