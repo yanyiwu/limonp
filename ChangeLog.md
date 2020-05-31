@@ -1,5 +1,9 @@
 # limonp ChangeLog
 
+## v0.6.4
+
++ merge [fixup gcc8 warnings](https://github.com/yanyiwu/gojieba/pull/70)
+
 ## v0.6.3
 
 + remove compiler conplained macro
