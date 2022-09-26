@@ -48,11 +48,16 @@ class Logger {
 
     struct tm tmNow;
 
-    errno_t err = localtime_s(&tmNow, &timeNow);
-    assert(err = 0);
+    #if defined(_WIN32) || defined(_WIN64)
+    errno_t e = localtime_s(&tmNow, &timeNow);
+    assert(e = 0);
+    #else
+    struct tm * tm_tmp = localtime_s(&timerNow, tmNow);
+    assert(tm_tmp != nullptr);
+    #endif
 
     strftime(buf, sizeof(buf), LOG_TIME_FORMAT, &tmNow);
-    
+
     stream_ << buf 
       << " " << filename 
       << ":" << lineno 

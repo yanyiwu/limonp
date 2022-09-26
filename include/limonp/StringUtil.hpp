@@ -352,8 +352,13 @@ inline void GetTime(const string& format, string&  timeStr) {
 
   struct tm tmNow;
 
+  #if defined(_WIN32) || defined(_WIN64)
   errno_t e = localtime_s(&tmNow, &timeNow);
   assert(e = 0);
+  #else
+  struct tm * tm_tmp = localtime_s(&timerNow, tmNow);
+  assert(tm_tmp != nullptr);
+  #endif
 
   timeStr.resize(64);
   
