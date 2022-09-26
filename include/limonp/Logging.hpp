@@ -52,7 +52,7 @@ class Logger {
     errno_t e = localtime_s(&tmNow, &timeNow);
     assert(e = 0);
     #else
-    struct tm * tm_tmp = localtime_s(&timerNow, tmNow);
+    struct tm * tm_tmp = localtime_s(&timeNow, tmNow);
     assert(tm_tmp != nullptr);
     #endif
 
