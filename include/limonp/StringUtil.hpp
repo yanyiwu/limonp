@@ -349,8 +349,16 @@ void GBKTrans(Uint16ContainerConIter begin, Uint16ContainerConIter end, string& 
 inline void GetTime(const string& format, string&  timeStr) {
   time_t timeNow;
   time(&timeNow);
+
+  struct tm tmNow;
+
+  errno_t e = localtime_s(&tmNow, &timeNow);
+  assert(e = 0);
+
   timeStr.resize(64);
-  size_t len = strftime((char*)timeStr.c_str(), timeStr.size(), format.c_str(), localtime(&timeNow));
+  
+  size_t len = strftime((char*)timeStr.c_str(), timeStr.size(), format.c_str(), &tmNow);
+  
   timeStr.resize(len);
 }
 

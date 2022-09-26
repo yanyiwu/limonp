@@ -40,10 +40,19 @@ class Logger {
      }
 #endif
     assert(level_ <= sizeof(LOG_LEVEL_ARRAY)/sizeof(*LOG_LEVEL_ARRAY));
+    
     char buf[32];
-    time_t now;
-    time(&now);
-    strftime(buf, sizeof(buf), LOG_TIME_FORMAT, localtime(&now));
+    
+    time_t timeNow;
+    time(&timeNow);
+
+    struct tm tmNow;
+
+    errno_t err = localtime_s(&tmNow, &timeNow);
+    assert(err = 0);
+
+    strftime(buf, sizeof(buf), LOG_TIME_FORMAT, &tmNow);
+    
     stream_ << buf 
       << " " << filename 
       << ":" << lineno 
