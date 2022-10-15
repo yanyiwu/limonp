@@ -1,5 +1,14 @@
 # limonp ChangeLog
 
+## v0.6.5
+
++ Merged [pr-25 Update cmake.yml](https://github.com/yanyiwu/limonp/pull/25)
++ Merged [pr-26 fix license for end of line sequence and remove useless signature](https://github.com/yanyiwu/limonp/pull/26)
++ Merged [pr-27 Update cmake.yml](https://github.com/yanyiwu/limonp/pull/27)
++ Merged [pr-28 add a target to be ready to support installation](https://github.com/yanyiwu/limonp/pull/28)
++ Merged [pr-29 Installable by cmake](https://github.com/yanyiwu/limonp/pull/29)
++ Merged [pr-30 Replace localtime with localtime_s on Windows and localtime_r on Linux](https://github.com/yanyiwu/limonp/pull/30)
+
 ## v0.6.4
 
 + merge [fixup gcc8 warnings](https://github.com/yanyiwu/gojieba/pull/70)
