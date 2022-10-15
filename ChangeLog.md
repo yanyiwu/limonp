@@ -1,5 +1,9 @@
 # limonp ChangeLog
 
+## v0.6.6
+
++ Merged [pr-31 To be compatible with cpp17 and later, use lambda instead of std::not1 & std::bind2nd #31](https://github.com/yanyiwu/limonp/pull/31)
+
 ## v0.6.5
 
 + Merged [pr-25 Update cmake.yml](https://github.com/yanyiwu/limonp/pull/25)
