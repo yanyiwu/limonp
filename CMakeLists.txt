@@ -3,10 +3,13 @@ cmake_minimum_required(VERSION 3.0)
 PROJECT(limonp
         LANGUAGES CXX)
 
-ADD_DEFINITIONS(-O3 -Wall -g)
-IF(APPLE) # mac os
-    ADD_DEFINITIONS(-std=c++0x)
-endif()
+################
+# cmake config #
+################
+
+set(CMAKE_CXX_STANDARD 11 CACHE STRING "C++ Standard")
+set(CMAKE_CXX_STANDARD_REQUIRED ON CACHE BOOL "C++ Standard Requirement")
+set(CMAKE_CXX_EXTENSIONS OFF CACHE BOOL "C++ Extensions")
 
 ##############
 # dependency #
