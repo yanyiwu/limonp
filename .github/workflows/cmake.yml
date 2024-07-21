@@ -16,7 +16,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]  
+        os: [ubuntu-latest, macos-latest]  
+        cpp_version: [c++03, c++11, c++14, c++17, c++20]
 
     steps:
     - uses: actions/checkout@v2
@@ -27,7 +28,8 @@ jobs:
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
       # run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
-      run: mkdir ${{github.workspace}}/build && cd ${{github.workspace}}/build && cmake -DBUILD_TESTING=ON ../
+      run: mkdir ${{github.workspace}}/build && cd ${{github.workspace}}/build && cmake -DBUILD_TESTING=ON -DCMAKE_CXX_STANDARD=${{ matrix.cpp_version }} ../
+
 
     - name: Build
       # Build your program with the given configuration
