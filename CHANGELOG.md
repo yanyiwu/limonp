@@ -1,5 +1,8 @@
-# limonp ChangeLog
+# CHANGELOG
 
+## Next Version
+
++ [git submodule] Added googletest-release-v1.6.0
 
 ## v0.6.7
 
