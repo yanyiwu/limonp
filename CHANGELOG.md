@@ -1,7 +1,8 @@
 # CHANGELOG
 
-## Next Version
+## v0.7.0
 
++ [CI] Added os.macos and cpp_version=[c++98, c++03, c++11, c++14, c++17, c++20]
 + [git submodule] Added googletest-release-v1.6.0
 
 ## v0.6.7
