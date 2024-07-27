@@ -7,9 +7,14 @@ PROJECT(limonp
 # cmake config #
 ################
 
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON CACHE BOOL "C++ Standard Requirement")
-set(CMAKE_CXX_EXTENSIONS OFF CACHE BOOL "C++ Extensions")
+if(NOT DEFINED CMAKE_CXX_STANDARD)
+    set(CMAKE_CXX_STANDARD 11)
+endif()
+message(STATUS "CMAKE_CXX_STANDARD is ${CMAKE_CXX_STANDARD}")
+
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
 
 ##############
 # dependency #
