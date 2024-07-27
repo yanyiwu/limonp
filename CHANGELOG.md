@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Version
+
++ [CMake] fix CMAKE_CXX_STANDARD passed from github/actions and [c++11, c++14] only
+
 ## v0.7.0
 
 + [CI] Added os.macos and cpp_version=[c++98, c++03, c++11, c++14, c++17, c++20]
