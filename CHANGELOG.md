@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Next Version
+## 0.7.1
 
 + [CMake] fix CMAKE_CXX_STANDARD passed from github/actions and [c++11, c++14] only
 
