@@ -1,28 +1,10 @@
 #ifndef LIMONP_STD_EXTEMSION_HPP
 #define LIMONP_STD_EXTEMSION_HPP
 
-#include <map>
-
-#ifdef __APPLE__
 #include <unordered_map>
 #include <unordered_set>
-#elif(__cplusplus >= 201103L)
-#include <unordered_map>
-#include <unordered_set>
-#elif defined _MSC_VER
-#include <unordered_map>
-#include <unordered_set>
-#else
-#include <tr1/unordered_map>
-#include <tr1/unordered_set>
-namespace std {
-using std::tr1::unordered_map;
-using std::tr1::unordered_set;
-}
-
-#endif
-
 #include <set>
+#include <map>
 #include <string>
 #include <vector>
 #include <deque>
