@@ -1,6 +1,13 @@
 # CHANGELOG
 
-## 0.7.1
+## v0.7.2
+
++ [CI] ubuntu version from 20 to 22, macos version from 12 to 14
++ [test/unittes] uint->size_t
++ [googletest] v1.6.0->v1.10.0
++ [CMake] version required 3.0 -> 3.5
+
+## v0.7.1
 
 + [CMake] fix CMAKE_CXX_STANDARD passed from github/actions and [c++11, c++14] only
 
