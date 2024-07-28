@@ -7,7 +7,7 @@ ADD_EXECUTABLE(demo demo.cpp)
 ADD_EXECUTABLE(thread_pool_demo thread_pool_demo.cpp)
 TARGET_LINK_LIBRARIES(thread_pool_demo pthread)
 
-SET(GTEST_ROOT_DIR googletest)
+SET(GTEST_ROOT_DIR googletest/googletest)
 INCLUDE_DIRECTORIES(${GTEST_ROOT_DIR} ${GTEST_ROOT_DIR}/include)
 ADD_DEFINITIONS(-DGTEST_USE_OWN_TR1_TUPLE=1)
 ADD_LIBRARY(gtest STATIC ${GTEST_ROOT_DIR}/src/gtest-all.cc)
