@@ -20,4 +20,5 @@ ADD_EXECUTABLE(test.run
 	#TThread.cpp 
 	#TThreadPool.cpp 
 )
-TARGET_LINK_LIBRARIES(test.run gtest)
+find_package(Threads REQUIRED)
+TARGET_LINK_LIBRARIES(test.run gtest Threads::Threads)
