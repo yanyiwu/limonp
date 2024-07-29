@@ -7,12 +7,12 @@ ADD_EXECUTABLE(test.run
 	TLogging.cpp  
 	TArgvContext.cpp  
 	TConfig.cpp
-	TMd5.cpp
 	TStringUtil.cpp 
 	TStdExtension.cpp 
 	TLocalVector.cpp 
 	TClosure.cpp 
 	TColorPrint.cpp
+	#TMd5.cpp
 	#TFileLock.cpp
 	#TBoundedQueue.cpp 
 	#TMutexLock.cpp 
