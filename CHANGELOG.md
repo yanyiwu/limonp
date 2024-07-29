@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## v0.8.0
+
++ [StringUtil] Fix windows assert typo
++ [CMake] find_package(Threads REQUIRED); target_link_libraries(... Threads::Threads)
++ [CMAKE][CI] windows: 2019,2022
++ [CMAKE][CI] matrix.build_type[Release, Debug]
++ [unittest] disable #TMd5.cpp
++ [unittest] disable #TFileLock.cpp
++ [unittest] disable #TBoundedQueue.cpp 
++ [unittest] disable #TMutexLock.cpp 
++ [unittest] disable #TBlockingQueue.cpp 
++ [unittest] disable #TThread.cpp 
++ [unittest] disable #TThreadPool.cpp
+
 ## v0.7.2
 
 + [CI] ubuntu version from 20 to 22, macos version from 12 to 14
