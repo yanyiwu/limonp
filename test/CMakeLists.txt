@@ -4,8 +4,11 @@ SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/test/lib)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/include)
 
 ADD_EXECUTABLE(demo demo.cpp)
-ADD_EXECUTABLE(thread_pool_demo thread_pool_demo.cpp)
-TARGET_LINK_LIBRARIES(thread_pool_demo pthread)
+
+#if(NOT MSVC)
+#	ADD_EXECUTABLE(thread_pool_demo thread_pool_demo.cpp)
+#	TARGET_LINK_LIBRARIES(thread_pool_demo pthread)
+#endif()
 
 SET(GTEST_ROOT_DIR googletest/googletest)
 INCLUDE_DIRECTORIES(${GTEST_ROOT_DIR} ${GTEST_ROOT_DIR}/include)
