@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v0.8.1
+
++ [CI] fix windows gtest thread link error
++ [submodule] rm test/googletest
++ [CMake] FetchContent googletest
++ [CMake] required 3.5 -> 3.14
+
 ## v0.8.0
 
 + [StringUtil] Fix windows assert typo
