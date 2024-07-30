@@ -30,8 +30,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-      with:
-          submodules: recursive
 
     - name: Configure CMake
       run: cmake -B ${{github.workspace}}/build -DBUILD_TESTING=ON -DCMAKE_CXX_STANDARD=${{matrix.cpp_version}} -DCMAKE_BUILD_TYPE=${{matrix.build_type}}

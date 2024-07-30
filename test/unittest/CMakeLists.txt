@@ -1,4 +1,11 @@
+
+if (MSVC)
+	set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreadedDebugDLL")
+	set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+endif()
+
 include(FetchContent)
+
 FetchContent_Declare(
   googletest
   GIT_REPOSITORY https://github.com/google/googletest.git
