@@ -1,6 +1,10 @@
-SET(GTEST_ROOT_DIR ${PROJECT_SOURCE_DIR}/test/gtest)
-
-INCLUDE_DIRECTORIES(${GTEST_ROOT_DIR} ${GTEST_ROOT_DIR}/include ${PROJECT_SOURCE_DIR}/include)
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  GIT_REPOSITORY https://github.com/google/googletest.git
+  GIT_TAG release-1.11.0
+)
+FetchContent_MakeAvailable(googletest)
 
 ADD_EXECUTABLE(test.run 
 	gtest_main.cpp 
@@ -20,5 +24,7 @@ ADD_EXECUTABLE(test.run
 	#TThread.cpp 
 	#TThreadPool.cpp 
 )
-find_package(Threads REQUIRED)
-TARGET_LINK_LIBRARIES(test.run gtest Threads::Threads)
+TARGET_LINK_LIBRARIES(test.run gtest)
+
+#include(GoogleTest)
+#gtest_discover_tests(test.run)
