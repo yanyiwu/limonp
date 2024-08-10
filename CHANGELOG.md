@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v0.9.0
+
++ [c++20] compatibility
++ [c++17] compatibility
+
 ## v0.8.1
 
 + [CI] fix windows gtest thread link error
