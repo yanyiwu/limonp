@@ -29,7 +29,7 @@ jobs:
         build_type: [Release, Debug]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
     - name: Configure CMake
       run: cmake -B ${{github.workspace}}/build -DBUILD_TESTING=ON -DCMAKE_CXX_STANDARD=${{matrix.cpp_version}} -DCMAKE_BUILD_TYPE=${{matrix.build_type}}
