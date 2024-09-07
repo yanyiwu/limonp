@@ -23,7 +23,6 @@ ADD_EXECUTABLE(test.run
 	TLocalVector.cpp 
 	TClosure.cpp 
 	TColorPrint.cpp
-	#TFileLock.cpp
 	#TBoundedQueue.cpp 
 	#TMutexLock.cpp 
 	#TBlockingQueue.cpp 
