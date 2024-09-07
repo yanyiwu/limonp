@@ -23,11 +23,6 @@ ADD_EXECUTABLE(test.run
 	TLocalVector.cpp 
 	TClosure.cpp 
 	TColorPrint.cpp
-	#TBoundedQueue.cpp 
-	#TMutexLock.cpp 
-	#TBlockingQueue.cpp 
-	#TThread.cpp 
-	#TThreadPool.cpp 
 )
 TARGET_LINK_LIBRARIES(test.run gtest)
 
