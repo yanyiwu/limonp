@@ -2,7 +2,7 @@ name: Close Stale Issues
 
 on:
   schedule:
-    - cron: '0 10 * * *'  # Run daily
+    - cron: '0 10 1 * *'  # Run monthly
 
 jobs:
   stale:
