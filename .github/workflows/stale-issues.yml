@@ -2,7 +2,7 @@ name: Close Stale Issues
 
 on:
   schedule:
-    - cron: '0 10 1 * *'  # Run monthly
+    - cron: '0 10 1 1 *'  # Run yearly on January 1st at 10:00 UTC
 
 jobs:
   stale:
