@@ -16,6 +16,16 @@
 
 **`no linking , no hurts`** 
 
+## Build
+
+```
+mkdir build
+cmake ..
+make
+
+make test
+```
+
 ## Example
 
 See Details in `test/demo.cpp`
