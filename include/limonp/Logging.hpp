@@ -49,9 +49,13 @@ class Logger {
     struct tm tmNow;
 
     #if defined(_WIN32) || defined(_WIN64)
-    assert(localtime_s(&tmNow, &timeNow) == 0);
+    errno_t e = localtime_s(&tmNow, &timeNow);
+    assert(e == 0);
+    (void)e;
     #else
-    assert(localtime_r(&timeNow, &tmNow) != nullptr);
+    struct tm * tm_tmp = localtime_r(&timeNow, &tmNow);
+    assert(tm_tmp != nullptr);
+    (void)tm_tmp;
     #endif
 
     strftime(buf, sizeof(buf), LOG_TIME_FORMAT, &tmNow);
